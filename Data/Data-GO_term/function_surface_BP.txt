@@ -1,0 +1,129 @@
+0: regulation of transcription from RNA polymerase II promoter
+1: positive regulation of transcription from RNA polymerase II promoter
+2: negative regulation of transcription from RNA polymerase II promoter
+3: signal transduction
+4: cell differentiation
+5: apoptotic process
+6: negative regulation of cell proliferation
+7: negative regulation of apoptotic process
+8: negative regulation of transcription, DNA-templated
+9: positive regulation of cell proliferation
+10: transcription from RNA polymerase II promoter
+11: cell migration
+12: cellular response to DNA damage stimulus
+13: response to xenobiotic stimulus
+14: angiogenesis
+15: positive regulation of apoptotic process
+16: regulation of cell migration
+17: anatomical structure morphogenesis
+18: Wnt signaling pathway
+19: visual perception
+20: osteoblast differentiation
+21: cell proliferation
+22: in utero embryonic development
+23: negative regulation of chondrocyte differentiation
+24: cellular calcium ion homeostasis
+25: kidney development
+26: gene expression
+27: skeletal system development
+28: transmembrane receptor protein tyrosine kinase signaling pathway
+29: multicellular organism development
+30: negative regulation of canonical Wnt signaling pathway
+31: cellular response to lipopolysaccharide
+32: positive regulation of phagocytosis
+33: negative regulation of Wnt signaling pathway
+34: odontogenesis of dentin-containing tooth
+35: bone development
+36: anatomical structure development
+37: positive regulation of neuron differentiation
+38: negative regulation of NF-kappaB transcription factor activity
+39: canonical Wnt signaling pathway
+40: calcium ion transmembrane transport
+41: sodium ion transmembrane transport
+42: Notch signaling pathway
+43: small GTPase mediated signal transduction
+44: animal organ morphogenesis
+45: embryonic eye morphogenesis
+46: sympathetic nervous system development
+47: middle ear morphogenesis
+48: positive regulation of superoxide anion generation
+49: regulation of bone mineralization
+50: positive regulation of protein tyrosine kinase activity
+51: cellular response to BMP stimulus
+52: regulation of cell differentiation
+53: negative regulation of MAP kinase activity
+54: hormone-mediated signaling pathway
+55: stem cell proliferation
+56: mRNA transcription from RNA polymerase II promoter
+57: myelination
+58: chondrocyte differentiation
+59: response to estrogen
+60: peptidyl-tyrosine phosphorylation
+61: positive regulation of endothelial cell proliferation
+62: regulation of autophagy
+63: positive regulation of MAP kinase activity
+64: defense response
+65: negative regulation of ERK1 and ERK2 cascade
+66: locomotory behavior
+67: smoothened signaling pathway
+68: calcium ion transport
+69: glandular epithelial cell development
+70: regulation of microtubule-based process
+71: hepoxilin biosynthetic process
+72: phosphate ion homeostasis
+73: embryonic digestive tract development
+74: regulation of ossification
+75: chondroitin sulfate biosynthetic process
+76: chondrocyte development
+77: retinoic acid receptor signaling pathway
+78: superoxide metabolic process
+79: apoptotic cell clearance
+80: positive regulation of chondrocyte differentiation
+81: negative regulation of stem cell proliferation
+82: cardiac muscle cell differentiation
+83: cellular response to estrogen stimulus
+84: linoleic acid metabolic process
+85: face development
+86: regulation of neuron apoptotic process
+87: positive regulation of exocytosis
+88: dentate gyrus development
+89: superoxide anion generation
+90: developmental growth
+91: retina layer formation
+92: negative regulation of cyclin-dependent protein serine/threonine kinase activity
+93: embryonic cranial skeleton morphogenesis
+94: maintenance of permeability of blood-brain barrier
+95: activation of adenylate cyclase activity
+96: pattern specification process
+97: positive regulation of stem cell proliferation
+98: positive regulation of cell death
+99: animal organ development
+100: regulation of neurogenesis
+101: regulation of cytosolic calcium ion concentration
+102: negative regulation of cellular response to vascular endothelial growth factor stimulus
+103: myeloid dendritic cell activation involved in immune response
+104: positive regulation of endothelial cell chemotaxis to fibroblast growth factor
+105: trachea cartilage development
+106: NADPH regeneration
+107: post-embryonic animal organ morphogenesis
+108: animal organ formation
+109: chordate embryonic development
+110: ventricular cardiac muscle cell differentiation
+111: dermatan sulfate biosynthetic process
+112: dopamine uptake
+113: glutathione transmembrane transport
+114: membrane raft assembly
+115: forebrain radial glial cell differentiation
+116: macropinocytosis
+117: forebrain dorsal/ventral pattern formation
+118: noradrenergic neuron differentiation
+119: positive regulation of sensory perception of pain
+120: parathyroid gland development
+121: negative regulation of T cell cytokine production
+122: negative regulation of response to endoplasmic reticulum stress
+123: growth plate cartilage development
+124: regulation of reactive oxygen species biosynthetic process
+125: glutathione derivative biosynthetic process
+126: regulation of glucose transport
+127: poly-N-acetyllactosamine biosynthetic process
+128: response to sodium phosphate
