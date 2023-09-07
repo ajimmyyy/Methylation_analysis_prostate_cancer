@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-fn_bate = "../Data/Data-origin/all_beta_normalized.csv"
-fn_dmp_hypo = "../Data/Data-volcano/DMP_hypo.csv"
-fn_o = "../Data/Data-cutpoint/hypo_with_cutpoint.csv"
+fn_bate = "Data/Data-origin/all_beta_normalized.csv"
+fn_dmp_hypo = "Data/Data-volcano/DMP_hypo.csv"
+fn_o = "Data/Data-cutpoint/hypo_with_cutpoint.csv"
 normal_num = 50
 
 data_bate_df = pd.read_csv(fn_bate)
@@ -42,5 +42,10 @@ def cal_cutpoint(row):
 data_out = dmp_bate_df.iloc[:, 0].to_frame()
 tqdm.pandas(desc="find cutpoint")
 data_out[["cutpoint", "F1"]] = dmp_bate_df.progress_apply(cal_cutpoint, axis = 1)
+
+data_out.columns.values[0] = 'CpG'
+data_dmp_df.columns.values[0] = 'CpG'
+
+data_out = pd.merge(data_dmp_df, data_out, on = ["CpG"], how = "inner")
 
 data_out.to_csv(fn_o, sep=',', encoding='utf-8', index=False)

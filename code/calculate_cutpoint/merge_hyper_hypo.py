@@ -12,6 +12,6 @@ data_dmp_hypo = pd.read_csv(fn_dmp_hypo)
 data_dmp_hyper.loc[:, "DNAm"] = "hyper"
 data_dmp_hypo.loc[:, "DNAm"] = "hypo"
 
-merged_df = pd.merge(data_dmp_hyper, data_dmp_hypo, how='outer')
+merged_df = pd.concat([data_dmp_hyper, data_dmp_hypo])
 merged_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
 
