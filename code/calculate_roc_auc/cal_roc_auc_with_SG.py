@@ -5,11 +5,10 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, auc
 
 fn_bate = "Data/Data-origin/all_beta_normalized.csv"
-fn_dmp = "Data/Data-GDC/DMP_filter_with_GDC_single.csv"
-# fn_dmp = "Data/Data-cutpoint/dmp_with_cutpoint.csv"
-fn_o = "Data/Data-ROC_AUC/DMP_single_with_auc.csv"
-fn_o_pic = "Data/Data-ROC_AUC/ROC_curve_single.png"
-
+fn_dmp = "Data/Data-GDC/DMP_filter_GDC_all.csv"
+fn_dmp_s = "Data/Data-GDC/DMP_filter_GDC_onlyin_single.csv"
+fn_dmp_g = "Data/Data-GDC/DMP_filter_GDC_onlyin_group.csv"
+fn_o = "Data/Data-ROC_AUC/DMP_SG_with_auc.csv"
 normal_num = 50
 
 data_bate_df = pd.read_csv(fn_bate)
@@ -17,6 +16,9 @@ data_bate_df = pd.read_csv(fn_bate)
 data_dmp_df = pd.read_csv(fn_dmp)
 DMP_list = data_dmp_df.iloc[:, 0].tolist()
 dmp_bate_df = data_bate_df.loc[data_bate_df[data_bate_df.columns[0]].isin(DMP_list)]
+
+dmp_single_list = pd.read_csv(fn_dmp_s).loc[:, "CpG"].tolist()
+dmp_group_list = pd.read_csv(fn_dmp_g).loc[:, "CpG"].tolist()
 
 def cal_cutpoint(row):
     transform_row = row.to_numpy()
@@ -31,31 +33,18 @@ def cal_cutpoint(row):
 
     auc1 = auc(fpr, tpr)
 
-    if auc1 > 0.5:
-        plt.plot(fpr, tpr, color = 'gainsboro', alpha = .04)
-    else:
-        plt.plot(fpr, tpr, color = 'blue', label = 'AUC = %0.2f' % auc1)
+    gdc = "both"
+    if transform_row[0] in dmp_single_list:
+        gdc = "single"
+    elif transform_row[0] in dmp_group_list:
+        gdc = "group"
 
-    if transform_row[0] == "cg06263461":
-        plt.plot(fpr, tpr, color = 'red', label = 'Max AUC = %0.2f' % auc1)
-    if transform_row[0] == "cg21634602":
-        plt.plot(fpr, tpr, color = 'orange', label = 'Min AUC = %0.2f' % auc1)
-
-    return pd.Series({"auc": auc1})
+    return pd.Series({"auc": auc1, "GDC": gdc})
 
 data_out = dmp_bate_df.iloc[:, 0].to_frame()
 
 tqdm.pandas(desc="find auc")
-data_out["auc"] = dmp_bate_df.progress_apply(cal_cutpoint, axis = 1)
-
-plt.legend(loc = 'lower right')
-plt.plot([0, 1], [0, 1],'r--')
-plt.xlim([0, 1])
-plt.ylim([0, 1])
-plt.ylabel('True Positive Rate')
-plt.xlabel('False Positive Rate')
-plt.savefig(fn_o_pic)
-plt.show()
+data_out[["auc", "GDC"]] = dmp_bate_df.progress_apply(cal_cutpoint, axis = 1)
 
 data_out.columns.values[0] = 'CpG'
 data_out = pd.merge(data_dmp_df, data_out, on = ["CpG"], how = "inner")

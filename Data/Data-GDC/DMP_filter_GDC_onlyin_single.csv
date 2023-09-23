@@ -1,0 +1,2 @@
+CpG,logFC,AveExpr,t,P.Value,adj.P.Val,B,Normal_AVG,Tumor_AVG,deltaBeta,CHR,MAPINFO,Strand,Type,gene,feature,cgi,feat.cgi,UCSC_CpG_Islands_Name,DHS,Enhancer,Phantom,Probe_SNPs,Probe_SNPs_10,dbeta,cutpoint,F1,DNAm
+cg22855020,0.370458172,0.612461802,13.66108642,7.780000000000001e-37,1.5299999999999999e-34,72.55751741,0.275318214,0.645776386,0.370458172,8,42356731,F,II,SLC20A2,5'UTR,opensea,5'UTR-opensea,,,True,,,,0.425722752,0.44,0.9240506329113924,hyper
