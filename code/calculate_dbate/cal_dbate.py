@@ -4,8 +4,8 @@ import numpy as np
 from tqdm import tqdm
 
 normal_num = 50
-fn_i = "all_beta_normalized.csv"
-fn_o = "all_with_dbeta_avg.csv"
+fn_i = "Data/Data-origin/all_beta_normalized.csv"
+fn_o = "Data/Data-dbatea/ll_beta_delta.csv"
 
 def cal_dbate(row):
     transform_row = row.to_numpy()

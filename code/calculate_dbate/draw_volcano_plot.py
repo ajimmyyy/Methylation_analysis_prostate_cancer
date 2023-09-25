@@ -3,10 +3,10 @@ import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-fn_i = "DMP_per_gene.csv"
-fn_o = "DMP_hyper.csv"
-fn_o_hypo = "DMP_hypo.csv"
-pic_o = "DMP_with_volcano.jpg"
+fn_i = "Data/Data-dbate/DMP_per_gene.csv"
+fn_o = "Data/Data-volcano/DMP_hyper.csv"
+fn_o_hypo = "Data/Data-volcano/DMP_hypo.csv"
+pic_o = "Data/Data-volcano/DMP_volcano_plot.jpg"
 
 threshold_FC = 0.37
 threshold_Pvalue = -np.log10(0.05)

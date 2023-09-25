@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-fn_dmp_group = "Data/Data-GDC/DMP_filter_with_GDC_group.csv"
-fn_dmp_single = "Data/Data-GDC/DMP_filter_with_GDC_single.csv"
-fn_o_single = "Data/Data-GDC/DMP_filter_GDC_onlyin_single.csv"
-fn_o_group = "Data/Data-GDC/DMP_filter_GDC_onlyin_group.csv"
-fn_o_outer = "Data/Data-GDC/DMP_filter_GDC_all.csv"
+fn_dmp_group = "Data/Data-GDC/HyperHpo_filtered_GDC_group"
+fn_dmp_single = "Data/Data-GDC/HyperHpo_filtered_GDC_single.csv"
+fn_o_single = "Data/Data-GDC/HyperHpo_filtered_GDC_single_sole.csv"
+fn_o_group = "Data/Data-GDC/HyperHpo_filtered_GDC_group_sole.csv"
+fn_o_outer = "Data/Data-GDC/HyperHpo_filtered_GDC_both_single_group.csv"
 
 data_dmp_df_group = pd.read_csv(fn_dmp_group)
 data_dmp_df_single = pd.read_csv(fn_dmp_single)

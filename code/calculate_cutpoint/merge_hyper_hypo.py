@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 fn_dmp_hyper = "Data/Data-cutpoint/hyper_with_cutpoint.csv"
 fn_dmp_hypo = "Data/Data-cutpoint/hypo_with_cutpoint.csv"
-fn_o = "Data/Data-cutpoint/dmp_with_cutpoint.csv"
+fn_o = "Data/Data-cutpoint/HyperHypo_cutpoint.csv"
 
 data_dmp_hyper = pd.read_csv(fn_dmp_hyper)
 data_dmp_hypo = pd.read_csv(fn_dmp_hypo)

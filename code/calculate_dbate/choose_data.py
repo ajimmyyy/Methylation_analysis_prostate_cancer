@@ -3,10 +3,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-fn_dmp = "DMP_result_TN.csv"
-fn_dbate = "all_with_dbeta.csv"
-fn_o = "DMP_per_gene.csv"
-fn_o_tmp = "DMP_with_dbate.csv"
+fn_dmp = "Data/Data-origin/DMP_result_TN.csv"
+fn_dbate = "all_beta_delta.csvData/Data-dbate/all_beta_delta.csv"
+fn_o = "Data/Data-dbate/DMP_per_gene.csv.csv"
 
 data_dmp_df = pd.read_csv(fn_dmp)
 data_dbate_df = pd.read_csv(fn_dbate)
@@ -25,7 +24,6 @@ def find_gene(row):
 
 tqdm.pandas(desc="find dbate")
 data_dmp_df["dbate"] = data_dmp_df.progress_apply(find_dbate, axis = 1)
-data_dmp_df.to_csv(fn_o_tmp, sep=',', encoding='utf-8', index=False)
 data_dmp_df = data_dmp_df.iloc[data_dmp_df['dbate'].abs().argsort()]
 
 tqdm.pandas(desc="find gene")

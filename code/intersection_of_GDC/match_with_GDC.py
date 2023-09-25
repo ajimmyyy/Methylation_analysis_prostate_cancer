@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-fn_dmp = "Data/Data-cutpoint/dmp_with_cutpoint.csv"
+fn_dmp = "Data/Data-cutpoint/HyperHypo_cutpoint.csv"
 GDC_path = "Data/Data-GDC/matchgene185_single_3Y10__OR2.txt"
-fn_o = "Data/Data-GDC/DMP_filter_with_GDC_single.csv"
+fn_o = "Data/Data-GDC/HyperHypo_filtered_GDC_single.csv"
 
 with open(GDC_path, 'r') as file:
     lines = file.readlines()

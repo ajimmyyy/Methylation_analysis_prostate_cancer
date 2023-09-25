@@ -5,9 +5,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, auc
 
 fn_bate = "Data/Data-origin/all_beta_normalized.csv"
-fn_dmp = "Data/Data-GDC/DMP_filter_with_GDC_single.csv"
-# fn_dmp = "Data/Data-cutpoint/dmp_with_cutpoint.csv"
-fn_o = "Data/Data-ROC_AUC/DMP_single_with_auc.csv"
+fn_dmp = "Data/Data-GDC/HyperHpo_filtered_GDC_single.csv"
+fn_o = "Data/Data-ROC_AUC/GDC_single_auc.csv"
 fn_o_pic = "Data/Data-ROC_AUC/ROC_curve_single.png"
 
 normal_num = 50
