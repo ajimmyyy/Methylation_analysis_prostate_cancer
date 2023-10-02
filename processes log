@@ -1,0 +1,3 @@
+# 完整流程
+1. 在RStudio輸入IDAT檔（分為測試集test和訓練集train），經ChAMP套件之norm正規化後輸出存有甲基化後beta值的csv檔。以及用
+2. 
