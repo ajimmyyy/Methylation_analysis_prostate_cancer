@@ -6,7 +6,7 @@ fn_cutpoint = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
 fn_beta = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
 fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate.csv"
 normal_num = 20
-threshold_validate_MAPE = 0.05
+threshold_validate_MAPE = 0.1
 
 data_bate_df = pd.read_csv(fn_beta)
 data_cutpoint_df = pd.read_csv(fn_cutpoint)
@@ -35,8 +35,8 @@ def check_cutpoint(row):
 
 tqdm.pandas(desc="find cutpoint")
 data_cutpoint_df["F1_validate"] = data_cutpoint_df.progress_apply(check_cutpoint, axis = 1)
-data_cutpoint_df["dF1"] = abs(data_cutpoint_df["F1_validate"] - data_cutpoint_df["F1"]) / data_cutpoint_df["F1"]
-data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["dF1"] < threshold_validate_MAPE]
+# data_cutpoint_df["dF1"] = abs(data_cutpoint_df["F1_validate"] - data_cutpoint_df["F1"]) / data_cutpoint_df["F1"]
+data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["F1_validate"] > 0.8]
 
 data_cutpoint_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
 

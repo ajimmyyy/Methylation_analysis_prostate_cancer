@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, auc
 
 fn_bate = "Data/Data-origin/all_beta_normalized.csv"
-fn_dmp = "Data/Data-GDC/HyperHpo_filtered_GDC_both_single_group.csv"
-fn_dmp_s = "Data/Data-GDC/HyperHpo_filtered_GDC_single_sole.csv"
-fn_dmp_g = "Data/Data-GDC/HyperHpo_filtered_GDC_group_sole.csv"
-fn_o = "Data/Data-ROC_AUC/GDC_both_single_group_auc.csv"
+fn_dmp = "Data/Data-comorbidity/HyperHpo_filtered_comorbidity_both_single_group.csv"
+fn_dmp_s = "Data/Data-comorbidity/HyperHpo_filtered_comorbidity_single_sole.csv"
+fn_dmp_g = "Data/Data-comorbidity/HyperHpo_filtered_comorbidity_group_sole.csv"
+fn_o = "Data/Data-ROC_AUC/comorbidity_both_single_group_auc.csv"
 normal_num = 50
 
 data_bate_df = pd.read_csv(fn_bate)
