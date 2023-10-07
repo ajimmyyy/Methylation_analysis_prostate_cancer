@@ -13,6 +13,8 @@ fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_single.png"
 # fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_group.png"
 
 normal_num = 50
+half_total_num = 278
+half_normal_num = 25
 
 data_bate_df = pd.read_csv(fn_bate)
 data_dmp_df = pd.read_csv(fn_dmp)
@@ -25,8 +27,8 @@ def cal_cutpoint(row):
     FPRs = []
 
     predict_beta = transform_row[1::2]
-    actual_beta = np.ones(278)
-    actual_beta[:25] = 0
+    actual_beta = np.ones(half_total_num)
+    actual_beta[:half_normal_num] = 0
 
     fpr, tpr, threshold = roc_curve(actual_beta, predict_beta)
 
