@@ -16,7 +16,12 @@ data_origin_df = pd.read_csv(fn_origin)
 random_normal = np.random.choice(normal_total//2, normal_num // 2, replace=False) * 2
 random_tumor = np.random.choice(tumor_total // 2, tumor_num // 2, replace=False) * 2
 
+print(random_normal, len(random_normal))
+print(random_tumor, len(random_tumor))
+
 selected_columns = np.sort(np.concatenate([[0], random_normal + 1, random_normal + 2, random_tumor + normal_total + 1, random_tumor + normal_total + 2]))
+
+print(selected_columns, len(selected_columns))
 
 data = data_origin_df.iloc[:, selected_columns.tolist()]
 

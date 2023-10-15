@@ -16,6 +16,7 @@ comorbidity = [line.strip() for line in lines]
 data_dmp_df = pd.read_csv(fn_dmp)
 
 result_df = data_dmp_df[data_dmp_df["gene"].isin(comorbidity)]
+
 result_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
 
 
