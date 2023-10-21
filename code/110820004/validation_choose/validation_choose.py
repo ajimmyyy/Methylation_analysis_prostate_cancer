@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+from config_loader import config
 
-fn_origin = "C:/Users/acer/Desktop/Data-origin/test/all_beta_normalized_test.csv"
-fn_validation = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
-fn_selected_columns = "C:/Users/acer/Desktop/Data-origin/validation/validation_choose.txt"
+fn_origin = config["ALL_BETA_NORMALIZED_TEST_PATH"]
+fn_validation = config["ALL_BETA_NORMALIZED_VALIDATION_PATH"]
+fn_selected_columns = config["VALIDATION_CHOOSE_PATH"]
 
 normal_total = 50
 normal_num = 20

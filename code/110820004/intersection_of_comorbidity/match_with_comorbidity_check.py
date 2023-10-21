@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+from config_loader import config
 
-fn_dmp_group = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_group.csv"
-fn_dmp_single = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_single.csv"
-fn_o_single = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_single_sole.csv"
-fn_o_group = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_group_sole.csv"
-fn_o_outer = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_both_single_group.csv"
+fn_dmp_group = config["HYPER_HYPO_COMORBIDITY_GROUP_PATH"]
+fn_dmp_single = config["HYPER_HYPO_COMORBIDITY_SINGLE_PATH"]
+fn_o_single = config["HYPER_HYPO_COMORBIDITY_GROUP_GROUP_PATH"]
+fn_o_group = config["HYPER_HYPO_COMORBIDITY_GROUP_SOLO_PATH"]
+fn_o_outer = config["HYPER_HYPO_COMORBIDITY_BOTH_PATH"]
 
 data_dmp_df_group = pd.read_csv(fn_dmp_group)
 data_dmp_df_single = pd.read_csv(fn_dmp_single)

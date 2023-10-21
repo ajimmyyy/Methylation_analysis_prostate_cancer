@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+from config_loader import config
 
-fn_dmp = "Data/110820004/Data-Cutpoint/HyperHypo_cutpoint_validate.csv"
-comorbidity_path = "Data/110820004/Data-Comorbidity/matchgene185_single_3Y10__OR2.txt"
-# comorbidity_path = "Data/110820004/Data-Comorbidity/matchgene185_group_3Y10__OR2.txt"
-fn_o = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_single.csv"
-# fn_o = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_group.csv"
+fn_dmp = config["HYPER_HYPO_CUTPOINT_VALIDATION_PATH"]
+comorbidity_path = config["COMORBIDITY_SINGLE_PATH"]
+# comorbidity_path = config["COMORBIDITY_GROUP_PATH"]
+fn_o = config["HYPER_HYPO_COMORBIDITY_SINGLE_PATH"]
+# fn_o = config["HYPER_HYPO_COMORBIDITY_GROUP_PATH"]
 
 with open(comorbidity_path, 'r') as file:
     lines = file.readlines()

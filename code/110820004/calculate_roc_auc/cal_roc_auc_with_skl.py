@@ -3,14 +3,15 @@ import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, auc
+from config_loader import config
 
-fn_bate = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
-# fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_single.csv"
-fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_group.csv"
-# fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_single_auc.csv"
-fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_group_auc.csv"
-# fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_single.png"
-fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_group.png"
+fn_bate = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
+# fn_dmp = config["HYPER_HYPO_COMORBIDITY_SINGLE_PATH"]
+fn_dmp = config["HYPER_HYPO_COMORBIDITY_GROUP_PATH"]
+# fn_o = config["COMORBIDITY_SINGLE_AUC_PATH"]
+fn_o = config["COMORBIDITY_GROUP_AUC_PATH"]
+# fn_o_pic = config["COMORBIDITY_SINGLE_ROC_PICTURE_PATH"]
+fn_o_pic = config["COMORBIDITY_GROUP_ROC_PICTURE_PATH"]
 
 normal_num = 50
 half_total_num = 278

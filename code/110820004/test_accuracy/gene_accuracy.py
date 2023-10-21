@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from config_loader import config
 
-fn_beta = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
+fn_beta = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
 normal_num = 50
 test_cpg = "cg12161228"
+test_gene = "GSTP1"
 cutpoint = 0.17
 
 data_beta = pd.read_csv(fn_beta)
