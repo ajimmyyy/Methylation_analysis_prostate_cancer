@@ -2,12 +2,11 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-from config_loader import config
 
-fn_i = config["DMP_PER_GENE_PATH"]
-fn_o = config["DMP_HYPER_PATH"]
-fn_o_hypo = config["DMP_HYPO_PATH"]
-pic_o = config["VOLCANO_PICTURE_PATH"]
+fn_i = "Data/Data-dbate/DMP_per_gene.csv.csv"
+fn_o = "Data/Data-volcano/DMP_hyper.csv"
+fn_o_hypo = "Data/Data-volcano/DMP_hypo.csv"
+pic_o = "Data/Data-volcano/DMP_volcano_plot.jpg"
 
 threshold_FC = 0.37
 threshold_Pvalue = -np.log10(0.05)

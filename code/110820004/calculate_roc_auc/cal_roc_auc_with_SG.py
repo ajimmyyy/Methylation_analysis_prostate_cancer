@@ -3,13 +3,12 @@ import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, auc
-from config_loader import config
 
-fn_bate = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
-fn_dmp = config["HYPER_HYPO_COMORBIDITY_BOTH_PATH"]
-fn_dmp_s = config["HYPER_HYPO_COMORBIDITY_SINGLE_SOLO_PATH"]
-fn_dmp_g = config["HYPER_HYPO_COMORBIDITY_GROUP_SOLO_PATH"]
-fn_o = config["COMORBIDITY_BOTH_AUC_PATH"]
+fn_bate = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
+fn_dmp = "Data/110820004/Data-comorbidity/HyperHpo_filtered_comorbidity_both_single_group.csv"
+fn_dmp_s = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_single_sole.csv"
+fn_dmp_g = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_group_sole.csv"
+fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_both_single_group_auc.csv"
 normal_num = 50
 
 data_bate_df = pd.read_csv(fn_bate)

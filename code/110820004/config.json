@@ -1,6 +1,6 @@
 {
-    "ALL_BETA_NORMALIZED_TRAIN_PATH": "C:/Users/acer/DesktopD/ata-origin/train/all_beta_normalized.csv",
-    "DNP_RESULT_TRAIN_PATH": "C:/Users/acer/DesktopD/ata-origint/train/DMP_result_TN.csv",
+    "ALL_BETA_NORMALIZED_TRAIN_PATH": "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv",
+    "DNP_RESULT_TRAIN_PATH": "C:/Users/acer/Desktop/Data-origint/train/DMP_result_TN.csv",
     "ALL_BETA_NORMALIZED_TEST_PATH": "C:/Users/acer/Desktop/Data-origin/test/all_beta_normalized_test.csv",
     "ALL_BETA_NORMALIZED_VALIDATION_PATH": "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv",
     "VALIDATION_CHOOSE_PATH": "C:/Users/acer/Desktop/Data-origin/validation/validation_choose.txt",

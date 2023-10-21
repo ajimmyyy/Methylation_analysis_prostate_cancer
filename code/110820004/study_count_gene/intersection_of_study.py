@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-fn_dmp = config["COMORBIDITY_GROUP_AUC_PATH"]
-study_dmp = config["STUDY_COUNT_GENE_PATH"]
-fn_o = config["COMORBIDITY_GROUP_AUC_STUDY_COUNT_PATH"]
+fn_dmp = "Data/110820004/Data-ROC_AUC/comorbidity_group_auc.csv"
+study_dmp = "Data/110820004/Data-study/study_count_gene.csv"
+fn_o = "Data/110820004/Data-study/comorbidity_group_auc_study_count.csv"
 
 data_dmp_df = pd.read_csv(fn_dmp)
 data_study_df = pd.read_csv(study_dmp)

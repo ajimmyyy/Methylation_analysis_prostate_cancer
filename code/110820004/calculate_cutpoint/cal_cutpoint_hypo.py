@@ -2,11 +2,10 @@ import csv
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-fn_beta = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
-fn_dmp_hypo = config["DMP_HYPO_PATH"]
-fn_o = config["HYPO_CUTPOINT_PATH"]
+fn_beta = "Data/Data-origin/all_beta_normalized.csv"
+fn_dmp_hypo = "Data/Data-volcano/DMP_hypo.csv"
+fn_o = "Data/Data-cutpoint/hypo_with_cutpoint.csv"
 normal_num = 50
 
 data_beta_df = pd.read_csv(fn_beta)

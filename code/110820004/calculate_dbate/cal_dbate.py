@@ -2,10 +2,9 @@ import csv
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-fn_i = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
-fn_o = config["ALL_BETA_APPEND_DBATE_PATH"]
+fn_i = "C:/Users/acer/DesktopD/ata-origin/train/all_beta_normalized.csv"
+fn_o = "Data/110820004/Data-dbate/all_beta_delta.csv"
 count_of_normal = 50
 
 def cal_dbate(row, normal_num):

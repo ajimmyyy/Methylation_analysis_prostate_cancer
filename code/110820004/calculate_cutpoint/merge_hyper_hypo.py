@@ -1,17 +1,10 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-<<<<<<< Updated upstream
 fn_dmp_hyper = "Data/110820004/Data-cutpoint/hyper_with_cutpoint.csv"
 fn_dmp_hypo = "Data/110820004/Data-cutpoint/hypo_with_cutpoint.csv"
 fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
-=======
-fn_dmp_hyper = config["HYPER_CUTPOINT_PATH"]
-fn_dmp_hypo = config["HYPO_CUTPOINT_PATH"]
-fn_o = config["HYPER_HYPO_CUTPOINT_PATH"]
->>>>>>> Stashed changes
 
 data_dmp_hyper = pd.read_csv(fn_dmp_hyper)
 data_dmp_hypo = pd.read_csv(fn_dmp_hypo)

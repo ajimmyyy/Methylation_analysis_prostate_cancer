@@ -2,17 +2,10 @@ import csv
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-<<<<<<< Updated upstream
 fn_beta = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
 fn_dmp_hyper = "Data/110820004/Data-volcano/DMP_hyper.csv"
 fn_o = "Data/Data-cutpoint/hyper_with_cutpoint.csv"
-=======
-fn_beta = config["ALL_BETA_NORMALIZED_TRAIN_PATH"]
-fn_dmp_hyper = config["DMP_HYPER_PATH"]
-fn_o = config["HYPER_CUTPOINT_PATH"]
->>>>>>> Stashed changes
 normal_num = 50
 
 data_beta_df = pd.read_csv(fn_beta)

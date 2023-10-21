@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from config_loader import config
 
-fn_cutpoint = config["HYPER_HYPO_CUTPOINT_PATH"]
-fn_beta = config["ALL_BETA_NORMALIZED_VALIDATION_PATH"]
-fn_o = config["HYPER_HYPO_CUTPOINT_VALIDATION_PATH"]
-fn_o_keep = config["HYPER_HYPO_CUTPOINT_VALIDATION_KEEP_PATH"]
+fn_cutpoint = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
+fn_beta = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
+fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate.csv"
+fn_o_keep = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate_keep.csv"
 
 normal_num = 20
 half_total_num = 110
