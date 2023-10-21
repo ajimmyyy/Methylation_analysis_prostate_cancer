@@ -5,7 +5,7 @@
     "ALL_BETA_NORMALIZED_VALIDATION_PATH": "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv",
     "VALIDATION_CHOOSE_PATH": "C:/Users/acer/Desktop/Data-origin/validation/validation_choose.txt",
 
-    "ALL_BETA_APPEND_DBATE_PATH": "Data/110820004/Data-dbate/all_beta_delta.csv",
+    "ALL_BETA_APPEND_DBETA_PATH": "Data/110820004/Data-dbeta/all_beta_delta.csv",
     "DMP_PER_GENE_PATH": "Data/Data-dbate/DMP_per_gene.csv.csv",
     
     "DMP_HYPER_PATH": "Data/Data-volcano/DMP_hyper.csv",
