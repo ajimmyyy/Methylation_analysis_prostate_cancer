@@ -11,7 +11,6 @@ normal_num = 20
 half_total_num = 110
 half_normal_num = 10
 threshold_validate_MAPE = 0.8
-threshold_validate_dif = 0.05
 
 data_beta_df = pd.read_csv(fn_beta)
 data_cutpoint_df = pd.read_csv(fn_cutpoint)
@@ -45,8 +44,6 @@ data_cutpoint_df["F1_dif"] = data_cutpoint_df["F1_validate"] - data_cutpoint_df[
 data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["F1_validate"] > threshold_validate_MAPE]
 
 data_cutpoint_df.to_csv(fn_o_keep, sep=',', encoding='utf-8', index=False)
-
-data_cutpoint_df = data_cutpoint_df[abs(data_cutpoint_df["F1_dif"]) < threshold_validate_dif]
 
 data_cutpoint_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
 
