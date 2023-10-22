@@ -2,20 +2,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-fn_cutpoint = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
-fn_beta = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
-fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate.csv"
-fn_o_keep = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate_keep.csv"
 
-normal_num = 20
-half_total_num = 110
-half_normal_num = 10
-threshold_validate_MAPE = 0.8
 
-data_beta_df = pd.read_csv(fn_beta)
-data_cutpoint_df = pd.read_csv(fn_cutpoint)
-
-def check_cutpoint(row):
+def check_cutpoint(row, normal_num):
     cutpoint = row["cutpoint"]
     filtered_row = data_beta_df[data_beta_df[data_beta_df.columns[0]] == row["CpG"]]
 
@@ -37,15 +26,23 @@ def check_cutpoint(row):
 
     return pd.Series({"F1_validate": F1})
 
-tqdm.pandas(desc="find cutpoint")
-data_cutpoint_df["F1_validate"] = data_cutpoint_df.progress_apply(check_cutpoint, axis = 1)
-data_cutpoint_df["F1_dif"] = data_cutpoint_df["F1_validate"] - data_cutpoint_df["F1"]
+if __name__ == "__main__":
+    fn_cutpoint = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
+    fn_beta = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
+    fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate.csv"
+    count_of_normal = 20
+    threshold_validate_MAPE = 0.8
 
-data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["F1_validate"] > threshold_validate_MAPE]
+    data_beta_df = pd.read_csv(fn_beta)
+    data_cutpoint_df = pd.read_csv(fn_cutpoint)
 
-data_cutpoint_df.to_csv(fn_o_keep, sep=',', encoding='utf-8', index=False)
+    tqdm.pandas(desc="find cutpoint")
+    data_cutpoint_df["F1_validate"] = data_cutpoint_df.progress_apply(check_cutpoint, axis = 1, args = (count_of_normal,))
+    data_cutpoint_df["F1_dif"] = data_cutpoint_df["F1_validate"] - data_cutpoint_df["F1"]
 
-data_cutpoint_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
+    data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["F1_validate"] > threshold_validate_MAPE]
+
+    data_cutpoint_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
 
 
 
