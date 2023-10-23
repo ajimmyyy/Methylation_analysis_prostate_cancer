@@ -2,6 +2,17 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# random_choose_validation(fn_origin, normal_total, normal_num, tumor_total, tumor_num):
+# 隨機選取驗證集
+# Parameters:
+# fn_origin: DataFrame，資料集
+# normal_total: Int，normal資料數量
+# normal_num: Int，要選取的normal資料數量
+# tumor_total: Int，tumor資料數量
+# tumor_num: Int，要選取的tumor資料數量
+# Return:
+# data: DataFrame，驗證集
+# selected_columns: List，選取表
 def random_choose_validation(fn_origin, normal_total, normal_num, tumor_total, tumor_num):
     data_origin_df = pd.read_csv(fn_origin)
 

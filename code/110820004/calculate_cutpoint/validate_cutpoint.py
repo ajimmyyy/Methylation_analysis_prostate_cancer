@@ -2,8 +2,15 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-
-
+# check_cutpoint(row, normal_num):
+# 驗證每個位點的切點
+# Parameters:
+# row: DataFrame輸入列，透過apply輸入
+# normal_num: Int，normal資料數量
+# Return:
+# F1_validate: DataFrame行資料
+# *請透過apply or progress_apply使用此function
+# *請確保資料擁有各病人之beta值
 def check_cutpoint(row, normal_num):
     cutpoint = row["cutpoint"]
     filtered_row = data_beta_df[data_beta_df[data_beta_df.columns[0]] == row["CpG"]]

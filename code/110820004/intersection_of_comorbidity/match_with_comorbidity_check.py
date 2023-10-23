@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# 
+# 共病基因single, group差集,連集
+# 
 fn_dmp_group = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_group.csv"
 fn_dmp_single = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_single.csv"
 fn_o_single = "Data/110820004/Data-comorbidity/HyperHypo_filtered_comorbidity_single_sole.csv"

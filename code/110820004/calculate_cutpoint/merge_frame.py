@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# 
+# 合併 hyper,hypo
+# 
 fn_dmp_hyper = "Data/110820004/Data-cutpoint/hyper_with_cutpoint.csv"
 fn_dmp_hypo = "Data/110820004/Data-cutpoint/hypo_with_cutpoint.csv"
 fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
