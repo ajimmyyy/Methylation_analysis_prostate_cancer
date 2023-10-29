@@ -4,6 +4,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# 
+# 與train資料mapping，並判斷癌症前後期
+# 
 def judge_cancer_stage(row):
     if row["Sample_Group"] == "Normal":
         return pd.Series({"cancer_stage": "None"})
@@ -22,7 +25,9 @@ def judge_cancer_stage(row):
 if __name__ == "__main__":
     cancer_stage_map = "Data/110820004/Data-cancer_stage/cancer_stage.csv"
     sample_sheet_dir = "Data/110820004/Data-cancer_stage/sample_sheet.csv"
-    fn_o = "Data/110820004/Data-cancer_stage/patient_cancer_stage_train.csv"
+    fn_patient_detail = "Data/110820004/Data-cancer_stage/patient_cancer_stage_train.csv"
+    fn_early_patient = "Data/110820004/Data-cancer_stage/early_patient_list.txt"
+    fn_later_patient = "Data/110820004/Data-cancer_stage/later_patient_list.txt"
 
     cancer_stage_df = pd.read_csv(cancer_stage_map)
     sample_sheet = pd.read_csv(sample_sheet_dir)
@@ -32,5 +37,9 @@ if __name__ == "__main__":
 
     tqdm.pandas(desc="find cancer stage")
     data_out["cancer_stage"] = data_out.progress_apply(judge_cancer_stage, axis = 1)
+    early_patient = data_out[data_out["cancer_stage"] == "early"].drop_duplicates()
+    later_patient = data_out[data_out["cancer_stage"] == "later"].drop_duplicates()
 
-    data_out.to_csv(fn_o, sep=',', encoding='utf-8', index=False)   
+    data_out.to_csv(fn_patient_detail, sep=',', encoding='utf-8', index=False)
+    early_patient["Sample_Name"].to_csv(fn_early_patient, sep='\t', index=False, header=False)
+    later_patient["Sample_Name"].to_csv(fn_later_patient, sep='\t', index=False, header=False)      

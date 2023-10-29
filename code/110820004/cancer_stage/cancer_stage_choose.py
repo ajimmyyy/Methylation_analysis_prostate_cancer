@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# 
+# 標註每位病患的TCGA_barcode,SentrixID,TNM
+# 
 if __name__ == "__main__":
     TCGA_dir = "C:/Users/acer/Desktop/special_subject/dataset/jhu-usc.edu_PRAD.HumanMethylation450.1.13.0.sdrf.txt"
     cancer_stage_dir = "Data/110820004/Data-cancer_stage/prad_tcga_pan_can_atlas_2018_clinical_data.csv"
