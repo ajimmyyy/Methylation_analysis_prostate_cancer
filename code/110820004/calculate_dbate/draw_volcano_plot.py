@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     data_df = pd.read_csv(fn_i)
 
-    uper_x, lower_x = Choose_hyper_hypo(data_df, threshold_FC, -threshold_FC, threshold_Pvalue)
+    uper_x, lower_x = Choose_hyper_hypo(data_df, threshold_FC, -0.258, threshold_Pvalue)
 
     plt.figure(figsize=(32,18))
     plt.style.use("ggplot")
