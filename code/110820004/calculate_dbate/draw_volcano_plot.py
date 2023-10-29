@@ -26,12 +26,13 @@ if __name__ == "__main__":
     fn_o_hypo = "Data/110820004/Data-volcano/DMP_hypo.csv"
     pic_o = "Data/110820004/Data-volcano/DMP_volcano_plot.jpg"
 
-    threshold_FC = 0.37
+    threshold_FC_hyper = 0.37
+    threshold_FC_hypo = -0.258
     threshold_Pvalue = -np.log10(0.05)
 
     data_df = pd.read_csv(fn_i)
 
-    uper_x, lower_x = Choose_hyper_hypo(data_df, threshold_FC, -0.258, threshold_Pvalue)
+    uper_x, lower_x = Choose_hyper_hypo(data_df, threshold_FC_hyper, threshold_FC_hypo, threshold_Pvalue)
 
     plt.figure(figsize=(32,18))
     plt.style.use("ggplot")
@@ -39,8 +40,8 @@ if __name__ == "__main__":
     plt.ylabel("-log(P.adj)", fontweight = "bold")
 
     plt.scatter((data_df["logFC"]), -np.log10(data_df["adj.P.Val"]), c = "grey", s = 15, alpha = .5, label='other')
-    plt.axvline(threshold_FC,color="black", linestyle="--")
-    plt.axvline(-threshold_FC,color="black", linestyle="--")
+    plt.axvline(threshold_FC_hyper,color="black", linestyle="--")
+    plt.axvline(threshold_FC_hypo,color="black", linestyle="--")
     plt.scatter((uper_x["logFC"]), -np.log10(uper_x["adj.P.Val"]), c = "red", s = 15, alpha = .5, label='hyper')
     plt.scatter((lower_x["logFC"]), -np.log10(lower_x["adj.P.Val"]), c = "blue", s = 15, alpha = .5, label='hypo')
     plt.axhline(threshold_Pvalue,color="black", linestyle="--")

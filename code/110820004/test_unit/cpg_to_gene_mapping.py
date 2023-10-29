@@ -4,7 +4,8 @@ import numpy as np
 from tqdm import tqdm
 
 if __name__ == "__main__":
-    test_gene = ["GAPDH", "ACTB", "MYH14;MYH14;MYH14", "PRHOXNB"]
+    # test_gene = ["GAPDH", "ACTB", "MYH14;MYH14;MYH14", "PRHOXNB"]
+    test_gene = ["GSTP1"]
     CpG_site_o = []
 
     detail_450k_dir = "C:/Users/acer/Desktop/Data-origin/humanmethylation450.csv"

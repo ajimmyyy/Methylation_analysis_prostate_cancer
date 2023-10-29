@@ -31,12 +31,12 @@ def cal_auc(row, total_num, normal_num):
 
 if __name__ == "__main__":
     fn_bate = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
-    # fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_single.csv"
-    fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_group.csv"
-    # fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_single_auc.csv"
-    fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_group_auc.csv"
-    # fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_single.png"
-    fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_group.png"
+    fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_single.csv"
+    # fn_dmp = "Data/110820004/Data-Comorbidity/HyperHypo_filtered_comorbidity_group.csv"
+    fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_single_auc.csv"
+    # fn_o = "Data/110820004/Data-ROC_AUC/comorbidity_group_auc.csv"
+    fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_single.png"
+    # fn_o_pic = "Data/110820004/Data-ROC_AUC/ROC_curve_group.png"
 
     half_total_num = 556
     half_normal_num = 50

@@ -11,11 +11,13 @@ from tqdm import tqdm
 # F1_validate: DataFrame行資料
 # *請透過apply or progress_apply使用此function
 # *請確保資料擁有各病人之beta值
-def check_cutpoint(row, normal_num):
+def check_cutpoint(row,beta_df, normal_num):
     cutpoint = row["cutpoint"]
-    filtered_row = data_beta_df[data_beta_df[data_beta_df.columns[0]] == row["CpG"]]
-
-    transform_row = filtered_row.to_numpy()[0]
+    filtered_row = beta_df[beta_df[beta_df.columns[0]] == row["CpG"]]
+    try:
+        transform_row = filtered_row.to_numpy()[0]
+    except:
+        return pd.Series({"F1_validate": 0})
     normal_beta = transform_row[1:normal_num + 1:2]
     tumor_beta = transform_row[normal_num + 1::2]
 
@@ -37,6 +39,7 @@ if __name__ == "__main__":
     fn_cutpoint = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint.csv"
     fn_beta = "C:/Users/acer/Desktop/Data-origin/validation/all_beta_normalized_validation.csv"
     fn_o = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate.csv"
+    fn_o_ex = "Data/110820004/Data-cutpoint/HyperHypo_cutpoint_validate_not_find.csv"
     count_of_normal = 20
     threshold_validate_MAPE = 0.8
 
@@ -44,13 +47,11 @@ if __name__ == "__main__":
     data_cutpoint_df = pd.read_csv(fn_cutpoint)
 
     tqdm.pandas(desc="find cutpoint")
-    data_cutpoint_df["F1_validate"] = data_cutpoint_df.progress_apply(check_cutpoint, axis = 1, args = (count_of_normal,))
+    data_cutpoint_df["F1_validate"] = data_cutpoint_df.progress_apply(check_cutpoint, axis = 1, args = (data_beta_df,count_of_normal,))
     data_cutpoint_df["F1_dif"] = data_cutpoint_df["F1_validate"] - data_cutpoint_df["F1"]
 
+    data_not_find = data_cutpoint_df[data_cutpoint_df["F1_validate"] == 0]
     data_cutpoint_df = data_cutpoint_df[data_cutpoint_df["F1_validate"] > threshold_validate_MAPE]
 
+    data_not_find.to_csv(fn_o_ex, sep=',', encoding='utf-8', index=False)
     data_cutpoint_df.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
-
-
-
-    

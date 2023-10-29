@@ -6,13 +6,16 @@ import matplotlib.pyplot as plt
 # 
 #測試單一位點
 #  
-fn_beta = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
+fn_beta = "C:/Users/acer/Desktop/Data-origin/test/all_beta_normalized_test.csv"
 normal_num = 50
-test_cpg = "cg12161228"
+test_cpg = "cg17551002"
 cutpoint = 0.17
 
 # 取得位點
 data_beta = pd.read_csv(fn_beta)
+
+print(data_beta.shape[1], data_beta.shape[0])
+
 row = data_beta[data_beta[data_beta.columns[0]] == test_cpg]
 
 # 區分normal, tumor
