@@ -9,7 +9,7 @@ if __name__ == "__main__":
     CpG_site_o = []
 
     detail_450k_dir = "C:/Users/acer/Desktop/Data-origin/humanmethylation450.csv"
-    fn_o = "C:/Users/acer/Desktop/tmp.csv"
+    fn_o = "C:/Users/acer/Desktop/tmp/tmp.csv"
 
     detail_450k_df = pd.read_csv(detail_450k_dir)
     filtered_data = detail_450k_df[detail_450k_df["UCSC_RefGene_Name"].isin(test_gene)]
