@@ -12,7 +12,7 @@ from sklearn.metrics import roc_curve, roc_auc_score, auc
 # normal_num: Int，normal資料數量
 # Return:
 # auc: DataFrame行資料
-# *請透過apply or progress_apply使用此function
+# *請透過apply or progress_apply使用此function  
 # *請確保資料擁有各病人之beta值
 def cal_auc(row, total_num, normal_num):
     transform_row = row.to_numpy()
