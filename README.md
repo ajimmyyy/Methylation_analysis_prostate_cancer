@@ -8,3 +8,4 @@ pandas
 tqdm
 matplotlib
 sklearn
+pygosemsim https://github.com/mojaie/pygosemsim
