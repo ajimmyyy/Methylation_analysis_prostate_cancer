@@ -14,7 +14,7 @@ count_of_normal = 50
 fn_i = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
 fn_early = "Data/110820004/Data-cancer_stage/early_patient_list.txt"
 fn_later = "Data/110820004/Data-cancer_stage/later_patient_list.txt"
-fn_o = "Data/110820004/Data-cancer_stage/all_data/cancer_stage_with_dbate.csv"
+fn_o = "Data/110820004/Data-cancer_stage/cancer_stage_with_dbate.csv"
 
 data_df = pd.read_csv(fn_i)
 with open(fn_early, "r") as file:
