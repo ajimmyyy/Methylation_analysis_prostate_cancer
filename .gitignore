@@ -3,4 +3,5 @@
 /Data/Row
 /Data/External
 /build
-/__pycache__/
+__pycache__/
+*.pyc
