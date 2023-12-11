@@ -25,9 +25,11 @@ def check_cutpoint(row,beta_df, normal_num):
     FN = np.sum(tumor_beta < cutpoint)
     TP = np.sum(tumor_beta > cutpoint)
 
-    sensitivity = TP/(TP+FN)
-    precision = TP/(TP+FP) if TP != 0 else 0
+    if (TP == 0):
+        return pd.Series({"F1_validate": 0})
 
+    sensitivity = TP/(TP+FN)
+    precision = TP/(TP+FP)
     F1 = 2 * sensitivity * precision / (sensitivity + precision)
 
     if row["DNAm"] == "hypo":

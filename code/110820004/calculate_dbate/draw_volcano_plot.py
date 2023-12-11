@@ -22,12 +22,12 @@ def Choose_hyper_hypo(dmp_result, threshold_FC_hyper, threshold_FC_hypo, thresho
 
 if __name__ == "__main__":
     fn_i = "Data/110820004/Data-dbate/DMP_per_gene.csv"
-    fn_o = "Data/110820004/Data-volcano/DMP_hyper.csv"
+    fn_o_hyper = "Data/110820004/Data-volcano/DMP_hyper.csv"
     fn_o_hypo = "Data/110820004/Data-volcano/DMP_hypo.csv"
     pic_o = "Data/110820004/Data-volcano/DMP_volcano_plot.jpg"
 
-    threshold_FC_hyper = 0.37
-    threshold_FC_hypo = -0.258
+    threshold_FC_hyper = 0.319
+    threshold_FC_hypo = -0.214
     threshold_Pvalue = -np.log10(0.05)
 
     data_df = pd.read_csv(fn_i)
@@ -53,8 +53,8 @@ if __name__ == "__main__":
     plt.savefig(pic_o)
     plt.close()
 
-    # uper_x.to_csv(fn_o, sep=',', encoding='utf-8', index=False)
-    # lower_x.to_csv(fn_o_hypo, sep=',', encoding='utf-8', index=False)
+    uper_x.to_csv(fn_o_hyper, sep=',', encoding='utf-8', index=False)
+    lower_x.to_csv(fn_o_hypo, sep=',', encoding='utf-8', index=False)
     print(len(uper_x))
     print(len(TSS_x[TSS_x["feature"] == 'TSS1500']))
     print(len(TSS_x[TSS_x["feature"] == 'TSS200']))

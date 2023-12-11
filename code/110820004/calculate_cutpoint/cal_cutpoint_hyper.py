@@ -39,13 +39,13 @@ def cal_cutpoint(row, normal_num):
 
 if __name__ == "__main__":
     fn_beta = "C:/Users/acer/Desktop/Data-origin/train/all_beta_normalized.csv"
-    fn_dmp_hypo = "Data/110820004/Data-volcano/DMP_hyper.csv"
+    fn_dmp_hyper = "Data/110820004/Data-volcano/DMP_hyper.csv"
     fn_o = "Data/110820004/Data-cutpoint/hyper_with_cutpoint.csv"
     count_of_normal = 50
 
     data_beta_df = pd.read_csv(fn_beta)
 
-    data_dmp_df = pd.read_csv(fn_dmp_hypo)
+    data_dmp_df = pd.read_csv(fn_dmp_hyper)
     DMP_list = data_dmp_df.iloc[:, 0].tolist()
     dmp_beta_df = data_beta_df.loc[data_beta_df[data_beta_df.columns[0]].isin(DMP_list)]
 

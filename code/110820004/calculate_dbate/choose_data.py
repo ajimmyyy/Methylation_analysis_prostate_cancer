@@ -1,6 +1,7 @@
 import csv
 import pandas as pd
 import numpy as np
+import swifter
 from tqdm import tqdm
 
 # choose_dbate_per_gene(dmp_result, all_dbate)
@@ -18,11 +19,11 @@ def choose_dbate_per_gene(dmp_result, all_dbate):
         filtered_rows = all_dbate[all_dbate[all_dbate.columns[0]] == row.iat[0]]
         return filtered_rows['dbeta'].values[0]
 
-    tqdm.pandas(desc="find dbeta")
-    dmp_result["dbeta"] = dmp_result.progress_apply(find_dbate, axis = 1)
+    dmp_result["dbeta"] = dmp_result.swifter.apply(find_dbate, axis = 1)
 
-    max_indices = dmp_result.groupby('gene', group_keys=False)['dbeta'].apply(lambda x: x.abs().idxmax())
-    dmp_result = dmp_result.loc[max_indices]
+    filtered_dmp = dmp_result[dmp_result['feature'].isin(['TSS200', 'TSS1500'])]
+    max_indices = filtered_dmp.groupby('gene', group_keys=False)['dbeta'].apply(lambda x: x.abs().idxmax())
+    dmp_result = filtered_dmp.loc[max_indices]
 
     return dmp_result
 

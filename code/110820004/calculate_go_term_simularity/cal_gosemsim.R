@@ -16,10 +16,10 @@ gene_similarity_hyper <- mgeneSim(genes_hyper, semData = hsGO, measure = "Wang",
 genet_similarity_hypo <- mgeneSim(genes_hypo, semData = hsGO, measure = "Wang", combine = "BMA")
 
 result_sim <- as.data.frame(gene_similarity)
-write.csv(result_sim, file = fn_o, row.names = FALSE)
+write.csv(result_sim, file = fn_o, row.names = TRUE)
 
 result_hyper <- as.data.frame(gene_similarity_hyper)
-write.csv(result_hyper, file = fn_hyper, row.names = FALSE)
+write.csv(result_hyper, file = fn_hyper, row.names = TRUE)
 
 result_hypo <- as.data.frame(genet_similarity_hypo)
-write.csv(result_hypo, file = fn_hypo, row.names = FALSE)
+write.csv(result_hypo, file = fn_hypo, row.names = TRUE)
