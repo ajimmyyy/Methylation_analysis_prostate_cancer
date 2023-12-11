@@ -9,8 +9,8 @@ if __name__ == "__main__":
     _config = ConfigParser()
     _config.read(_configPath)
 
-    threshold_dbeta_hyper = 0.368
-    threshold_dbeta_hypo = -0.238
+    threshold_dbeta_hyper = 0.37
+    threshold_dbeta_hypo = -0.258
     threshold_Pvalue = -np.log10(0.05)
 
     _dmpDataDf = pd.read_csv(_config["Paths"]["Filter_DBEAT_DATA_PATH"]) 
