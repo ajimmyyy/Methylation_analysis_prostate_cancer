@@ -1,4 +1,0 @@
-MakeFile
-Src
-Tests
-ValidateModel
