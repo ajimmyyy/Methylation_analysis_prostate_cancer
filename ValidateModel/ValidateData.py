@@ -4,7 +4,28 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 class ValidateData:
-    NOT_FIND = -1    
+    NOT_FIND = -1
+
+    # randomChooseValidation(betaDf, normalCount, normalChoose, tumorCount, tumorChoose)
+    # 隨機選取驗證集
+    # Parameters:
+    # betaDf: DataFrame，資料集
+    # normalCount: Int，normal資料數量
+    # normalChoose: Int，要選取的normal資料數量
+    # tumorCount: Int，tumor資料數量
+    # tumorChoose: Int，要選取的tumor資料數量
+    # Return:
+    # data: DataFrame，驗證集
+    # selectColumns: List，選取表
+    def randomChooseValidation(betaDf, normalCount, normalChoose, tumorCount, tumorChoose):
+        randomNormal = np.random.choice(normalCount//2, normalChoose // 2, replace=False) * 2
+        randomTumor = np.random.choice(tumorCount // 2, tumorChoose // 2, replace=False) * 2
+
+        selectColumns = np.sort(np.concatenate([[0], randomNormal + 1, randomNormal + 2, randomTumor + normalCount + 1, randomTumor + normalCount + 2]))
+
+        data = betaDf.iloc[:, selectColumns.tolist()]
+
+        return data, selectColumns
 
     # ValidateCutpoint(self, cutpointDf, betaDf, normalCount, thresholdF1 = 0.8)
     # 驗證每個位點的切點

@@ -1,7 +1,7 @@
 /venv
 /methylation_analysis.egg-info
-/Data/Row
-/Data/External
+/Data/Row/*
+/Data/External/*
 /build
 __pycache__/
 *.pyc
