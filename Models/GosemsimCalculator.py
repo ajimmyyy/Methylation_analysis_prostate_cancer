@@ -7,6 +7,8 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
 class GosemsimCalculator:
+    def CalculateDistanceMatrixGeometricMean():
+        return
     # ClusterGoterm(self, gosemsimDf, distanceMethod = 'average', clusterNumRange = range(5, 51))
     # 對距離資料分群
     # Parameters:

@@ -12,6 +12,6 @@ if __name__ == "__main__":
     _gosemsimDf = pd.read_csv(_config["Paths"]["GOSEMSIM_MF_HYPER_PATH"], index_col = 0)
 
     _gosemsimCalculator = GosemsimCalculator()
-    _fig = _gosemsimCalculator.DrawHeatmap(_gosemsimDf, "ward")
+    _fig = _gosemsimCalculator.DrawHeatmap(_gosemsimDf, "average")
 
-    FileSaver.SavePlot(_fig, _config["Paths"]["GENE_MF_HYPER_WARD_HEATMAP_PATH"])
+    FileSaver.SavePlot(_fig, _config["Paths"]["GENE_MF_HYPER_AVERAGE_HEATMAP_PATH"])

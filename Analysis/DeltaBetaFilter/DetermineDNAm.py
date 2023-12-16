@@ -9,14 +9,14 @@ if __name__ == "__main__":
     _config = ConfigParser()
     _config.read(_configPath)
 
-    threshold_dbeta_hyper = 0.368
-    threshold_dbeta_hypo = -0.238
-    threshold_Pvalue = -np.log10(0.05)
+    _hyperThreshold = 0.368
+    _hypoThreshold = -0.238
+    _pValueThreshold = -np.log10(0.05)
 
     _dmpDataDf = pd.read_csv(_config["Paths"]["Filter_DBEAT_DATA_PATH"]) 
 
     _dbateFilter = DeltaBetaFilter()
-    _hyperDf, _hypoDf = _dbateFilter.DetermineDNAm(_dmpDataDf, threshold_dbeta_hyper, threshold_dbeta_hypo, threshold_Pvalue)
+    _hyperDf, _hypoDf = _dbateFilter.DetermineDNAm(_dmpDataDf, _hyperThreshold, _hypoThreshold, _pValueThreshold)
     _fig = _dbateFilter.DrawVolcanoPlot(_dmpDataDf, _hyperDf, _hypoDf)
 
     FileSaver.SaveDataframe(_hyperDf, _config["Paths"]["DMP_HYPER_DATA_PATH"])
