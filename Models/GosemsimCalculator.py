@@ -34,7 +34,7 @@ class GosemsimCalculator:
         }
         df = pd.DataFrame(data)
 
-        silhouetteFig = plt.figure(figsize=(20, 20))
+        silhouetteFig = plt.figure(figsize=(20, 40))
         plt.plot(clusterNumRange, scores, marker='o')
         plt.title('Silhouette Score vs Number of Clusters')
         plt.xlabel('Number of Clusters')

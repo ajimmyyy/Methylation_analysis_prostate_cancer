@@ -15,8 +15,8 @@ if __name__ == "__main__":
     _geneFilter = GeneFilter()
     _geneCluster = _geneFilter.IntersectData(_aucDf, _geneCluster, "gene")
 
-    # idx_max_dbeta = _geneCluster.groupby('cluster')['dbeta'].idxmax()
-    # idx_max_auc = _geneCluster.groupby('cluster')['auc'].idxmax()
+    idx_max_dbeta = _geneCluster.groupby('cluster')['dbeta'].idxmax()
+    idx_max_auc = _geneCluster.groupby('cluster')['auc'].idxmax()
     idx_max_F1 = _geneCluster.groupby('cluster')['F1'].idxmax()
 
     _geneCluster = _geneCluster.loc[idx_max_F1]

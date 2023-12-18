@@ -17,3 +17,4 @@ if __name__ == "__main__":
     plt.show()
 
     FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_WARD_PATH"])
+    FileSaver.SavePlot(silhouetteFig, _config["Paths"]["GENE_MF_HYPER_WARD_SILHOUETTE_PATH"])
