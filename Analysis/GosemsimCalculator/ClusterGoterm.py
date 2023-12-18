@@ -12,9 +12,9 @@ if __name__ == "__main__":
     _gosemsimDf = pd.read_csv(_config["Paths"]["GOSEMSIM_MF_HYPER_PATH"], index_col = 0)
 
     _gosemsimCalculator = GosemsimCalculator()
-    _geneCluster, silhouetteFig = _gosemsimCalculator.ClusterGoterm(_gosemsimDf, "ward")
+    _geneCluster, silhouetteFig = _gosemsimCalculator.ClusterGoterm(_gosemsimDf, "average")
 
     plt.show()
 
-    FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_WARD_PATH"])
-    FileSaver.SavePlot(silhouetteFig, _config["Paths"]["GENE_MF_HYPER_WARD_SILHOUETTE_PATH"])
+    FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_AVERAGE_PATH"])
+    FileSaver.SavePlot(silhouetteFig, _config["Paths"]["GENE_MF_HYPER_AVERAGE_SILHOUETTE_PATH"])
