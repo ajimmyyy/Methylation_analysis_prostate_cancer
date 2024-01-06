@@ -15,4 +15,3 @@ multipledispatch
 # 安裝
 執行pip install .
 安裝所有依賴函式庫
-[均一]: <https://www.kaggle.com/datasets/junyiacademy/learning-activity-public-dataset-by-junyi-academy>
