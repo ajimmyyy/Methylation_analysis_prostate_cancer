@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from Models.GeneFilter import GeneFilter
 from MakeFile.FileSaver import FileSaver
@@ -26,18 +27,20 @@ if __name__ == "__main__":
     for cluster in _clusters:
         clusterData = _geneWardCluster[_geneWardCluster['cluster'] == cluster].iloc[:, 1:-2].T
 
-        pca = PCA()
+        pca = PCA(n_components = 3)
         transformed_data = pca.fit_transform(clusterData)
 
-        explainedVarianceRatio = pca.explained_variance_ratio_
-        original_genes = _geneWardCluster[_geneWardCluster['cluster'] == cluster]['gene'].values
-        for i, gene in enumerate(original_genes):
-            print(f'Cluster {cluster} - {gene}: {explainedVarianceRatio[i]*100:.2f}%')
+        print("cluster: ", cluster)
+        print(clusterData.shape)
+        print(transformed_data.shape)
 
-        cumulativeVarianceRatio = explainedVarianceRatio.cumsum()
-        plt.plot(range(1, len(cumulativeVarianceRatio) + 1), cumulativeVarianceRatio, marker='o')
-        plt.xlabel('Number of Principal Components')
-        plt.ylabel('Cumulative Variance Ratio')
-        plt.title(f'Cluster {cluster} - Cumulative Variance Ratio of Principal Components')
+        pc1 = transformed_data[:, 0]
+        pc2 = transformed_data[:, 1]
+
+        colors = np.array(['red'] * 50 + ['blue'] * (len(pc1) - 50))
+        plt.figure(figsize=(8,6))
+        plt.scatter(pc1, pc2,c=colors,cmap='rainbow')
+        plt.xlabel('First principal component')
+        plt.ylabel('Second Principal Component')
         plt.show()
 
