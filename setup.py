@@ -12,6 +12,8 @@ setup(
         'scikit-learn',
         'seaborn',
         'scipy',
-        'multipledispatch'
+        'multipledispatch',
+        "biopython",
+        "scikit-learn-extra",
     ],
 )
