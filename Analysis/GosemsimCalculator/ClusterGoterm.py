@@ -12,9 +12,12 @@ if __name__ == "__main__":
     _gosemsimDf = pd.read_csv(_config["Paths"]["GOSEMSIM_MF_HYPER_PATH"], index_col = 0)
 
     _gosemsimCalculator = GosemsimCalculator()
-    _geneCluster, silhouetteFig = _gosemsimCalculator.ClusterGoterm(_gosemsimDf, "ward")
-
+    # _geneClusterHierarchy, silhouetteHierarchy = _gosemsimCalculator.ClusterHierarchy(_gosemsimDf, "ward")
+    # plt.show()
+    _geneClusterKMedoids, silhouetteKMedoids = _gosemsimCalculator.ClusterKMedoids(_gosemsimDf)
     plt.show()
+    # _geneClusterNJ, NJtree = _gosemsimCalculator.ClusterNeighborJioning(_gosemsimDf)
+    # plt.show()
 
-    FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_WARD_PATH"])
-    FileSaver.SavePlot(silhouetteFig, _config["Paths"]["GENE_MF_HYPER_WARD_SILHOUETTE_PATH"])
+    # FileSaver.SaveDataframe(_geneClusterHierarchy, _config["Paths"]["GENE_CLUSTER_MF_HYPER_HIERARCY_WARD_PATH"])
+    # FileSaver.SavePlot(silhouetteHierarchy, _config["Paths"]["GENE_MF_HYPER_HIERARCY_WARD_SILHOUETTE_PATH"])
