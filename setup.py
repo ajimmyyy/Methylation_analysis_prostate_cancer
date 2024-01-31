@@ -15,5 +15,7 @@ setup(
         'multipledispatch',
         "biopython",
         "scikit-learn-extra",
+        "biomart",
+        "goatools"
     ],
 )

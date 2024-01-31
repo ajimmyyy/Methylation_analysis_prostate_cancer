@@ -9,7 +9,7 @@ if __name__ == '__main__':
     _config.read(_configPath)
 
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
-    _geneList = _aucDf[_aucDf['DNAm'] == 'hyper']['gene'].tolist()
+    _geneList = _aucDf[_aucDf['DNAm'] == 'hypo']['gene'].tolist()
 
     server = BiomartServer("http://www.ensembl.org/biomart")
     interpro = server.datasets['hsapiens_gene_ensembl']
@@ -19,6 +19,14 @@ if __name__ == '__main__':
         },
         'attributes': [
             "external_gene_name",
-            "name_1006"
+            "go_id",
+             "namespace_1003"
         ]
-    })
+    }, header = 1)
+
+    with open(_config["Paths"]["HYPO_GO_TERM_PATH"], 'w', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        for line in response.iter_lines():
+            line = line.decode('utf-8')
+            line_parts = line.split("\t")
+            csvwriter.writerow(line_parts)
