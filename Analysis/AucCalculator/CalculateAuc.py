@@ -4,7 +4,7 @@ import pandas as pd
 from MakeFile.FileSaver import FileSaver
 
 if __name__ == "__main__":
-    _configPath = "Src/Models/AucCalculatorModel/config.ini"
+    _configPath = "Analysis/AucCalculator/config.ini"
     _config = ConfigParser()
     _config.read(_configPath)
 

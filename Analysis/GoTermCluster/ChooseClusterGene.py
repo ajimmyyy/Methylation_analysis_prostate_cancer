@@ -5,7 +5,7 @@ from MakeFile.FileSaver import FileSaver
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-    _configPath = "Analysis/GosemsimCalculator/config.ini"
+    _configPath = "Analysis/GoTermCluster/config.ini"
     _config = ConfigParser()
     _config.read(_configPath)
 

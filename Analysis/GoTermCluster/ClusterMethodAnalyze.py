@@ -4,6 +4,8 @@ import numpy as np
 from MakeFile.FileSaver import FileSaver
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
 
 def GetClusterList(clusterDf):
     cluster = []
@@ -19,6 +21,14 @@ def JaccardSimilarity(list1, list2):
     union = len(set1.union(set2))
     return intersection / union if union != 0 else 0
 
+def CosineSimilarity(list1, list2):
+    geneString1 = ' '.join(list1)
+    geneString2 = ' '.join(list2)
+
+    vectorizer = CountVectorizer()
+    gene_vectors = vectorizer.fit_transform([geneString1, geneString2])
+    cosineSim = cosine_similarity(gene_vectors)
+    return cosineSim[0][1]
 
 def ReorderColumns(df):
     for i in range(len(df.index)):
@@ -38,14 +48,14 @@ def ClusterSimilarity(clusters1, clusters2):
     for cluster1 in clusters1:
         row = []
         for cluster2 in clusters2:
-            similarity = JaccardSimilarity(cluster1, cluster2)
+            similarity = CosineSimilarity(cluster1, cluster2)
             row.append(similarity)
         data.append(row)
 
     return ReorderColumns(pd.DataFrame(data))
 
 if __name__ == "__main__":
-    _configPath = "Analysis/GosemsimCalculator/config.ini"
+    _configPath = "Analysis/GoTermCluster/config.ini"
     _config = ConfigParser()
     _config.read(_configPath)
 
