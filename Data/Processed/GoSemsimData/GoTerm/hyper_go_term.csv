@@ -1,5 +1,4 @@
 Gene name,GO term accession,GO domain
-ACE,,
 ACE,GO:0016020,cellular_component
 ACE,GO:0006508,biological_process
 ACE,GO:0008237,molecular_function
@@ -92,7 +91,6 @@ ACE,GO:0009925,cellular_component
 ACE,GO:0031526,cellular_component
 ACE,GO:0031982,cellular_component
 ACE,GO:0097225,cellular_component
-ACOT11,,
 ACOT11,GO:0008289,molecular_function
 ACOT11,GO:0016790,molecular_function
 ACOT11,GO:0005737,cellular_component
@@ -114,7 +112,6 @@ ACOT11,GO:0120163,biological_process
 ACOT11,GO:0009266,biological_process
 ACOT11,GO:0052816,molecular_function
 ACOT11,GO:0009409,biological_process
-ACSS3,,
 ACSS3,GO:0006629,biological_process
 ACSS3,GO:0043231,cellular_component
 ACSS3,GO:0000166,molecular_function
@@ -146,7 +143,6 @@ ADAM11,GO:0007229,biological_process
 ADAM11,GO:0033555,biological_process
 ADAM11,GO:0061367,biological_process
 ADAM11,GO:0061368,biological_process
-ADAM11,,
 ADAMTS12,GO:0006508,biological_process
 ADAMTS12,GO:0008237,molecular_function
 ADAMTS12,GO:0004222,molecular_function
@@ -175,7 +171,6 @@ ADAMTS12,GO:1901509,biological_process
 ADAMTS12,GO:1902203,biological_process
 ADAMTS12,GO:1902548,biological_process
 ADAMTS12,GO:2001113,biological_process
-ADAMTS12,,
 AFAP1L1,GO:0005737,cellular_component
 AFAP1L1,GO:0042995,cellular_component
 AFAP1L1,GO:0005856,cellular_component
@@ -185,7 +180,6 @@ AFAP1L1,GO:0005515,molecular_function
 AFAP1L1,GO:0005829,cellular_component
 AFAP1L1,GO:0001725,cellular_component
 AFAP1L1,GO:0017124,molecular_function
-AFAP1L1,,
 ALDH1L1,GO:0005737,cellular_component
 ALDH1L1,GO:0003824,molecular_function
 ALDH1L1,GO:0016491,molecular_function
@@ -198,7 +192,6 @@ ALDH1L1,GO:0005829,cellular_component
 ALDH1L1,GO:0070062,cellular_component
 ALDH1L1,GO:0004029,molecular_function
 ALDH1L1,GO:0006740,biological_process
-ALDH1L1,,
 ALDH1L1,GO:0044281,biological_process
 ALDH1L1,GO:0005515,molecular_function
 ALOX12,GO:0046872,molecular_function
@@ -235,7 +228,6 @@ ALOX12,GO:0033559,biological_process
 ALOX12,GO:0042554,biological_process
 ALOX12,GO:1901751,biological_process
 ALOX12,GO:2001306,biological_process
-ALOX12,,
 AMIGO2,GO:0005515,molecular_function
 AMIGO2,GO:0005634,cellular_component
 AMIGO2,GO:0016020,cellular_component
@@ -253,7 +245,6 @@ ANGPTL2,GO:0005102,molecular_function
 ANGPTL2,GO:0062023,cellular_component
 ANGPTL2,GO:0070062,cellular_component
 ANGPTL2,GO:0007267,biological_process
-ANGPTL2,,
 ANK1,GO:0005515,molecular_function
 ANK1,GO:0007165,biological_process
 ANK1,GO:0005737,cellular_component
@@ -278,7 +269,6 @@ ANK1,GO:0019903,molecular_function
 ANK1,GO:0072659,biological_process
 ANK1,GO:0045199,biological_process
 ANK1,GO:0014731,cellular_component
-ANK1,GO:0170014,
 ANK1,GO:0030507,molecular_function
 ANK1,GO:0009898,cellular_component
 ANK1,GO:0006888,biological_process
@@ -288,7 +278,6 @@ ANK1,GO:0030673,cellular_component
 ANK1,GO:0031672,cellular_component
 ANK1,GO:0042383,cellular_component
 ANK1,GO:0045211,cellular_component
-ANK1,,
 ANXA2,GO:0005509,molecular_function
 ANXA2,GO:0008092,molecular_function
 ANXA2,GO:0005544,molecular_function
@@ -361,7 +350,6 @@ ANXA2,GO:0005829,cellular_component
 ANXA2,GO:0035749,cellular_component
 ANXA2,GO:0042383,cellular_component
 ANXA2,GO:0043220,cellular_component
-ANXA2,,
 AOX1,GO:0046872,molecular_function
 AOX1,GO:0050660,molecular_function
 AOX1,GO:0016491,molecular_function
@@ -379,7 +367,6 @@ AOX1,GO:0042802,molecular_function
 AOX1,GO:0070062,cellular_component
 AOX1,GO:0006805,biological_process
 AOX1,GO:0004031,molecular_function
-AOX1,,
 APC,GO:0005515,molecular_function
 APC,GO:0008017,molecular_function
 APC,GO:0016055,biological_process
@@ -388,7 +375,6 @@ APC,GO:0008013,molecular_function
 APC,GO:0005737,cellular_component
 APC,GO:0043231,cellular_component
 APC,GO:0016043,biological_process
-APC,,
 APC,GO:0005794,cellular_component
 APC,GO:0005886,cellular_component
 APC,GO:0071944,cellular_component
@@ -487,7 +473,6 @@ ATOH1,GO:0097402,biological_process
 ATOH1,GO:1904019,biological_process
 ATOH1,GO:1904036,biological_process
 ATOH1,GO:2000982,biological_process
-B3GAT1,,
 B3GAT1,GO:0016020,cellular_component
 B3GAT1,GO:0015018,molecular_function
 B3GAT1,GO:0005576,cellular_component
@@ -544,7 +529,6 @@ BARD1,GO:2000001,biological_process
 BARD1,GO:0000152,cellular_component
 BARD1,GO:0070532,cellular_component
 BARD1,GO:0031441,biological_process
-BARD1,,
 BMP7,GO:0005576,cellular_component
 BMP7,GO:0008083,molecular_function
 BMP7,GO:0005515,molecular_function
@@ -640,8 +624,6 @@ BMP7,GO:0010664,biological_process
 BMP7,GO:0016358,biological_process
 BMP7,GO:1901223,biological_process
 BMP7,GO:0007165,biological_process
-BMP7,,
-CA3,,
 CA3,GO:0008270,molecular_function
 CA3,GO:0004089,molecular_function
 CA3,GO:0005737,cellular_component
@@ -669,7 +651,6 @@ CALD1,GO:0030016,cellular_component
 CALD1,GO:0051017,biological_process
 CALD1,GO:0001525,biological_process
 CALD1,GO:0005523,molecular_function
-CALD1,,
 CALD1,GO:0016020,cellular_component
 CALD1,GO:0030478,cellular_component
 CARTPT,GO:0007186,biological_process
@@ -700,8 +681,6 @@ CARTPT,GO:0050796,biological_process
 CARTPT,GO:0051971,biological_process
 CARTPT,GO:0070093,biological_process
 CARTPT,GO:0070253,biological_process
-CARTPT,,
-CAV1,,
 CAV1,GO:0070836,biological_process
 CAV1,GO:0016020,cellular_component
 CAV1,GO:0005794,cellular_component
@@ -884,8 +863,6 @@ CBX5,GO:0000776,cellular_component
 CBX5,GO:0010369,cellular_component
 CBX5,GO:0000118,cellular_component
 CBX5,GO:0035097,cellular_component
-CBX5,,
-CCDC8,,
 CCDC8,GO:0005737,cellular_component
 CCDC8,GO:0005654,cellular_component
 CCDC8,GO:0005829,cellular_component
@@ -908,7 +885,6 @@ CCK,GO:0007409,biological_process
 CCK,GO:0001764,biological_process
 CCK,GO:0051428,molecular_function
 CCK,GO:0042755,biological_process
-CCK,,
 CCND2,GO:0005634,cellular_component
 CCND2,GO:0005737,cellular_component
 CCND2,GO:0016020,cellular_component
@@ -932,7 +908,6 @@ CCND2,GO:0044772,biological_process
 CCND2,GO:0045737,biological_process
 CCND2,GO:1900087,biological_process
 CCND2,GO:0097129,cellular_component
-CCND2,,
 CCND2,GO:0007616,biological_process
 CCND2,GO:0008344,biological_process
 CCND2,GO:0051726,biological_process
@@ -941,7 +916,6 @@ CD200,GO:0098632,molecular_function
 CD200,GO:0098609,biological_process
 CD200,GO:0050776,biological_process
 CD200,GO:0043031,biological_process
-CD200,,
 CD200,GO:0016020,cellular_component
 CD200,GO:0005886,cellular_component
 CD200,GO:0005515,molecular_function
@@ -1028,7 +1002,6 @@ CD44,GO:0070487,biological_process
 CD44,GO:0035692,cellular_component
 CD44,GO:2000392,biological_process
 CD44,GO:1900625,biological_process
-CD44,,
 CD44,GO:0033674,biological_process
 CD44,GO:0110165,cellular_component
 CD9,GO:0016020,cellular_component
@@ -1055,7 +1028,6 @@ CD9,GO:0071404,biological_process
 CD9,GO:0090331,biological_process
 CD9,GO:0008347,biological_process
 CD9,GO:0030913,biological_process
-CD9,,
 CD9,GO:0008283,biological_process
 CD9,GO:0008285,biological_process
 CD9,GO:1905521,biological_process
@@ -1096,8 +1068,6 @@ CDH23,GO:0098683,cellular_component
 CDH23,GO:0098684,cellular_component
 CDH23,GO:0090102,biological_process
 CDH23,GO:0098609,biological_process
-CDH23,,
-CDKN1B,,
 CDKN1B,GO:0005634,cellular_component
 CDKN1B,GO:0051726,biological_process
 CDKN1B,GO:0004861,molecular_function
@@ -1200,7 +1170,6 @@ CDO1,GO:0043200,biological_process
 CDO1,GO:0045471,biological_process
 CDO1,GO:0051384,biological_process
 CDO1,GO:0051591,biological_process
-CDO1,,
 CDX2,GO:0003677,molecular_function
 CDX2,GO:0006355,biological_process
 CDX2,GO:0005634,cellular_component
@@ -1242,7 +1211,6 @@ CDX2,GO:0060711,biological_process
 CDX2,GO:0000794,cellular_component
 CDX2,GO:0017053,cellular_component
 CDX2,GO:0032991,cellular_component
-CDX2,,
 CFTR,GO:0016020,cellular_component
 CFTR,GO:0005524,molecular_function
 CFTR,GO:0006811,biological_process
@@ -1250,7 +1218,6 @@ CFTR,GO:0055085,biological_process
 CFTR,GO:0140359,molecular_function
 CFTR,GO:0005254,molecular_function
 CFTR,GO:1902476,biological_process
-CFTR,,
 CFTR,GO:0000166,molecular_function
 CFTR,GO:0016853,molecular_function
 CFTR,GO:0005783,cellular_component
@@ -1306,7 +1273,6 @@ CFTR,GO:0006695,biological_process
 CFTR,GO:0006904,biological_process
 CFTR,GO:0030301,biological_process
 CFTR,GO:0051649,biological_process
-CHAD,,
 CHAD,GO:0005515,molecular_function
 CHAD,GO:0005576,cellular_component
 CHAD,GO:0005615,cellular_component
@@ -1339,7 +1305,6 @@ CNN3,GO:0098609,biological_process
 CNN3,GO:0098641,molecular_function
 CNN3,GO:0005912,cellular_component
 CNN3,GO:0030855,biological_process
-CNN3,,
 COL5A2,GO:0005515,molecular_function
 COL5A2,GO:0005201,molecular_function
 COL5A2,GO:0005576,cellular_component
@@ -1361,8 +1326,6 @@ COL5A2,GO:0048592,biological_process
 COL5A2,GO:0071230,biological_process
 COL5A2,GO:1903225,biological_process
 COL5A2,GO:0005588,cellular_component
-COL5A2,,
-COL7A1,,
 COL7A1,GO:0005515,molecular_function
 COL7A1,GO:0004867,molecular_function
 COL7A1,GO:0005576,cellular_component
@@ -1386,7 +1349,6 @@ CPVL,GO:0008233,molecular_function
 CPVL,GO:0016787,molecular_function
 CPVL,GO:0004180,molecular_function
 CPVL,GO:0070062,cellular_component
-CPVL,,
 CUL1,GO:0006511,biological_process
 CUL1,GO:0031625,molecular_function
 CUL1,GO:0031461,cellular_component
@@ -1406,8 +1368,6 @@ CUL1,GO:0030674,molecular_function
 CUL1,GO:1990452,cellular_component
 CUL1,GO:0097193,biological_process
 CUL1,GO:0031146,biological_process
-CUL1,GO:0160072,
-CUL1,,
 CUL1,GO:0006513,biological_process
 CUL1,GO:0006915,biological_process
 CUL1,GO:0008283,biological_process
@@ -1498,8 +1458,6 @@ CX3CL1,GO:0061518,biological_process
 CX3CL1,GO:1900450,biological_process
 CX3CL1,GO:2001223,biological_process
 CX3CL1,GO:0007165,biological_process
-CX3CL1,,
-CXCL1,,
 CXCL1,GO:0005576,cellular_component
 CXCL1,GO:0006935,biological_process
 CXCL1,GO:0006955,biological_process
@@ -1559,7 +1517,6 @@ CYB5R2,GO:0004128,molecular_function
 CYB5R2,GO:0005739,cellular_component
 CYB5R2,GO:0071949,molecular_function
 CYB5R2,GO:0015701,biological_process
-CYB5R2,,
 CYBA,GO:0020037,molecular_function
 CYBA,GO:0016020,cellular_component
 CYBA,GO:0005886,cellular_component
@@ -1598,7 +1555,6 @@ CYBA,GO:0072593,biological_process
 CYBA,GO:1900426,biological_process
 CYBA,GO:0005737,cellular_component
 CYBA,GO:0005768,cellular_component
-CYBA,,
 DAB1,GO:0043231,cellular_component
 DAB1,GO:0030154,biological_process
 DAB1,GO:0005515,molecular_function
@@ -1631,7 +1587,6 @@ DAB1,GO:0097475,biological_process
 DAB1,GO:0097477,biological_process
 DAB1,GO:0140650,biological_process
 DAB1,GO:0048471,cellular_component
-DAB1,,
 DCTN1,GO:0005634,cellular_component
 DCTN1,GO:0005737,cellular_component
 DCTN1,GO:0016020,cellular_component
@@ -1684,13 +1639,11 @@ DCTN1,GO:0050905,biological_process
 DCTN1,GO:0099558,biological_process
 DCTN1,GO:1904398,biological_process
 DCTN1,GO:1905515,biological_process
-DCTN1,,
 DCTN1,GO:0032402,biological_process
 DCTN1,GO:0031252,cellular_component
 DCTN1,GO:0036064,cellular_component
 DCTN1,GO:0032991,cellular_component
 DSE,GO:0016853,molecular_function
-DSE,,
 DSE,GO:0016020,cellular_component
 DSE,GO:0005794,cellular_component
 DSE,GO:0030659,cellular_component
@@ -1739,7 +1692,6 @@ DUOX1,GO:0043020,cellular_component
 DUOX1,GO:0016175,molecular_function
 DUOX1,GO:0106293,molecular_function
 DUOX1,GO:0042335,biological_process
-DUOX1,,
 E2F8,GO:0006355,biological_process
 E2F8,GO:0006357,biological_process
 E2F8,GO:0005667,cellular_component
@@ -1771,7 +1723,6 @@ E2F8,GO:0070365,biological_process
 E2F8,GO:0090575,cellular_component
 E2F8,GO:0042802,molecular_function
 E2F8,GO:0048144,biological_process
-E2F8,,
 EFEMP1,GO:0005509,molecular_function
 EFEMP1,GO:0005615,cellular_component
 EFEMP1,GO:0005576,cellular_component
@@ -1791,7 +1742,6 @@ EFEMP1,GO:0043010,biological_process
 EFEMP1,GO:0048048,biological_process
 EFEMP1,GO:0048050,biological_process
 EFEMP1,GO:0032331,biological_process
-EFEMP1,,
 EFS,GO:0007155,biological_process
 EFS,GO:0017124,molecular_function
 EFS,GO:0005515,molecular_function
@@ -1830,7 +1780,6 @@ ENPP2,GO:0030149,biological_process
 ENPP2,GO:2000394,biological_process
 ENPP2,GO:0004528,molecular_function
 ENPP2,GO:0047391,molecular_function
-ENPP2,,
 ENPP2,GO:0006644,biological_process
 ENPP2,GO:0016020,cellular_component
 EPHX3,GO:0003824,molecular_function
@@ -1842,7 +1791,6 @@ EPHX3,GO:0016787,molecular_function
 EPHX3,GO:0004301,molecular_function
 EPHX3,GO:0097176,biological_process
 EPSTI1,GO:0005515,molecular_function
-EPSTI1,,
 ESRRG,GO:0003677,molecular_function
 ESRRG,GO:0003707,molecular_function
 ESRRG,GO:0008270,molecular_function
@@ -1870,8 +1818,6 @@ ESRRG,GO:0000977,molecular_function
 ESRRG,GO:0001228,molecular_function
 ESRRG,GO:0045893,biological_process
 ESRRG,GO:0042802,molecular_function
-ESRRG,,
-EYA4,,
 EYA4,GO:0004725,molecular_function
 EYA4,GO:0007275,biological_process
 EYA4,GO:0005634,cellular_component
@@ -1943,7 +1889,6 @@ FBN1,GO:0048048,biological_process
 FBN1,GO:0048050,biological_process
 FBN1,GO:0071560,biological_process
 FBN1,GO:1990314,biological_process
-FBN1,,
 FBN2,GO:0005509,molecular_function
 FBN2,GO:0005576,cellular_component
 FBN2,GO:0007165,biological_process
@@ -1963,7 +1908,6 @@ FBN2,GO:0048048,biological_process
 FBN2,GO:0030326,biological_process
 FBN2,GO:0035108,biological_process
 FBN2,GO:0060346,biological_process
-FBN2,,
 FBXO17,GO:0005515,molecular_function
 FBXO17,GO:0005737,cellular_component
 FBXO17,GO:0061630,molecular_function
@@ -1972,7 +1916,6 @@ FBXO17,GO:0019005,cellular_component
 FBXO17,GO:0030433,biological_process
 FBXO17,GO:0006516,biological_process
 FBXO17,GO:0031146,biological_process
-FBXO17,,
 FGF8,GO:0008083,molecular_function
 FGF8,GO:0005576,cellular_component
 FGF8,GO:0030154,biological_process
@@ -2068,18 +2011,15 @@ FGF8,GO:0140014,biological_process
 FGF8,GO:2000648,biological_process
 FGF8,GO:0009897,cellular_component
 FGF8,GO:0007165,biological_process
-FGF8,,
 FJX1,GO:0005576,cellular_component
 FJX1,GO:0005615,cellular_component
 FJX1,GO:0007267,biological_process
 FJX1,GO:0010842,biological_process
-FJX1,,
 FLOT1,GO:0016020,cellular_component
 FLOT1,GO:0005886,cellular_component
 FLOT1,GO:0005768,cellular_component
 FLOT1,GO:0005901,cellular_component
 FLOT1,GO:0016600,cellular_component
-FLOT1,,
 FLOT1,GO:0005515,molecular_function
 FLOT1,GO:0031410,cellular_component
 FLOT1,GO:0005765,cellular_component
@@ -2163,7 +2103,6 @@ FLRT2,GO:0051965,biological_process
 FLRT2,GO:0061343,biological_process
 FLRT2,GO:0071711,biological_process
 FLRT2,GO:2001222,biological_process
-FLRT2,,
 FOXG1,GO:0006355,biological_process
 FOXG1,GO:0003700,molecular_function
 FOXG1,GO:0043565,molecular_function
@@ -2217,7 +2156,6 @@ GCM2,GO:0006874,biological_process
 GCM2,GO:0060017,biological_process
 GCM2,GO:0030643,biological_process
 GCM2,GO:0042063,biological_process
-GCNT2,,
 GCNT2,GO:0016020,cellular_component
 GCNT2,GO:0016757,molecular_function
 GCNT2,GO:0005794,cellular_component
@@ -2258,7 +2196,6 @@ GFRA3,GO:0001764,biological_process
 GFRA3,GO:0007411,biological_process
 GFRA3,GO:0048485,biological_process
 GFRA3,GO:0048666,biological_process
-GIT1,,
 GIT1,GO:0005515,molecular_function
 GIT1,GO:0005096,molecular_function
 GIT1,GO:0032012,biological_process
@@ -2448,7 +2385,6 @@ GLI3,GO:2000647,biological_process
 GLI3,GO:0005930,cellular_component
 GLI3,GO:0016607,cellular_component
 GLI3,GO:0017053,cellular_component
-GLI3,,
 GPR150,GO:0007186,biological_process
 GPR150,GO:0016020,cellular_component
 GPR150,GO:0004930,molecular_function
@@ -2496,7 +2432,6 @@ GREM1,GO:1900086,biological_process
 GREM1,GO:1900155,biological_process
 GREM1,GO:1900158,biological_process
 GREM1,GO:2000273,biological_process
-GREM1,,
 GREM1,GO:0001525,biological_process
 GREM1,GO:0002689,biological_process
 GREM1,GO:0003337,biological_process
@@ -2543,7 +2478,6 @@ GRHL3,GO:0061029,biological_process
 GRHL3,GO:0061436,biological_process
 GRHL3,GO:0090103,biological_process
 GRHL3,GO:0090179,biological_process
-GRHL3,,
 GSTM2,GO:0004364,molecular_function
 GSTM2,GO:0005737,cellular_component
 GSTM2,GO:0006629,biological_process
@@ -2574,8 +2508,6 @@ GSTM2,GO:0018916,biological_process
 GSTM2,GO:0070458,biological_process
 GSTM2,GO:0060316,biological_process
 GSTM2,GO:0014809,biological_process
-GSTM2,,
-GSX2,,
 GSX2,GO:0003677,molecular_function
 GSX2,GO:0006355,biological_process
 GSX2,GO:0003700,molecular_function
@@ -2606,7 +2538,6 @@ GSX2,GO:0048714,biological_process
 GSX2,GO:0048853,biological_process
 GSX2,GO:0060163,biological_process
 GSX2,GO:0097154,biological_process
-HAAO,,
 HAAO,GO:0046872,molecular_function
 HAAO,GO:0005737,cellular_component
 HAAO,GO:0005506,molecular_function
@@ -2673,7 +2604,6 @@ HES5,GO:0048715,biological_process
 HES5,GO:2000974,biological_process
 HES5,GO:0021781,biological_process
 HES5,GO:0048712,biological_process
-HES5,,
 HES5,GO:0003682,molecular_function
 HES5,GO:0003690,molecular_function
 HES5,GO:0021861,biological_process
@@ -2716,7 +2646,6 @@ HIF3A,GO:0003677,molecular_function
 HIF3A,GO:0003700,molecular_function
 HIF3A,GO:0001666,biological_process
 HIF3A,GO:0006366,biological_process
-HIF3A,,
 HOXA7,GO:0003677,molecular_function
 HOXA7,GO:0006355,biological_process
 HOXA7,GO:0005634,cellular_component
@@ -2743,7 +2672,6 @@ HOXA7,GO:0045617,biological_process
 HOXA7,GO:0002686,biological_process
 HOXA7,GO:0048704,biological_process
 HOXA7,GO:0048863,biological_process
-HOXA7,,
 HOXC4,GO:0003677,molecular_function
 HOXC4,GO:0006355,biological_process
 HOXC4,GO:0005634,cellular_component
@@ -2758,7 +2686,6 @@ HOXC4,GO:0045944,biological_process
 HOXC4,GO:0009952,biological_process
 HOXC4,GO:0001228,molecular_function
 HOXC4,GO:0048704,biological_process
-HOXC4,,
 HOXC4,GO:0071837,molecular_function
 HOXC4,GO:0001501,biological_process
 HOXC4,GO:0048562,biological_process
@@ -2791,7 +2718,6 @@ IFNGR2,GO:0060333,biological_process
 IFNGR2,GO:0004896,molecular_function
 IFNGR2,GO:0038196,biological_process
 IFNGR2,GO:0004906,molecular_function
-IFNGR2,,
 IGF2BP2,GO:0003723,molecular_function
 IGF2BP2,GO:0003676,molecular_function
 IGF2BP2,GO:0005737,cellular_component
@@ -2816,8 +2742,6 @@ IGF2BP2,GO:0005856,cellular_component
 IGF2BP2,GO:0090079,molecular_function
 IGF2BP2,GO:0097009,biological_process
 IGF2BP2,GO:0106106,biological_process
-IGF2BP2,,
-IKZF1,,
 IKZF1,GO:0005654,cellular_component
 IKZF1,GO:0005829,cellular_component
 IKZF1,GO:0005634,cellular_component
@@ -2947,12 +2871,10 @@ IL1B,GO:1903597,biological_process
 IL1B,GO:2000556,biological_process
 IL1B,GO:0030141,cellular_component
 IL1B,GO:0031982,cellular_component
-IL1B,,
 ITIH5,GO:0004867,molecular_function
 ITIH5,GO:0030212,biological_process
 ITIH5,GO:0005576,cellular_component
 ITIH5,GO:0030414,molecular_function
-ITIH5,,
 JDP2,GO:0003677,molecular_function
 JDP2,GO:0006355,biological_process
 JDP2,GO:0003700,molecular_function
@@ -2966,7 +2888,6 @@ JDP2,GO:1990837,molecular_function
 JDP2,GO:0001227,molecular_function
 JDP2,GO:0000122,biological_process
 JDP2,GO:0090575,cellular_component
-JDP2,,
 JDP2,GO:0003682,molecular_function
 JDP2,GO:0035497,molecular_function
 JDP2,GO:0042803,molecular_function
@@ -3024,7 +2945,6 @@ KCNH2,GO:0086010,biological_process
 KCNH2,GO:0086009,biological_process
 KCNH2,GO:1903765,biological_process
 KCNH2,GO:1902937,cellular_component
-KCNH2,,
 KLK13,GO:0006508,biological_process
 KLK13,GO:0004252,molecular_function
 KLK13,GO:0005737,cellular_component
@@ -3037,8 +2957,6 @@ KLK13,GO:0004175,molecular_function
 KLK13,GO:0016485,biological_process
 KLK13,GO:0005615,cellular_component
 KLK13,GO:0030141,cellular_component
-KLK13,,
-KRT7,,
 KRT7,GO:0045095,cellular_component
 KRT7,GO:0005634,cellular_component
 KRT7,GO:0005737,cellular_component
@@ -3075,8 +2993,6 @@ LAMA2,GO:0031594,cellular_component
 LAMA2,GO:0042383,cellular_component
 LAMA2,GO:0043083,cellular_component
 LAMA2,GO:0043197,cellular_component
-LAMA2,,
-LAYN,,
 LAYN,GO:0016020,cellular_component
 LAYN,GO:0030246,molecular_function
 LAYN,GO:0005925,cellular_component
@@ -3128,8 +3044,6 @@ LDB1,GO:0035019,biological_process
 LDB1,GO:0045785,biological_process
 LDB1,GO:0060322,biological_process
 LDB1,GO:0090575,cellular_component
-LDB1,,
-LMNA,,
 LMNA,GO:0005515,molecular_function
 LMNA,GO:0005634,cellular_component
 LMNA,GO:0016607,cellular_component
@@ -3302,8 +3216,6 @@ LTF,GO:2000117,biological_process
 LTF,GO:2000308,biological_process
 LTF,GO:2001205,biological_process
 LTF,GO:0030141,cellular_component
-LTF,,
-MACF1,,
 MACF1,GO:0005515,molecular_function
 MACF1,GO:0005509,molecular_function
 MACF1,GO:0008017,molecular_function
@@ -3386,7 +3298,6 @@ MAGI2,GO:0070699,molecular_function
 MAGI2,GO:0003402,biological_process
 MAGI2,GO:0016301,molecular_function
 MAGI2,GO:0016310,biological_process
-MAGI2,,
 MAPK10,GO:0005524,molecular_function
 MAPK10,GO:0006468,biological_process
 MAPK10,GO:0004672,molecular_function
@@ -3401,7 +3312,6 @@ MAPK10,GO:0016310,biological_process
 MAPK10,GO:0005654,cellular_component
 MAPK10,GO:0048511,biological_process
 MAPK10,GO:0000165,biological_process
-MAPK10,,
 MAPK10,GO:0005634,cellular_component
 MAPK10,GO:0016020,cellular_component
 MAPK10,GO:0005886,cellular_component
@@ -3416,7 +3326,6 @@ MAPK10,GO:0007254,biological_process
 MAPK10,GO:0009416,biological_process
 MAPK10,GO:0004705,molecular_function
 MAPK10,GO:0004708,molecular_function
-MARVELD1,,
 MARVELD1,GO:0016020,cellular_component
 MARVELD1,GO:0005634,cellular_component
 MARVELD1,GO:0005737,cellular_component
@@ -3425,10 +3334,8 @@ MARVELD1,GO:0005856,cellular_component
 MARVELD1,GO:0007049,biological_process
 MARVELD1,GO:0042552,biological_process
 MARVELD1,GO:0019911,molecular_function
-MIR1258,,
 MIR9-1,GO:0035195,biological_process
 MIR9-1,GO:0016442,cellular_component
-MMP14,,
 MMP14,GO:0008270,molecular_function
 MMP14,GO:0006508,biological_process
 MMP14,GO:0008237,molecular_function
@@ -3522,7 +3429,6 @@ NDRG2,GO:0003674,molecular_function
 NDRG2,GO:0007165,biological_process
 NDRG2,GO:0021762,biological_process
 NDRG2,GO:0005794,cellular_component
-NDRG2,,
 NDRG2,GO:0001818,biological_process
 NDRG2,GO:0010574,biological_process
 NDRG2,GO:0070373,biological_process
@@ -3531,7 +3437,6 @@ NDRG2,GO:1904706,biological_process
 NDRG2,GO:1990874,biological_process
 NDRG2,GO:0005634,cellular_component
 NDRG2,GO:0016020,cellular_component
-NEU1,,
 NEU1,GO:0016020,cellular_component
 NEU1,GO:0016042,biological_process
 NEU1,GO:0004308,molecular_function
@@ -3558,7 +3463,6 @@ NEU1,GO:0035580,cellular_component
 NEU1,GO:0006689,biological_process
 NEU1,GO:0009313,biological_process
 NEU1,GO:0016997,molecular_function
-NFATC3,,
 NFATC3,GO:0003677,molecular_function
 NFATC3,GO:0006355,biological_process
 NFATC3,GO:0003700,molecular_function
@@ -3596,8 +3500,6 @@ NID2,GO:0005201,molecular_function
 NID2,GO:0005518,molecular_function
 NID2,GO:0071711,biological_process
 NID2,GO:0031012,cellular_component
-NID2,,
-NR1H3,,
 NR1H3,GO:0003677,molecular_function
 NR1H3,GO:0008270,molecular_function
 NR1H3,GO:0006355,biological_process
@@ -3712,7 +3614,6 @@ NRG1,GO:0060045,biological_process
 NRG1,GO:0010667,biological_process
 NRG1,GO:0007171,biological_process
 NRG1,GO:0055012,biological_process
-NRG1,,
 NRG1,GO:0005515,molecular_function
 NRG1,GO:0016324,cellular_component
 NRG1,GO:0007169,biological_process
@@ -3725,7 +3626,6 @@ NRG1,GO:0051238,biological_process
 NSD1,GO:0005634,cellular_component
 NSD1,GO:0005515,molecular_function
 NSD1,GO:0042054,molecular_function
-NSD1,,
 NSD1,GO:0046872,molecular_function
 NSD1,GO:0006338,biological_process
 NSD1,GO:0006325,biological_process
@@ -3782,7 +3682,6 @@ NUAK1,GO:0035507,biological_process
 NUAK1,GO:0042149,biological_process
 NUAK1,GO:0031588,cellular_component
 NUAK1,GO:0032007,biological_process
-NUAK1,,
 PAH,GO:0004497,molecular_function
 PAH,GO:0005506,molecular_function
 PAH,GO:0009072,biological_process
@@ -3798,7 +3697,6 @@ PAH,GO:0005829,cellular_component
 PAH,GO:0006571,biological_process
 PAH,GO:0008652,biological_process
 PAH,GO:0042423,biological_process
-PAH,,
 PAX3,GO:0003677,molecular_function
 PAX3,GO:0006355,biological_process
 PAX3,GO:0000981,molecular_function
@@ -3821,7 +3719,6 @@ PAX3,GO:0045893,biological_process
 PAX3,GO:0007605,biological_process
 PAX3,GO:0045944,biological_process
 PAX3,GO:0071837,molecular_function
-PAX3,,
 PDE4B,GO:0007165,biological_process
 PDE4B,GO:0004114,molecular_function
 PDE4B,GO:0008081,molecular_function
@@ -3861,7 +3758,6 @@ PDE4B,GO:0043197,cellular_component
 PDE4B,GO:0060076,cellular_component
 PDE4B,GO:0071944,cellular_component
 PDE4B,GO:0000930,cellular_component
-PDE4B,,
 PDGFRB,GO:0005524,molecular_function
 PDGFRB,GO:0006468,biological_process
 PDGFRB,GO:0004672,molecular_function
@@ -3936,8 +3832,6 @@ PDGFRB,GO:0060981,biological_process
 PDGFRB,GO:0061298,biological_process
 PDGFRB,GO:0071670,biological_process
 PDGFRB,GO:0072262,biological_process
-PDGFRB,,
-PDLIM4,,
 PDLIM4,GO:0005515,molecular_function
 PDLIM4,GO:0005634,cellular_component
 PDLIM4,GO:0005737,cellular_component
@@ -4015,7 +3909,6 @@ PDPN,GO:0055093,biological_process
 PDPN,GO:0060838,biological_process
 PDPN,GO:1904328,biological_process
 PDPN,GO:0061851,cellular_component
-PDPN,,
 PER1,GO:0005515,molecular_function
 PER1,GO:0005634,cellular_component
 PER1,GO:0005737,cellular_component
@@ -4049,7 +3942,6 @@ PER1,GO:0010608,biological_process
 PER1,GO:0051591,biological_process
 PER1,GO:1900015,biological_process
 PER1,GO:1900744,biological_process
-PER1,,
 PFKP,GO:0003872,molecular_function
 PFKP,GO:0006096,biological_process
 PFKP,GO:0006002,biological_process
@@ -4078,7 +3970,6 @@ PFKP,GO:0070095,molecular_function
 PFKP,GO:0061621,biological_process
 PFKP,GO:0005945,cellular_component
 PFKP,GO:1990830,biological_process
-PFKP,,
 PHOX2A,GO:0003677,molecular_function
 PHOX2A,GO:0006355,biological_process
 PHOX2A,GO:0000981,molecular_function
@@ -4101,7 +3992,6 @@ PHOX2A,GO:0043576,biological_process
 PHOX2A,GO:0048485,biological_process
 PHOX2A,GO:0048486,biological_process
 PHOX2A,GO:0071542,biological_process
-PHOX2A,,
 PLTP,GO:0008289,molecular_function
 PLTP,GO:0005615,cellular_component
 PLTP,GO:0005634,cellular_component
@@ -4156,7 +4046,6 @@ PON3,GO:0046395,biological_process
 PON3,GO:0003096,biological_process
 PON3,GO:0032929,biological_process
 PON3,GO:0051649,biological_process
-PON3,,
 POU3F3,GO:0003677,molecular_function
 POU3F3,GO:0006355,biological_process
 POU3F3,GO:0005634,cellular_component
@@ -4188,7 +4077,6 @@ POU3F3,GO:0021869,biological_process
 POU3F3,GO:0045944,biological_process
 POU3F3,GO:0048878,biological_process
 POU3F3,GO:0071918,biological_process
-PPT2,,
 PPT2,GO:0098599,molecular_function
 PPT2,GO:0016787,molecular_function
 PPT2,GO:0005764,cellular_component
@@ -4226,8 +4114,6 @@ PROM1,GO:0072139,biological_process
 PROM1,GO:2000768,biological_process
 PROM1,GO:0071914,cellular_component
 PROM1,GO:0042622,cellular_component
-PROM1,,
-PYCARD,,
 PYCARD,GO:0006954,biological_process
 PYCARD,GO:0042981,biological_process
 PYCARD,GO:0045087,biological_process
@@ -4429,7 +4315,6 @@ RARA,GO:1901532,biological_process
 RARA,GO:1902894,biological_process
 RARA,GO:0030425,cellular_component
 RARA,GO:0048471,cellular_component
-RARA,,
 RARB,GO:0003677,molecular_function
 RARB,GO:0008270,molecular_function
 RARB,GO:0006355,biological_process
@@ -4451,7 +4336,6 @@ RARB,GO:0045944,biological_process
 RARB,GO:0007165,biological_process
 RARB,GO:0009755,biological_process
 RARB,GO:0048566,biological_process
-RARB,,
 RARB,GO:0005515,molecular_function
 RARB,GO:0044877,molecular_function
 RARB,GO:0046965,molecular_function
@@ -4485,8 +4369,6 @@ RARRES1,GO:0005615,cellular_component
 RARRES1,GO:0030414,molecular_function
 RARRES1,GO:0070062,cellular_component
 RARRES1,GO:0008191,molecular_function
-RARRES1,,
-RARRES2,,
 RARRES2,GO:0006954,biological_process
 RARRES2,GO:0005102,molecular_function
 RARRES2,GO:0050994,biological_process
@@ -4523,8 +4405,6 @@ RASSF5,GO:0031398,biological_process
 RASSF5,GO:0046651,biological_process
 RASSF5,GO:0050672,biological_process
 RASSF5,GO:1900180,biological_process
-RASSF5,,
-RBP1,,
 RBP1,GO:0008289,molecular_function
 RBP1,GO:0005829,cellular_component
 RBP1,GO:0002138,biological_process
@@ -4562,7 +4442,6 @@ REC8,GO:0006302,biological_process
 REC8,GO:0007283,biological_process
 REC8,GO:0007131,biological_process
 REC8,GO:0051177,biological_process
-REC8,,
 REC8,GO:0000724,biological_process
 REC8,GO:0001556,biological_process
 REC8,GO:0007129,biological_process
@@ -4600,7 +4479,6 @@ RGMA,GO:0048671,biological_process
 RGMA,GO:0048681,biological_process
 RGMA,GO:0051044,biological_process
 RGMA,GO:0009986,cellular_component
-RGMA,,
 RHCG,GO:0016020,cellular_component
 RHCG,GO:0005886,cellular_component
 RHCG,GO:0008519,molecular_function
@@ -4621,7 +4499,6 @@ RHCG,GO:0030506,molecular_function
 RHCG,GO:0006873,biological_process
 RHCG,GO:0035378,biological_process
 RHCG,GO:0006885,biological_process
-RHCG,,
 RUSC1,GO:0005515,molecular_function
 RUSC1,GO:0005634,cellular_component
 RUSC1,GO:0005737,cellular_component
@@ -4637,8 +4514,6 @@ RUSC1,GO:0005769,cellular_component
 RUSC1,GO:0014069,cellular_component
 RUSC1,GO:0015630,cellular_component
 RUSC1,GO:0000209,biological_process
-RUSC1,,
-SCGB3A1,,
 SCGB3A1,GO:0005615,cellular_component
 SCGB3A1,GO:0005576,cellular_component
 SCGB3A1,GO:0007165,biological_process
@@ -4683,7 +4558,6 @@ SEMA5A,GO:0007413,biological_process
 SEMA5A,GO:0035373,molecular_function
 SEMA5A,GO:0021536,biological_process
 SEMA5A,GO:1990256,biological_process
-SEMA5A,,
 SERPINB1,GO:0005615,cellular_component
 SERPINB1,GO:0004867,molecular_function
 SERPINB1,GO:0005737,cellular_component
@@ -4702,7 +4576,6 @@ SERPINB1,GO:0032691,biological_process
 SERPINB1,GO:0010951,biological_process
 SERPINB1,GO:0044342,biological_process
 SERPINB1,GO:0044194,cellular_component
-SERPINB1,,
 SFRP5,GO:0005515,molecular_function
 SFRP5,GO:0005576,cellular_component
 SFRP5,GO:0030154,biological_process
@@ -4740,7 +4613,6 @@ SIM1,GO:0000977,molecular_function
 SIM1,GO:0000785,cellular_component
 SIM1,GO:0046982,molecular_function
 SIM1,GO:0001657,biological_process
-SIM1,,
 SIX2,GO:0003677,molecular_function
 SIX2,GO:0006355,biological_process
 SIX2,GO:0000981,molecular_function
@@ -4808,7 +4680,6 @@ SLC13A3,GO:0015746,biological_process
 SLC13A3,GO:0005310,molecular_function
 SLC13A3,GO:0015362,molecular_function
 SLC13A3,GO:0006835,biological_process
-SLC13A3,,
 SLC17A9,GO:0016020,cellular_component
 SLC17A9,GO:0022857,molecular_function
 SLC17A9,GO:0055085,biological_process
@@ -4827,11 +4698,8 @@ SLC17A9,GO:1904669,biological_process
 SLC17A9,GO:0001409,molecular_function
 SLC17A9,GO:0005347,molecular_function
 SLC17A9,GO:0015217,molecular_function
-SLC17A9,GO:0160042,
-SLC17A9,GO:0141013,
 SLC17A9,GO:1905146,biological_process
 SLC17A9,GO:0030141,cellular_component
-SLC17A9,,
 SLC2A2,GO:0016020,cellular_component
 SLC2A2,GO:0022857,molecular_function
 SLC2A2,GO:0055085,biological_process
@@ -4854,7 +4722,6 @@ SLC2A2,GO:0015757,biological_process
 SLC2A2,GO:0035774,biological_process
 SLC2A2,GO:0005737,cellular_component
 SLC2A2,GO:0005911,cellular_component
-SLC2A2,,
 SLC4A11,GO:0016020,cellular_component
 SLC4A11,GO:0005452,molecular_function
 SLC4A11,GO:0006820,biological_process
@@ -4893,7 +4760,6 @@ SLC4A11,GO:0046713,biological_process
 SLC4A11,GO:0050801,biological_process
 SLC4A11,GO:0034220,biological_process
 SLC4A11,GO:0015698,biological_process
-SLC4A11,,
 SLC5A7,GO:0016020,cellular_component
 SLC5A7,GO:0022857,molecular_function
 SLC5A7,GO:0055085,biological_process
@@ -4953,7 +4819,6 @@ SLC6A3,GO:0005334,molecular_function
 SLC6A3,GO:0015874,biological_process
 SLC6A3,GO:0051583,biological_process
 SLC6A3,GO:0032809,cellular_component
-SLC6A3,,
 SLC6A3,GO:0002020,molecular_function
 SLC6A3,GO:0005102,molecular_function
 SLC6A3,GO:0035240,molecular_function
@@ -5016,7 +4881,6 @@ SLFN11,GO:0016887,molecular_function
 SLFN11,GO:0090734,cellular_component
 SLFN11,GO:0008156,biological_process
 SLFN11,GO:0043111,biological_process
-SLFN11,,
 SOSTDC1,GO:0005615,cellular_component
 SOSTDC1,GO:0005576,cellular_component
 SOSTDC1,GO:0016055,biological_process
@@ -5061,11 +4925,9 @@ SPARC,GO:0010595,biological_process
 SPARC,GO:0005518,molecular_function
 SPARC,GO:0071682,cellular_component
 SPARC,GO:0031092,cellular_component
-SPARC,,
 SPRY4,GO:0016020,cellular_component
 SPRY4,GO:0007275,biological_process
 SPRY4,GO:0009966,biological_process
-SPRY4,,
 SPRY4,GO:0005737,cellular_component
 SPRY4,GO:0042995,cellular_component
 SPRY4,GO:0005886,cellular_component
@@ -5115,8 +4977,6 @@ TAC1,GO:0048265,biological_process
 TAC1,GO:1990090,biological_process
 TAC1,GO:0030424,cellular_component
 TAC1,GO:0043025,cellular_component
-TAC1,,
-TACC2,,
 TACC2,GO:0007052,biological_process
 TACC2,GO:0005634,cellular_component
 TACC2,GO:0005737,cellular_component
@@ -5134,7 +4994,6 @@ TAGLN,GO:0005737,cellular_component
 TAGLN,GO:0003779,molecular_function
 TAGLN,GO:0030855,biological_process
 TAGLN,GO:0007517,biological_process
-TAGLN,,
 TET2,GO:0070579,molecular_function
 TET2,GO:0006211,biological_process
 TET2,GO:0080111,biological_process
@@ -5159,8 +5018,6 @@ TET2,GO:0006493,biological_process
 TET2,GO:0030099,biological_process
 TET2,GO:0002521,biological_process
 TET2,GO:0014070,biological_process
-TET2,,
-THBS4,,
 THBS4,GO:0005576,cellular_component
 THBS4,GO:0005509,molecular_function
 THBS4,GO:0007155,biological_process
@@ -5240,7 +5097,6 @@ TIAM1,GO:0044295,cellular_component
 TIAM1,GO:0044304,cellular_component
 TIAM1,GO:0098978,cellular_component
 TIAM1,GO:0099147,cellular_component
-TIAM1,,
 TIMP2,GO:0005515,molecular_function
 TIMP2,GO:0008191,molecular_function
 TIMP2,GO:0030414,molecular_function
@@ -5260,9 +5116,7 @@ TIMP2,GO:0009725,biological_process
 TIMP2,GO:0034097,biological_process
 TIMP2,GO:0051045,biological_process
 TIMP2,GO:1905049,biological_process
-TIMP2,,
 TMEM106A,GO:0016020,cellular_component
-TMEM106A,,
 TMEM106A,GO:0005886,cellular_component
 TMEM106A,GO:0043123,biological_process
 TMEM106A,GO:0005515,molecular_function
@@ -5279,7 +5133,6 @@ TMEM106A,GO:0045348,biological_process
 TMEM106A,GO:0035780,biological_process
 TMEM106A,GO:0035781,biological_process
 TMEM106A,GO:1904407,biological_process
-TUBA4B,,
 TUBA4B,GO:0005525,molecular_function
 TUBA4B,GO:0007017,biological_process
 TUBA4B,GO:0005874,cellular_component
@@ -5316,7 +5169,6 @@ TXNRD1,GO:0050137,molecular_function
 TXNRD1,GO:0001707,biological_process
 TXNRD1,GO:0007369,biological_process
 TXNRD1,GO:0008283,biological_process
-TXNRD1,,
 TXNRD1,GO:0000166,molecular_function
 TXNRD1,GO:0010035,biological_process
 TXNRD1,GO:0006979,biological_process
@@ -5336,7 +5188,6 @@ VANGL2,GO:0001736,biological_process
 VANGL2,GO:0036514,biological_process
 VANGL2,GO:0036515,biological_process
 VANGL2,GO:0035787,biological_process
-VANGL2,,
 VIPR2,GO:0007186,biological_process
 VIPR2,GO:0016020,cellular_component
 VIPR2,GO:0004930,molecular_function
@@ -5356,7 +5207,6 @@ VWCE,GO:0005509,molecular_function
 VWCE,GO:0005515,molecular_function
 VWCE,GO:0003674,molecular_function
 VWCE,GO:0098586,biological_process
-VWCE,,
 WFDC2,GO:0005576,cellular_component
 WFDC2,GO:0030414,molecular_function
 WFDC2,GO:0005515,molecular_function
@@ -5370,7 +5220,6 @@ WFDC2,GO:0004866,molecular_function
 WFDC2,GO:0006508,biological_process
 WFDC2,GO:0019731,biological_process
 WFDC2,GO:0019828,molecular_function
-WFDC2,,
 WFDC5,GO:0005576,cellular_component
 WFDC5,GO:0030414,molecular_function
 WFDC5,GO:0005515,molecular_function
@@ -5393,7 +5242,6 @@ WIF1,GO:0070697,molecular_function
 WIF1,GO:0007368,biological_process
 WIF1,GO:0038092,biological_process
 WIF1,GO:0045600,biological_process
-WIF1,,
 WIPF1,GO:0003779,molecular_function
 WIPF1,GO:0005737,cellular_component
 WIPF1,GO:0042995,cellular_component
@@ -5413,7 +5261,6 @@ WIPF1,GO:0044183,molecular_function
 WIPF1,GO:0005522,molecular_function
 WIPF1,GO:0030048,biological_process
 WIPF1,GO:0051707,biological_process
-WIPF1,,
 ZFP42,GO:0005634,cellular_component
 ZFP42,GO:0005737,cellular_component
 ZFP42,GO:0046872,molecular_function

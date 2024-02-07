@@ -20,7 +20,7 @@ if __name__ == '__main__':
         'attributes': [
             "external_gene_name",
             "go_id",
-             "namespace_1003"
+            "namespace_1003"
         ]
     }, header = 1)
 
@@ -29,4 +29,5 @@ if __name__ == '__main__':
         for line in response.iter_lines():
             line = line.decode('utf-8')
             line_parts = line.split("\t")
-            csvwriter.writerow(line_parts)
+            if all(line_part.strip() for line_part in line_parts):
+                csvwriter.writerow(line_parts)
