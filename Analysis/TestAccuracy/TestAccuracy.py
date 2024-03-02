@@ -13,7 +13,7 @@ if __name__ == "__main__":
     _testDf = pd.read_csv(_config["Paths"]["MF_HYPER_WARD_CHOOSE_PATH"])
 
     _validateData = ValidateData()
-    _results = _validateData.ValidateGeneAccuracy(_testDf, _betaDataDf, 50, chooseOn = "F1")
+    _results = _validateData.ValidateGeneAccuracy(_testDf, _betaDataDf, 25, chooseOn = "F1")
     
     for i in range(len(_results)):
         print(_results[i])

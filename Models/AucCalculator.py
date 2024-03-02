@@ -54,9 +54,9 @@ class AucCalculator:
     def __CalculateRowRoc(self, row, normalCount):
         rowList = row.to_numpy()
 
-        predictBeta = rowList[1::2]
+        predictBeta = rowList[1:]
         actual_beta = np.ones(int(len(predictBeta)))
-        actual_beta[:int(normalCount / 2)] = 0
+        actual_beta[:normalCount] = 0
 
         fpr, tpr, threshold = roc_curve(actual_beta, predictBeta)
         return fpr, tpr

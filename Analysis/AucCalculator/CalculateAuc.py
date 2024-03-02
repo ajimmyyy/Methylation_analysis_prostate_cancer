@@ -13,6 +13,6 @@ if __name__ == "__main__":
     _comorbidityGroupDf = pd.read_csv(_config["Paths"]["CUTPOINT_VALIDATE_GROUP_PATH"])
 
     _aucCalculator = AucCalculator()
-    _outDf = _aucCalculator.CalculateAuc(_betaDataDf, _comorbidityGroupDf, 50)
+    _outDf = _aucCalculator.CalculateAuc(_betaDataDf, _comorbidityGroupDf, 25)
 
     FileSaver.SaveDataframe(_outDf, _config["Paths"]["AUC_GROUP_DATA_PATH"])

@@ -49,7 +49,7 @@ class DeltaBetaFilter:
     # thresholdDbetaHyper: double，Hyper部分dbeta閥值
     # thresholdDbetaHypo: double，Hypo部分dbeta閥值
     # thresholdPvalue: double，Pvalue閥值
-    # dbetaRow: string，dbeta行名，預設"dbeta"
+    # dbetaRow: string，dbeta行名，預設"deltaBeta"
     # Return:
     # hyper, hypo: DataFrame，hyper,hypo資料
     def DetermineDNAm(self, dmpDf, thresholdDbetaHyper, thresholdDbetaHypo, thresholdPvalue, dbetaRow = "dbeta"):
@@ -86,8 +86,8 @@ class DeltaBetaFilter:
     def __CalculateRowDeltaBeta(self, row, normalCount):
         rowList = row.to_numpy()
 
-        normalBeta = rowList[1:normalCount + 1:2]
-        tumorBeta = rowList[normalCount + 1::2]
+        normalBeta = rowList[1:normalCount + 1]
+        tumorBeta = rowList[normalCount + 1:]
 
         normalBeta = self.__RemoveOutliers(normalBeta)
         tumorBeta = self.__RemoveOutliers(tumorBeta)

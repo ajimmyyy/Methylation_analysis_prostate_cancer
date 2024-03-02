@@ -14,6 +14,6 @@ if __name__ == "__main__":
     _hypoDataDf = pd.read_csv(_config["Paths"]["DMP_HYPO_DATA_PATH"])
 
     _cutpointCalculator = CutpointCalculator()
-    _dfOut = _cutpointCalculator.CalculateCutpoint(_betaDataDf, [_hyperDataDf, _hypoDataDf], 50, ["hyper", "hypo"], "CpG", "mid")
+    _dfOut = _cutpointCalculator.CalculateCutpoint(_betaDataDf, [_hyperDataDf, _hypoDataDf], 25, ["hyper", "hypo"], "CpG", "mid")
 
     FileSaver.SaveDataframe(_dfOut, _config["Paths"]["CUTPOINT_DATA_PATH"])
