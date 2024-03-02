@@ -70,8 +70,8 @@ class ValidateData:
             betaDf = betaDf.to_numpy()[0]
         except:
             return pd.Series({"F1_validate": self.NOT_FIND})
-        normalBeta = betaDf[1:normalCount + 1:2]
-        tumorBeta = betaDf[normalCount + 1::2]
+        normalBeta = betaDf[1:normalCount + 1]
+        tumorBeta = betaDf[normalCount + 1:]
 
         if row["DNAm"] == "hyper":
             fp = np.sum(normalBeta > cutpoint)

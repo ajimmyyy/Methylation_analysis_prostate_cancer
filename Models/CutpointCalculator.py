@@ -61,8 +61,8 @@ class CutpointCalculator:
 
         for cutpoint in np.arange(0.01, 1, 0.01):
             rowList = row.to_numpy()
-            normalBeta = rowList[1:normalCount + 1:2]
-            tumorBeta = rowList[normalCount + 1::2]
+            normalBeta = rowList[1:normalCount + 1]
+            tumorBeta = rowList[normalCount + 1:]
 
             if type == "hyper":
                 tn = np.sum(normalBeta < cutpoint)
