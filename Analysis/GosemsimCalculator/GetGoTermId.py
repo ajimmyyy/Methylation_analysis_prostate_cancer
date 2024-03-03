@@ -2,6 +2,7 @@ from configparser import ConfigParser
 import pandas as pd
 import csv
 from biomart import BiomartServer
+from MakeFile.FileSaver import FileSaver
 
 if __name__ == '__main__':
     _configPath = "Analysis/GosemsimCalculator/config.ini"
@@ -24,10 +25,18 @@ if __name__ == '__main__':
         ]
     }, header = 1)
 
-    with open(_config["Paths"]["HYPO_GO_TERM_PATH"], 'w', newline='') as csvfile:
-        csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        for line in response.iter_lines():
-            line = line.decode('utf-8')
-            line_parts = line.split("\t")
-            if all(line_part.strip() for line_part in line_parts):
-                csvwriter.writerow(line_parts)
+    data = []
+    for entry in response.iter_lines():
+        data.append(entry.decode('utf-8').split('\t'))
+    header = data[0]
+    data = data[1:]
+    df = pd.DataFrame(data, columns=header)
+    FileSaver.SaveDataframe(df, _config["Paths"]["HYPO_GO_TERM_PATH"])
+
+    # with open(_config["Paths"]["HYPO_GO_TERM_PATH"], 'w', newline='') as csvfile:
+    #     csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    #     for line in response.iter_lines():
+    #         line = line.decode('utf-8')
+    #         line_parts = line.split("\t")
+    #         if all(line_part.strip() for line_part in line_parts):
+    #             csvwriter.writerow(line_parts)
