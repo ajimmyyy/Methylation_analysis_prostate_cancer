@@ -14,8 +14,19 @@ if __name__ == '__main__':
     _mfDf = _goTermDf[_goTermDf['GO domain'] == 'molecular_function']
     _goTermList = _mfDf.groupby('Gene name')['GO term accession'].apply(list).reset_index().values.tolist()
 
+
+    # # Wang method
+    # S_values = [(x, GOntoSim.Semantic_Value(x, 'wang')) for x in _goTermDf.loc[:, 'GO term accession'].tolist()]
+    # S_values = dict(S_values)
+
+    # _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "wang", S_values)
+    # _similarityDf = pd.DataFrame(_similarityDf, index=_mfDf['Gene name'].unique(), columns=_mfDf['Gene name'].unique())
+
+
+    # GontoSim method
     S_values = [(x, GOntoSim.Semantic_Value(x, 'Baseline_LCA_avg')) for x in _goTermDf.loc[:, 'GO term accession'].tolist()]
     S_values = dict(S_values)
+
     _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "GOntoSim", S_values)
     _similarityDf = pd.DataFrame(_similarityDf, index=_mfDf['Gene name'].unique(), columns=_mfDf['Gene name'].unique())
     _similarityDf.to_csv(_config["Paths"]["MF_GONTO_SIMILARITY_HYPER_PATH"])
