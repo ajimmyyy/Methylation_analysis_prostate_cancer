@@ -34,14 +34,14 @@ if __name__ == "__main__":
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
     _trainDf = TransformTrainData(_trainDf, 50)
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
-    _trainDf = _trainDf.iloc[1::2]
+    _trainDf = _trainDf.iloc[1:]
 
 
     # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
     _testDf = TransformTrainData(_testDf, 50)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
-    _testDf = _testDf.iloc[1::2]
+    _testDf = _testDf.iloc[1:]
 
 
     # split the training, testing data into X and Y
@@ -76,16 +76,9 @@ if __name__ == "__main__":
     print("F1: ", f1)
 
     importances = forest.feature_importances_
-    forest_importances = pd.Series(importances,index=_trainX.columns).sort_values(ascending=True)
-    forest_importances_top = forest_importances[-50:]
-
-    fig, ax = plt.subplots()
-    forest_importances_top.plot.barh(ax=ax)
-    ax.set_title("Feature importances using MDI")
-    ax.set_xlabel("Mean decrease in impurity")
-    fig.tight_layout()
-    plt.show()
-    FileSaver.SavePlot(fig, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
+    forest_importances = pd.DataFrame({'CpG': _trainX.columns, 'Gini': importances})
+    forest_importances = forest_importances.sort_values(by='Gini', ascending=False)
+    FileSaver.SaveDataframe(forest_importances, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
     # save the model
     treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
