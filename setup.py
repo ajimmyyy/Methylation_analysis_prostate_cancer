@@ -16,6 +16,9 @@ setup(
         "biopython",
         "scikit-learn-extra",
         "biomart",
-        "goatools"
+        "goatools",
+        "imblearn",
+        "graphviz",
+        "joblib",
     ],
 )

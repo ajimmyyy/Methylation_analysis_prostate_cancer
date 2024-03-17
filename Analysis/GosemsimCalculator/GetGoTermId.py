@@ -10,7 +10,7 @@ if __name__ == '__main__':
     _config.read(_configPath)
 
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
-    _geneList = _aucDf[_aucDf['DNAm'] == 'hypo']['gene'].tolist()
+    _geneList = _aucDf[_aucDf['DNAm'] == 'hyper']['gene'].tolist()
 
     server = BiomartServer("http://www.ensembl.org/biomart")
     interpro = server.datasets['hsapiens_gene_ensembl']
@@ -30,13 +30,6 @@ if __name__ == '__main__':
         data.append(entry.decode('utf-8').split('\t'))
     header = data[0]
     data = data[1:]
+    data = [sublist for sublist in data if all(item != '' for item in sublist)]
     df = pd.DataFrame(data, columns=header)
-    FileSaver.SaveDataframe(df, _config["Paths"]["HYPO_GO_TERM_PATH"])
-
-    # with open(_config["Paths"]["HYPO_GO_TERM_PATH"], 'w', newline='') as csvfile:
-    #     csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    #     for line in response.iter_lines():
-    #         line = line.decode('utf-8')
-    #         line_parts = line.split("\t")
-    #         if all(line_part.strip() for line_part in line_parts):
-    #             csvwriter.writerow(line_parts)
+    FileSaver.SaveDataframe(df, _config["Paths"]["HYPER_GO_TERM_PATH"])
