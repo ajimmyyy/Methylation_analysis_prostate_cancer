@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import plot_tree
+from sklearn import tree
 from collections import OrderedDict
 from imblearn.over_sampling import RandomOverSampler, SMOTE, KMeansSMOTE, SVMSMOTE, ADASYN
 from imblearn.pipeline import Pipeline
@@ -51,15 +52,18 @@ if __name__ == "__main__":
     _testY = _testDf["cancer"]
 
 
-    # oversample the training data
+    # # oversample the training data
     _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY) 
 
 
     # train the model
     # forest = RandomForestClassifier(n_estimators = 200, min_samples_leaf = 10, n_jobs=-1)
-    forest = RandomForestClassifier(n_estimators = 100, max_features = 30, n_jobs = -1)
+    forest = RandomForestClassifier(n_estimators = 100, max_features = 20, n_jobs = -1)
     forest.fit(_trainX, _trainY)
 
+    plt.figure(figsize=(20,10))
+    plot_tree(forest.estimators_[0], filled=True, feature_names=_trainX.columns)
+    plt.show()
 
     trainPredicted = forest.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
@@ -74,11 +78,6 @@ if __name__ == "__main__":
     f1 = f1_score(_testY, testPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
-
-    importances = forest.feature_importances_
-    forest_importances = pd.DataFrame({'CpG': _trainX.columns, 'Gini': importances})
-    forest_importances = forest_importances.sort_values(by='Gini', ascending=False)
-    FileSaver.SaveDataframe(forest_importances, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
     # save the model
     treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
@@ -125,7 +124,7 @@ if __name__ == "__main__":
     # ]
     # error_rate = OrderedDict((label, []) for label, _ in ensemble_clfs)
     # min_estimators = 100
-    # max_estimators = 150
+    # max_estimators = 200
     # for label, clf in ensemble_clfs:
     #     for i in range(min_estimators, max_estimators + 1, 5):
     #         clf.set_params(n_estimators=i)
@@ -141,8 +140,44 @@ if __name__ == "__main__":
     #     plt.plot(xs, ys, label=label)
 
     # plt.xlim(min_estimators, max_estimators)
-    # plt.ylim(0.01, 0.04)
+    # # plt.ylim(0.01, 0.04)
     # plt.xlabel("n_estimators")
     # plt.ylabel("OOB error rate")
     # plt.legend(loc="upper right")
+    # plt.show()
+
+
+    # pipeline = Pipeline([
+    # ('oversampling', RandomOverSampler()),
+    # ('clf', RandomForestClassifier(random_state=42))
+    # ])
+
+    # param_grid = {
+    #     'oversampling': [RandomOverSampler(), SMOTE(), KMeansSMOTE(), SVMSMOTE(), ADASYN()],
+    #     'clf__n_estimators': [50, 100, 200],
+    #     'clf__max_features': [None, 10, 20, 30, 40 ,50]
+    # }
+
+    # grid_search = GridSearchCV(pipeline, param_grid=param_grid, cv=5, scoring='f1', n_jobs=-1)
+    # grid_search.fit(_trainX, _trainY)
+
+    # best_params = grid_search.best_params_
+    # print("Best Parameters:", best_params)
+
+    # results = grid_search.cv_results_
+    # oversampling_names = [type(oversampler).__name__ for oversampler in param_grid['oversampling']]
+    # param_combinations = [(oversampling_name, n_estimators, max_features) for oversampling_name in oversampling_names for n_estimators in param_grid['clf__n_estimators'] for max_features in param_grid['clf__max_features']]
+    # f1_scores = results['mean_test_score']
+
+    # plt.figure(figsize=(12, 8))
+    # for i, oversampling_name in enumerate(oversampling_names):
+    #     oversampling_indices = [idx for idx, (oversampling, _, _) in enumerate(param_combinations) if oversampling == oversampling_name]
+    #     oversampling_f1_scores = [f1_scores[idx] for idx in oversampling_indices]
+    #     plt.scatter(oversampling_indices, oversampling_f1_scores, label=oversampling_name)
+    # plt.title('F1 Scores for Different Oversampling Methods')
+    # plt.xlabel('Parameter Combinations')
+    # plt.ylabel('F1 Score')
+    # plt.xticks(np.arange(len(param_combinations)), [f'{oversampling}\n{n_estimators}\n{max_features}' for oversampling, n_estimators, max_features in param_combinations], rotation=45, ha='right')
+    # plt.legend()
+    # plt.tight_layout()
     # plt.show()

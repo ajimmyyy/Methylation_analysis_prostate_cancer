@@ -19,6 +19,6 @@ setup(
         "goatools",
         "imblearn",
         "graphviz",
-        "joblib"
+        "joblib",
     ],
 )
