@@ -20,7 +20,7 @@ def TransformTrainData(df, normalNum):
     return df
 
 if __name__ == "__main__":
-    _configPath = "Analysis/RandomForest/config.ini"
+    _configPath = "Analysis/Models/config.ini"
     _config = ConfigParser()
     _config.read(_configPath)
 

@@ -10,9 +10,12 @@ from MakeFile.FileSaver import FileSaver
 from RandomForest import TransformTrainData
 
 if __name__ == "__main__":
-    _configPath = "Analysis/RandomForest/config.ini"
+    _configPath = "Analysis/Models/config.ini"
     _config = ConfigParser()
     _config.read(_configPath)
+
+    MODEL_PATH = _config["Paths"]["XGBOOST_PATH"]
+    SAVE_PATH = _config["Paths"]["XGBOOST_IMPORTANCES_PATH"]
 
     # filter out the CpG sites
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
@@ -30,20 +33,20 @@ if __name__ == "__main__":
     _testX = _testDf.drop(columns=["cancer"])
     _testY = _testDf["cancer"]
 
-    _forest = joblib.load(_config["Paths"]["RANDOM_FOREST_TREE_PATH"])
+    _model = joblib.load(MODEL_PATH)
 
-    _result = permutation_importance(_forest, _testX, _testY, n_repeats=10, random_state=0)
+    _result = permutation_importance(_model, _testX, _testY, n_repeats=10, random_state=0)
 
     _importancesMean = _result.importances_mean
     _importancesStd = _result.importances_std
-    _giniImportance = _forest.feature_importances_
+    _importance = _model.feature_importances_
 
     _sortedIndices = np.argsort(_importancesMean)
     _sortedScores = _importancesMean[_sortedIndices]
 
-    data = {'CpG': _testX.columns, 'Gini': _giniImportance, 'Importance Mean': _importancesMean, 'Importance Std': _sortedScores}
+    data = {'CpG': _testX.columns, 'FeatureImportance': _importance, 'ImportanceMean': _importancesMean, 'ImportanceStd': _sortedScores}
     df = pd.DataFrame(data)
-    FileSaver.SaveDataframe(df, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
+    FileSaver.SaveDataframe(df, SAVE_PATH)
 
     plt.figure(figsize=(10, 6))
     plt.boxplot(_result.importances[_sortedIndices].T, vert=False,
