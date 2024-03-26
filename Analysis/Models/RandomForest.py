@@ -29,18 +29,20 @@ if __name__ == "__main__":
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
+    # out = ['cg00795341', 'cg26010734', 'cg10777851', 'cg14578894', 'cg06390484', 'cg03430846', 'cg00536939', 'cg06197769', 'cg10959198', 'cg13605988']
+    # keepFeature = [x for x in keepFeature if x not in out]
 
 
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
-    _trainDf = TransformTrainData(_trainDf, 50)
+    _trainDf = TransformTrainData(_trainDf, 25)
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
     _trainDf = _trainDf.iloc[1:]
 
 
     # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
-    _testDf = TransformTrainData(_testDf, 50)
+    _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
 

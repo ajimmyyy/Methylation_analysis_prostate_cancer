@@ -6,6 +6,7 @@ import seaborn as sns
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.inspection import permutation_importance
+from xgboost import plot_tree
 from MakeFile.FileSaver import FileSaver
 from RandomForest import TransformTrainData
 
@@ -14,8 +15,8 @@ if __name__ == "__main__":
     _config = ConfigParser()
     _config.read(_configPath)
 
-    MODEL_PATH = _config["Paths"]["XGBOOST_PATH"]
-    SAVE_PATH = _config["Paths"]["XGBOOST_IMPORTANCES_PATH"]
+    MODEL_PATH = _config["Paths"]["RANDOM_FOREST_TREE_PATH"]
+    SAVE_PATH = _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"]
 
     # filter out the CpG sites
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
@@ -25,7 +26,7 @@ if __name__ == "__main__":
 
     # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
-    _testDf = TransformTrainData(_testDf, 50)
+    _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
 
@@ -54,11 +55,3 @@ if __name__ == "__main__":
     plt.xlabel('Importance Score')
     plt.title('Permutation Importance')
     plt.show()
-
-    # plt.figure(figsize=(10, 6))
-    # plt.barh(range(len(_importancesMean)), _importancesMean[sorted_indices], xerr=_importancesStd[sorted_indices])
-    # plt.yticks(range(len(_importancesMean)), np.array(_testX.columns)[sorted_indices])
-    # plt.xlabel('Mean Importances')
-    # plt.ylabel('Features')
-    # plt.title('Permutation Importances')
-    # plt.show()
