@@ -25,13 +25,14 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
-    _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
-    keepFeature = _aucDf["CpG"].tolist()
+    # _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
+    # _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
+    # keepFeature = _aucDf["CpG"].tolist()
+    # keepFeature.append("cancer")
+    _featureDf = pd.read_csv(_config["Paths"]["LASSO_IMPORTANCES_PATH"], index_col=0)
+    keepFeature = _featureDf.index.tolist()
+    keepFeature = keepFeature[:46]
     keepFeature.append("cancer")
-    # out = ['cg00795341', 'cg26010734', 'cg10777851', 'cg14578894', 'cg06390484', 'cg03430846', 'cg00536939', 'cg06197769', 'cg10959198', 'cg13605988']
-    # keepFeature = [x for x in keepFeature if x not in out]
-
 
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
@@ -54,18 +55,13 @@ if __name__ == "__main__":
     _testY = _testDf["cancer"]
 
 
-    # # oversample the training data
+    # oversample the training data
     _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY) 
-
 
     # train the model
     # forest = RandomForestClassifier(n_estimators = 200, min_samples_leaf = 10, n_jobs=-1)
-    forest = RandomForestClassifier(n_estimators = 100, max_features = 20, n_jobs = -1)
+    forest = RandomForestClassifier(n_estimators = 50, n_jobs = -1)
     forest.fit(_trainX, _trainY)
-
-    plt.figure(figsize=(20,10))
-    plot_tree(forest.estimators_[0], filled=True, feature_names=_trainX.columns)
-    plt.show()
 
     trainPredicted = forest.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
@@ -82,8 +78,17 @@ if __name__ == "__main__":
     print("F1: ", f1)
 
     # save the model
-    treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
-    joblib.dump(forest, treePath)
+    # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
+    # joblib.dump(forest, treePath)
+    importances = forest.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
+    forest_importances = pd.Series(importances, index=_testX.columns)
+    fig, ax = plt.subplots()
+    forest_importances.plot.bar(yerr=std, ax=ax)
+    ax.set_title("Feature importances using MDI")
+    ax.set_ylabel("Mean decrease in impurity")
+    fig.tight_layout()
+    plt.show()
 
 
     # RANDOM_STATE = 123
