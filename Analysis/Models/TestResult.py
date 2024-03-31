@@ -27,7 +27,7 @@ if __name__ == "__main__":
     _df = _df.iloc[1:]
 
     # read the testing data
-    _testDf = pd.read_csv(_config["Paths"]["450K_DATA_PATH"], index_col=0)
+    _testDf = pd.read_csv(_config["Paths"]["850K_DATA_PATH"], index_col=0)
     _testDf = TransformTrainData(_testDf, 10)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]

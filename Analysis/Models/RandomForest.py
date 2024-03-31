@@ -22,13 +22,10 @@ if __name__ == "__main__":
     _config = ConfigParser()
     _config.read(_configPath)
 
-    # # filter out the CpG sites
-    # _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
-    # _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
-    # keepFeature = _aucDf["CpG"].tolist()
-    # keepFeature.append("cancer")
-    keepFeature = pd.read_csv(_config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
-    keepFeature = keepFeature["CpG"].tolist()
+    # filter out the CpG sites
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
+    _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
+    keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
 
     # read the training data
@@ -55,38 +52,37 @@ if __name__ == "__main__":
     print(_trainY.value_counts())
 
     # train the model
-    # _rfModel = RandomForestClassifier(n_estimators = 200, min_samples_leaf = 10, n_jobs=-1)
-    _rfModel = RandomForestClassifier(n_estimators = 100, max_features=2, n_jobs = -1)
+    _rfModel = RandomForestClassifier(n_estimators = 3000, min_samples_leaf = 20, n_jobs=-1)
     _rfecv = RFECV(estimator=_rfModel, step=1, cv=5, scoring='f1', n_jobs=-1)
-    _rfModel.fit(_trainX, _trainY)
+    _rfecv.fit(_trainX, _trainY)
 
-    trainPredicted = _rfModel.predict(_trainX)
+    trainPredicted = _rfecv.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
     f1 = f1_score(_trainY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
 
     # test the model
-    testPredicted = _rfModel.predict(_testX)
+    testPredicted = _rfecv.predict(_testX)
     accuracy = accuracy_score(_testY, testPredicted)
     f1 = f1_score(_testY, testPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
 
 
-    # # feature selection
-    # print("Optimal number of features : %d" % _rfecv.n_features_)
-    # print("Ranking of features : %s" % _rfecv.ranking_)
-    # print("mean_test_score : %s" % _rfecv.cv_results_['mean_test_score'])
-    # print("std_test_score : %s" % _rfecv.cv_results_['std_test_score'])
+    # feature selection
+    print("Optimal number of features : %d" % _rfecv.n_features_)
+    print("Ranking of features : %s" % _rfecv.ranking_)
+    print("mean_test_score : %s" % _rfecv.cv_results_['mean_test_score'])
+    print("std_test_score : %s" % _rfecv.cv_results_['std_test_score'])
 
-    # feature_names = _trainX.columns
-    # selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
+    feature_names = _trainX.columns
+    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
 
-    # results_df = pd.DataFrame({
-    #     'CpG': selected_feature_names,
-    # })
-    # FileSaver.SaveDataframe(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
+    results_df = pd.DataFrame({
+        'CpG': selected_feature_names,
+    })
+    FileSaver.SaveDataframe(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
 
     # importance = _rfModel.feature_importances_
     # importance = pd.DataFrame({'CpG': _trainX.columns, 'Importance': importance})
@@ -101,8 +97,8 @@ if __name__ == "__main__":
     # FileSaver.SaveDataframe(importance, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
     # save the model
-    treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
-    joblib.dump(_rfModel, treePath)
+    # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
+    # joblib.dump(_rfModel, treePath)
 
 
     # # Parameter Tuning
