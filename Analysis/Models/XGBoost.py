@@ -7,6 +7,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import f1_score, accuracy_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import KMeansSMOTE
 from RandomForest import TransformTrainData
 from MakeFile.FileSaver import FileSaver
@@ -27,17 +28,17 @@ if __name__ == "__main__":
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
 
-
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
-    _trainDf = TransformTrainData(_trainDf, 50)
+    print(_trainDf.shape)
+    _trainDf = TransformTrainData(_trainDf, 25)
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
     _trainDf = _trainDf.iloc[1:]
 
-
     # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
-    _testDf = TransformTrainData(_testDf, 50)
+    print(_testDf.shape)
+    _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
 
@@ -51,14 +52,6 @@ if __name__ == "__main__":
     _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY)
 
     # train the model
-    # _xgboostModel = XGBClassifier(
-    #     n_estimators = 125, 
-    #     max_depth = 4, 
-    #     min_child_weight = 2, 
-    #     subsample = 0.9,
-    #     colsample_bytree = 0.8,
-    #     learning_rate= 0.05,
-    # )
     _xgboostModel = XGBClassifier(
         n_estimators = 125, 
         max_depth = 4, 
@@ -89,33 +82,33 @@ if __name__ == "__main__":
     xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
     joblib.dump(_xgboostModel, xgboostPath)
 
-    # _importance = _xgboostModel.feature_importances_
-    # _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
-    # _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
-    # _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
+    _importance = _xgboostModel.feature_importances_
+    _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
+    _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
+    _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
 
-    # df = pd.DataFrame({
-    #     'CpG': list(_weight.keys()),
-    #     'weight': list(_weight.values()),
-    #     'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
-    #     'cover': [_cover.get(feature, 0) for feature in _weight.keys()]
-    #     'importance': _importance
-    # })
+    df = pd.DataFrame({
+        'CpG': list(_weight.keys()),
+        'weight': list(_weight.values()),
+        'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
+        'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
+    })
+    FileSaver.SaveDataframe(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
 
-
-    # # Parameter Tuning
+    # Parameter Tuning
+    # cv = {'learning_rate': [0.01, 0.05, 0.07, 0.1, 0.2]}
     # model = XGBClassifier(
     #     n_estimators = 125, 
-    #     max_depth = 4, 
+    #     max_depth = 3, 
     #     min_child_weight = 2, 
-    #     subsample = 0.9,
-    #     colsample_bytree = 0.8,
-    #     reg_alpha= 0.1,
-    #     reg_lambda= 1,
-    #     learning_rate= 0.05,
+    #     subsample = 0.6,
+    #     colsample_bytree = 0.7,
+    #     reg_alpha= 0.05,
+    #     reg_lambda= 0.05,
+    #     learning_rate= 0.07,
     #     objective= 'binary:logistic'
     # )
-    # grid_search = GridSearchCV(model, scoring="f1", n_jobs=-1, cv=5)
+    # grid_search = GridSearchCV(model, param_grid=cv, scoring="f1", n_jobs=-1, cv=5)
     # grid_result = grid_search.fit(_trainX, _trainY)
 
     # # summarize results
