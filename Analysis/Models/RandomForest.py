@@ -6,9 +6,7 @@ import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import GridSearchCV
-from sklearn.tree import plot_tree
-from sklearn import tree
-from collections import OrderedDict
+from sklearn.feature_selection import RFECV
 from imblearn.over_sampling import RandomOverSampler, SMOTE, KMeansSMOTE, SVMSMOTE, ADASYN
 from imblearn.pipeline import Pipeline
 from MakeFile.FileSaver import FileSaver
@@ -25,13 +23,9 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    # _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
-    # _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
-    # keepFeature = _aucDf["CpG"].tolist()
-    # keepFeature.append("cancer")
-    _featureDf = pd.read_csv(_config["Paths"]["LASSO_IMPORTANCES_PATH"], index_col=0)
-    keepFeature = _featureDf.index.tolist()
-    keepFeature = keepFeature[:46]
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
+    _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
+    keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
 
     # read the training data
@@ -40,13 +34,11 @@ if __name__ == "__main__":
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
     _trainDf = _trainDf.iloc[1:]
 
-
     # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
     _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
-
 
     # split the training, testing data into X and Y
     _trainX = _trainDf.drop(columns=["cancer"])
@@ -57,102 +49,55 @@ if __name__ == "__main__":
 
     # oversample the training data
     _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY) 
+    print(_trainY.value_counts())
 
     # train the model
     # forest = RandomForestClassifier(n_estimators = 200, min_samples_leaf = 10, n_jobs=-1)
-    forest = RandomForestClassifier(n_estimators = 50, n_jobs = -1)
-    forest.fit(_trainX, _trainY)
+    _rfModel = RandomForestClassifier(n_estimators = 3000, max_features=20, n_jobs = -1)
+    _rfecv = RFECV(estimator=_rfModel, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfecv.fit(_trainX, _trainY)
 
-    trainPredicted = forest.predict(_trainX)
+    trainPredicted = _rfecv.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
     f1 = f1_score(_trainY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
 
-
     # test the model
-    testPredicted = forest.predict(_testX)
+    testPredicted = _rfecv.predict(_testX)
     accuracy = accuracy_score(_testY, testPredicted)
     f1 = f1_score(_testY, testPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
 
-    # save the model
-    # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
-    # joblib.dump(forest, treePath)
-    importances = forest.feature_importances_
-    std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
-    forest_importances = pd.Series(importances, index=_testX.columns)
-    fig, ax = plt.subplots()
-    forest_importances.plot.bar(yerr=std, ax=ax)
-    ax.set_title("Feature importances using MDI")
-    ax.set_ylabel("Mean decrease in impurity")
-    fig.tight_layout()
-    plt.show()
+    print("Optimal number of features : %d" % _rfecv.n_features_)
+    print("Ranking of features : %s" % _rfecv.ranking_)
+    print("mean_test_score : %s" % _rfecv.cv_results_['mean_test_score'])
+    print("std_test_score : %s" % _rfecv.cv_results_['std_test_score'])
 
+    feature_names = _trainX.columns
+    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
 
-    # RANDOM_STATE = 123
-    # ensemble_clfs = [
-    #     (
-    #         "RandomForestClassifier, max_features=5",
-    #         RandomForestClassifier(
-    #             warm_start=True,
-    #             oob_score=True,
-    #             max_features=5,
-    #             random_state=RANDOM_STATE,
-    #         ),
-    #     ),
-    #     (
-    #         "RandomForestClassifier, max_features=20",
-    #         RandomForestClassifier(
-    #             warm_start=True,
-    #             max_features=20,
-    #             oob_score=True,
-    #             random_state=RANDOM_STATE,
-    #         ),
-    #     ),
-    #     (
-    #         "RandomForestClassifier, max_features=30",
-    #         RandomForestClassifier(
-    #             warm_start=True,
-    #             max_features=30,
-    #             oob_score=True,
-    #             random_state=RANDOM_STATE,
-    #         ),
-    #     ),(
-    #         "RandomForestClassifier, max_features=40",
-    #         RandomForestClassifier(
-    #             warm_start=True,
-    #             max_features=40,
-    #             oob_score=True,
-    #             random_state=RANDOM_STATE,
-    #         ),
-    #     ),
-    # ]
-    # error_rate = OrderedDict((label, []) for label, _ in ensemble_clfs)
-    # min_estimators = 100
-    # max_estimators = 200
-    # for label, clf in ensemble_clfs:
-    #     for i in range(min_estimators, max_estimators + 1, 5):
-    #         clf.set_params(n_estimators=i)
-    #         clf.fit(_trainX, _trainY)
+    results_df = pd.DataFrame({
+        'CpG': selected_feature_names,
+    })
+    FileSaver.SaveDataframe(results_df, "C:/Users/acer/Desktop/test/test.csv")
 
-    #         # Record the OOB error for each `n_estimators=i` setting.
-    #         oob_error = 1 - clf.oob_score_
-    #         error_rate[label].append((i, oob_error))
-
-    # # Generate the "OOB error rate" vs. "n_estimators" plot.
-    # for label, clf_err in error_rate.items():
-    #     xs, ys = zip(*clf_err)
-    #     plt.plot(xs, ys, label=label)
-
-    # plt.xlim(min_estimators, max_estimators)
-    # # plt.ylim(0.01, 0.04)
-    # plt.xlabel("n_estimators")
-    # plt.ylabel("OOB error rate")
-    # plt.legend(loc="upper right")
+    # importance = _rfModel.feature_importances_
+    # importance = pd.DataFrame({'CpG': _trainX.columns, 'Importance': importance})
+    # importance["Std"] = np.std([tree.feature_importances_ for tree in _rfModel.estimators_], axis=0)
+    # importance = importance.sort_values(by="Importance", ascending=False)
+    # fig, ax = plt.subplots()
+    # x = range(importance.shape[0])
+    # y = importance["Importance"]
+    # yerr = importance["Std"]
+    # plt.bar(x, y, yerr=yerr, align="center")
     # plt.show()
+    # FileSaver.SaveDataframe(importance, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
+    # # save the model
+    # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
+    # joblib.dump(_rfModel, treePath)
 
     # pipeline = Pipeline([
     # ('oversampling', RandomOverSampler()),
@@ -160,12 +105,13 @@ if __name__ == "__main__":
     # ])
 
     # param_grid = {
-    #     'oversampling': [RandomOverSampler(), SMOTE(), KMeansSMOTE(), SVMSMOTE(), ADASYN()],
+    #     'oversampling': [KMeansSMOTE()],
+    #     'oversampling__sampling_strategy': ['0.2', '0.3', '0.5', '0.7', 'auto'],
     #     'clf__n_estimators': [50, 100, 200],
-    #     'clf__max_features': [None, 10, 20, 30, 40 ,50]
+    #     'clf__max_features': [5, 10, 20, 30]
     # }
 
-    # grid_search = GridSearchCV(pipeline, param_grid=param_grid, cv=5, scoring='f1', n_jobs=-1)
+    # grid_search = GridSearchCV(pipeline, param_grid=param_grid, cv=10, scoring='f1', n_jobs=-1)
     # grid_search.fit(_trainX, _trainY)
 
     # best_params = grid_search.best_params_
