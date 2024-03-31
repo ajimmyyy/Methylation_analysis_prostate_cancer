@@ -19,19 +19,18 @@ if __name__ == '__main__':
 
     print(_uniqueGoterms)
 
-    # # Wang method
-    # S_values = [(x, GOntoSim.Semantic_Value(x, 'wang')) for x in _uniqueGoterms]
-    # S_values = dict(S_values)
-
-    # _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "wang", S_values)
-    # _similarityDf = pd.DataFrame(_similarityDf, index=_mfDf['Gene name'].unique(), columns=_mfDf['Gene name'].unique())
-
-    # GontoSim method
-    S_values = [(x, GOntoSim.Semantic_Value(x, 'Baseline_LCA_avg')) for x in _uniqueGoterms]
+    # Wang method
+    S_values = [(x, GOntoSim.Semantic_Value(x, 'wang')) for x in _uniqueGoterms]
     S_values = dict(S_values)
 
-    _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "GOntoSim", S_values)
+    _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "wang", S_values)
     _similarityDf = pd.DataFrame(_similarityDf, index=_mfDf['Gene name'].unique(), columns=_mfDf['Gene name'].unique())
+
+    # # GontoSim method
+    # S_values = [(x, GOntoSim.Semantic_Value(x, 'Baseline_LCA_avg')) for x in _uniqueGoterms]
+    # S_values = dict(S_values)
+
+    # _similarityDf = GOntoSim.Similarity_Matrix(_goTermList, "GOntoSim", S_values)
+    # _similarityDf = pd.DataFrame(_similarityDf, index=_mfDf['Gene name'].unique(), columns=_mfDf['Gene name'].unique())
     # _similarityDf.to_csv(_config["Paths"]["MF_GONTO_SIMILARITY_HYPER_PATH"])
-    _similarityDf.to_csv("C:/Users/acer/Desktop/test/test.csv")
 

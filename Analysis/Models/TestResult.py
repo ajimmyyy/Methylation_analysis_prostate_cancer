@@ -19,8 +19,6 @@ if __name__ == "__main__":
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
-    out = ['cg00795341', 'cg26010734', 'cg10777851', 'cg14578894', 'cg06390484', 'cg03430846', 'cg00536939', 'cg06197769', 'cg10959198', 'cg13605988']
-    keepFeature = [x for x in keepFeature if x not in out]
 
     # read the testing data
     _df = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
@@ -29,13 +27,10 @@ if __name__ == "__main__":
     _df = _df.iloc[1:]
 
     # read the testing data
-    _testDf = pd.read_csv("C:/Users/acer/Desktop/all_beta_normalized.csv", index_col=0)
+    _testDf = pd.read_csv(_config["Paths"]["450K_DATA_PATH"], index_col=0)
     _testDf = TransformTrainData(_testDf, 10)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
-    # missing = ['cg00795341', 'cg26010734', 'cg10777851', 'cg14578894', 'cg06390484', 'cg03430846', 'cg00536939', 'cg06197769', 'cg10959198', 'cg13605988']
-    # for col in missing:
-    #     _testDf[col] = pd.Series(dtype=float)
     _testDf = _testDf[_df.columns]
 
     # split the training, testing data into X and Y
