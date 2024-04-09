@@ -127,14 +127,14 @@ class GosemsimCalculator:
 
         return df, silhouetteFig
 
-    # DrawHeatmap(self, gosemsimDf, distanceMethod = 'average')
+    # DrawHierarchy(self, gosemsimDf, distanceMethod = 'average')
     # 畫出熱圖
     # Parameters:
     # gosemsimDf: DataFrame，擁有兩兩距離的資料
     # distanceMethod: String，距離算法，詳見https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html
     # Return:
     # Figure，熱圖
-    def DrawHeatmap(self, gosemsimDf, distanceMethod = 'average'):
+    def DrawHierarchy(self, gosemsimDf, distanceMethod = 'average'):
         fig = plt.figure(figsize=(20, 20))
         row_linkage = hierarchy.linkage(gosemsimDf, method = distanceMethod)
         dn = hierarchy.dendrogram(row_linkage, labels = gosemsimDf.columns.tolist())

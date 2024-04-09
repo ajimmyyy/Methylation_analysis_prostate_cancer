@@ -23,7 +23,7 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
@@ -73,15 +73,22 @@ if __name__ == "__main__":
     # feature selection
     print("Optimal number of features : %d" % _rfecv.n_features_)
     print("Ranking of features : %s" % _rfecv.ranking_)
-    print("mean_test_score : %s" % _rfecv.cv_results_['mean_test_score'])
-    print("std_test_score : %s" % _rfecv.cv_results_['std_test_score'])
+    scores = _rfecv.cv_results_['mean_test_score']
+    stds = _rfecv.cv_results_['std_test_score']
+    plt.figure()
+    plt.title('RFECV')
+    plt.xlabel('Number of features selected')
+    plt.ylabel('Cross validation score (F1)')
+    plt.plot(range(1, len(scores) + 1), scores, marker='o', linestyle='-')
+    plt.fill_between(range(1, len(scores) + 1),
+                    scores - stds,
+                    scores + stds,
+                    alpha=0.2)
+    plt.show()
 
     feature_names = _trainX.columns
     selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
-
-    results_df = pd.DataFrame({
-        'CpG': selected_feature_names,
-    })
+    results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
     FileSaver.SaveDataframe(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
 
     # importance = _rfModel.feature_importances_
