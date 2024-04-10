@@ -31,4 +31,4 @@ if __name__ == "__main__":
     _cancerStageCalculator = CancerStageCalculator()
     _outDf = _cancerStageCalculator.MappingPatientTNM(_cancerStageMap, _IdMap)
 
-    FileSaver.SaveDataframe(_outDf, _config["Paths"]["DATASET_CANCER_STAGE_PATH"])
+    FileSaver.SaveData(_outDf, _config["Paths"]["DATASET_CANCER_STAGE_PATH"])

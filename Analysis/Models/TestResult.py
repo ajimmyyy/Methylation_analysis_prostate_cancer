@@ -56,4 +56,4 @@ if __name__ == "__main__":
     yerr = importance["Std"]
     plt.bar(x, y, yerr=yerr, align="center")
     plt.show()
-    FileSaver.SaveDataframe(importance, "C:/Users/acer/Desktop/test/FeatureImportance.csv")
+    FileSaver.SaveData(importance, "C:/Users/acer/Desktop/test/FeatureImportance.csv")

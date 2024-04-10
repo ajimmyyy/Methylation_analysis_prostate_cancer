@@ -89,7 +89,7 @@ if __name__ == "__main__":
     feature_names = _trainX.columns
     selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
     results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
-    FileSaver.SaveDataframe(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
+    FileSaver.SaveData(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
 
     # importance = _rfModel.feature_importances_
     # importance = pd.DataFrame({'CpG': _trainX.columns, 'Importance': importance})

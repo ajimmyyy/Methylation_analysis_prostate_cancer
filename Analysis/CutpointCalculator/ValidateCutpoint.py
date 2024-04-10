@@ -15,5 +15,5 @@ if __name__ == "__main__":
     _validateData = ValidateData()
     _dataOut, _dataNotFind = _validateData.ValidateCutpoint(_cutpointDataDf, _betaDataDf, 10)
 
-    FileSaver.SaveDataframe(_dataOut, _config["Paths"]["CUTPOINT_VALIDATE_DATA_PATH"])
+    FileSaver.SaveData(_dataOut, _config["Paths"]["CUTPOINT_VALIDATE_DATA_PATH"])
     

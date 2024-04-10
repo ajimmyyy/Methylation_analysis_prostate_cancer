@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     data = {'CpG': _testX.columns, 'FeatureImportance': _importance, 'ImportanceMean': _importancesMean, 'ImportanceStd': _sortedScores}
     df = pd.DataFrame(data)
-    FileSaver.SaveDataframe(df, SAVE_PATH)
+    FileSaver.SaveData(df, SAVE_PATH)
 
     plt.figure(figsize=(10, 6))
     plt.boxplot(_result.importances[_sortedIndices].T, vert=False,

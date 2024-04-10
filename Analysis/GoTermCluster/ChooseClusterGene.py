@@ -15,5 +15,5 @@ if __name__ == "__main__":
 
     _geneCluster = _geneCluster.loc[idx_max_F1]
 
-    FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["MF_HYPER_WARD_CHOOSE_PATH"])
+    FileSaver.SaveData(_geneCluster, _config["Paths"]["MF_HYPER_WARD_CHOOSE_PATH"])
 

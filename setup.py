@@ -20,5 +20,6 @@ setup(
         "biomart",
         "goatools",
         "joblib",
+        "shap"
     ],
 )

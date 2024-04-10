@@ -20,7 +20,7 @@ if __name__ == "__main__":
     _geneWardCluster = _geneFilter.IntersectData(_aucDf, _geneWardCluster, "gene")
     _geneWardCluster = _geneFilter.IntersectData(_betaDataDf, _geneWardCluster, "CpG")
 
-    FileSaver.SaveDataframe(_geneWardCluster, "C:/Users/acer/Desktop/test/test.csv")
+    FileSaver.SaveData(_geneWardCluster, "C:/Users/acer/Desktop/test/test.csv")
 
     _clusters = _geneWardCluster['cluster'].unique()
 

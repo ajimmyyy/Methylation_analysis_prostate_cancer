@@ -15,4 +15,4 @@ if __name__ == "__main__":
     _dbateFilter = DeltaBetaFilter()
     _dfOut = _dbateFilter.FilterDeltaBeta(_dbetaDataDf, _dmpDataDf, onlyPromoter = True)
 
-    FileSaver.SaveDataframe(_dfOut, _config["Paths"]["Filter_DBEAT_DATA_PATH"])
+    FileSaver.SaveData(_dfOut, _config["Paths"]["Filter_DBEAT_DATA_PATH"])

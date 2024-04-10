@@ -19,6 +19,6 @@ if __name__ == "__main__":
     _hyperDf, _hypoDf = _dbateFilter.DetermineDNAm(_dmpDataDf, _hyperThreshold, _hypoThreshold, _pValueThreshold)
     _fig = _dbateFilter.DrawVolcanoPlot(_dmpDataDf, _hyperDf, _hypoDf)
 
-    FileSaver.SaveDataframe(_hyperDf, _config["Paths"]["DMP_HYPER_DATA_PATH"])
-    FileSaver.SaveDataframe(_hypoDf, _config["Paths"]["DMP_HYPO_DATA_PATH"])
-    FileSaver.SavePlot(_fig, _config["Paths"]["VOLCANO_PLOT_PATH"])
+    FileSaver.SaveData(_hyperDf, _config["Paths"]["DMP_HYPER_DATA_PATH"])
+    FileSaver.SaveData(_hypoDf, _config["Paths"]["DMP_HYPO_DATA_PATH"])
+    FileSaver.SaveData(_fig, _config["Paths"]["VOLCANO_PLOT_PATH"])

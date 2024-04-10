@@ -14,4 +14,4 @@ if __name__ == "__main__":
     _geneFilter = GeneFilter()
     _studyCountDf = _geneFilter.IntersectData(_inDf, _selectDf, "gene")
 
-    FileSaver.SaveDataframe(_studyCountDf, _config["Paths"]["AUC_GROUP_STUDY_DATA_PATH"])
+    FileSaver.SaveData(_studyCountDf, _config["Paths"]["AUC_GROUP_STUDY_DATA_PATH"])
