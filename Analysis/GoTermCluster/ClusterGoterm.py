@@ -24,5 +24,5 @@ if __name__ == "__main__":
     _geneFilter = GeneFilter()
     _geneCluster = _geneFilter.IntersectData(_aucDf, _geneCluster, "gene")
 
-    FileSaver.SaveDataframe(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_KMEDOIDS_PATH"])
-    FileSaver.SavePlot(_silhouette, _config["Paths"]["GENE_MF_HYPER_KMEDOIDS_SILHOUETTE_PATH"])
+    FileSaver.SaveData(_geneCluster, _config["Paths"]["GENE_CLUSTER_MF_HYPER_KMEDOIDS_PATH"])
+    FileSaver.SaveData(_silhouette, _config["Paths"]["GENE_MF_HYPER_KMEDOIDS_SILHOUETTE_PATH"])

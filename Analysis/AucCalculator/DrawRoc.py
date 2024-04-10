@@ -15,4 +15,4 @@ if __name__ == "__main__":
     _aucCalculator = AucCalculator()
     _fig = _aucCalculator.DrawRoc(_betaDataDf, _comorbidityGroupDf, 25)
 
-    FileSaver.SavePlot(_fig, _config["Paths"]["ROC_GROUP_CURVE_PATH"])
+    FileSaver.SaveData(_fig, _config["Paths"]["ROC_GROUP_CURVE_PATH"])

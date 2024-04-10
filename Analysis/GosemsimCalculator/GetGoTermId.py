@@ -32,4 +32,4 @@ if __name__ == '__main__':
     data = data[1:]
     data = [sublist for sublist in data if all(item != '' for item in sublist)]
     df = pd.DataFrame(data, columns=header)
-    FileSaver.SaveDataframe(df, _config["Paths"]["HYPER_GO_TERM_PATH"])
+    FileSaver.SaveData(df, _config["Paths"]["HYPER_GO_TERM_PATH"])

@@ -93,7 +93,7 @@ if __name__ == "__main__":
         'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
         'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
     })
-    FileSaver.SaveDataframe(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
+    FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
 
     # Parameter Tuning
     # cv = {'learning_rate': [0.01, 0.05, 0.07, 0.1, 0.2]}

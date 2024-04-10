@@ -17,6 +17,6 @@ if __name__ == "__main__":
     _cancerStageCalculator = CancerStageCalculator()
     _sampleSheet, _earlyPatient, _laterPatient = _cancerStageCalculator.MarkCancerStage(_sampleSheet)
 
-    FileSaver.SaveDataframe(_sampleSheet, _config["Paths"]["TRAIN_CANCER_STAGE"])
-    FileSaver.SaveList(_earlyPatient["Sample_Name"].to_list(), _config["Paths"]["TRAIN_EARLY_CANCER_STAGE"])
-    FileSaver.SaveList(_laterPatient["Sample_Name"].to_list(), _config["Paths"]["TRAIN_LATER_CANCER_STAGE"])
+    FileSaver.SaveData(_sampleSheet, _config["Paths"]["TRAIN_CANCER_STAGE"])
+    FileSaver.SaveData(_earlyPatient["Sample_Name"].to_list(), _config["Paths"]["TRAIN_EARLY_CANCER_STAGE"])
+    FileSaver.SaveData(_laterPatient["Sample_Name"].to_list(), _config["Paths"]["TRAIN_LATER_CANCER_STAGE"])

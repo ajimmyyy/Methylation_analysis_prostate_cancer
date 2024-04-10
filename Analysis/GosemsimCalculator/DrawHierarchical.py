@@ -16,4 +16,4 @@ if __name__ == "__main__":
 
     plt.show()
 
-    FileSaver.SavePlot(_fig, _config["Paths"]["GENE_MF_HYPER_WARD_HIERARCHICAL_PATH"])
+    FileSaver.SaveData(_fig, _config["Paths"]["GENE_MF_HYPER_WARD_HIERARCHICAL_PATH"])

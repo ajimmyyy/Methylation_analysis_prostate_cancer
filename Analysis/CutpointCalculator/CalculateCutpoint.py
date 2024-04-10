@@ -16,4 +16,4 @@ if __name__ == "__main__":
     _cutpointCalculator = CutpointCalculator()
     _dfOut = _cutpointCalculator.CalculateCutpoint(_betaDataDf, [_hyperDataDf, _hypoDataDf], 25, ["hyper", "hypo"], "CpG", "mid")
 
-    FileSaver.SaveDataframe(_dfOut, _config["Paths"]["CUTPOINT_DATA_PATH"])
+    FileSaver.SaveData(_dfOut, _config["Paths"]["CUTPOINT_DATA_PATH"])

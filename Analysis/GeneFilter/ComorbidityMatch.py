@@ -22,5 +22,5 @@ if __name__ == "__main__":
     _groupDf = _geneFilter.IntersectData(_inDf, _groupComorbidityList, "gene")
     _singleDf = _geneFilter.IntersectData(_inDf, _singleComorbidityList, "gene")
 
-    FileSaver.SaveDataframe(_groupDf, _config["Paths"]["CUTPOINT_VALIDATE_GROUP_PATH"])
-    FileSaver.SaveDataframe(_singleDf, _config["Paths"]["CUTPOINT_VALIDATE_SINGLE_PATH"])
+    FileSaver.SaveData(_groupDf, _config["Paths"]["CUTPOINT_VALIDATE_GROUP_PATH"])
+    FileSaver.SaveData(_singleDf, _config["Paths"]["CUTPOINT_VALIDATE_SINGLE_PATH"])
