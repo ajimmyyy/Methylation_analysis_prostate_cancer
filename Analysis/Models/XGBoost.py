@@ -4,10 +4,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 from xgboost import XGBClassifier
-from sklearn.metrics import f1_score, accuracy_score
+from sklearn.metrics import f1_score, accuracy_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split    
 from imblearn.over_sampling import KMeansSMOTE
 from RandomForest import TransformTrainData
 from MakeFile.FileSaver import FileSaver
@@ -26,6 +26,7 @@ if __name__ == "__main__":
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
+    keepFeature = [feature for feature in keepFeature if feature not in ['cg26371731', 'cg19349369', 'cg09469554', 'cg18759209', 'cg20676696', 'cg03789645']]
     keepFeature.append("cancer")
 
     # read the training data
@@ -67,33 +68,35 @@ if __name__ == "__main__":
     _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
 
     trainPredicted = _xgboostModel.predict(_trainX)
-    accuracy = accuracy_score(_trainY, trainPredicted)
-    f1 = f1_score(_trainY, trainPredicted, average = "binary")
-    print(accuracy)
-    print("F1: ", f1)
+    print("training results:")
+    print("Accuracy: ", accuracy_score(_trainY, trainPredicted))
+    print("F1: ", f1_score(_trainY, trainPredicted, average = "binary"))
+    print("Recall: ", recall_score(_trainY, trainPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_trainY, trainPredicted, average = "binary", pos_label=0))
     
-    trainPredicted = _xgboostModel.predict(_testX)
-    accuracy = accuracy_score(_testY, trainPredicted)
-    f1 = f1_score(_testY, trainPredicted, average = "binary")
-    print(accuracy)
-    print("F1: ", f1)
+    testPredicted = _xgboostModel.predict(_testX)
+    print("\ntesting results:")
+    print("Accuracy: ", accuracy_score(_testY, testPredicted))
+    print("F1: ", f1_score(_testY, testPredicted, average = "binary"))
+    print("Recall: ", recall_score(_testY, testPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_testY, testPredicted, average = "binary", pos_label=0))
 
-    # save the model
-    xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
-    joblib.dump(_xgboostModel, xgboostPath)
+    # # save the model
+    # xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
+    # joblib.dump(_xgboostModel, xgboostPath)
 
-    _importance = _xgboostModel.feature_importances_
-    _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
-    _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
-    _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
+    # _importance = _xgboostModel.feature_importances_
+    # _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
+    # _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
+    # _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
 
-    df = pd.DataFrame({
-        'CpG': list(_weight.keys()),
-        'weight': list(_weight.values()),
-        'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
-        'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
-    })
-    FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
+    # df = pd.DataFrame({
+    #     'CpG': list(_weight.keys()),
+    #     'weight': list(_weight.values()),
+    #     'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
+    #     'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
+    # })
+    # FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
 
     # Parameter Tuning
     # cv = {'learning_rate': [0.01, 0.05, 0.07, 0.1, 0.2]}
