@@ -8,7 +8,7 @@ from sklearn.metrics import f1_score, accuracy_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split    
-from imblearn.over_sampling import KMeansSMOTE
+from imblearn.over_sampling import SVMSMOTE
 from RandomForest import TransformTrainData
 from MakeFile.FileSaver import FileSaver
 
@@ -26,7 +26,6 @@ if __name__ == "__main__":
     _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
-    keepFeature = [feature for feature in keepFeature if feature not in ['cg26371731', 'cg19349369', 'cg09469554', 'cg18759209', 'cg20676696', 'cg03789645']]
     keepFeature.append("cancer")
 
     # read the training data
@@ -50,7 +49,7 @@ if __name__ == "__main__":
     _testY = _testDf["cancer"]
 
     # oversample the training data
-    _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY)
+    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
 
     # train the model
     _xgboostModel = XGBClassifier(
