@@ -8,6 +8,7 @@ from sklearn.metrics import f1_score, accuracy_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split
+import shap
 from imblearn.over_sampling import KMeansSMOTE
 from RandomForest import TransformTrainData
 from MakeFile.FileSaver import FileSaver
@@ -65,6 +66,12 @@ if __name__ == "__main__":
     )
     eval_set = [(_testX, _testY)]
     _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
+
+    # evaluate the model
+    _explainer = shap.Explainer(_xgboostModel)
+    _shapValues = _explainer(_testX)
+    # shap.waterfall_plot(_shapValues[1])
+    shap.plots.beeswarm(_shapValues) 
 
     trainPredicted = _xgboostModel.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
