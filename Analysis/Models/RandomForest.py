@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_selection import RFECV
 from imblearn.over_sampling import RandomOverSampler, SMOTE, KMeansSMOTE, SVMSMOTE, ADASYN
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
-
+    
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
     _trainDf = TransformTrainData(_trainDf, 25)
@@ -48,27 +48,30 @@ if __name__ == "__main__":
 
 
     # oversample the training data
-    _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY) 
+    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY) 
     print(_trainY.value_counts())
 
     # train the model
-    _rfModel = RandomForestClassifier(n_estimators = 3000, min_samples_leaf = 20, n_jobs=-1)
-    _rfecv = RFECV(estimator=_rfModel, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfModel = RandomForestClassifier(n_estimators = 3000, n_jobs=-1)
+    _rfecv = RFECV(estimator=_rfModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
 
     trainPredicted = _rfecv.predict(_trainX)
-    accuracy = accuracy_score(_trainY, trainPredicted)
-    f1 = f1_score(_trainY, trainPredicted, average = "binary")
-    print(accuracy)
-    print("F1: ", f1)
+
+    print("training results:")
+    print("Accuracy: ", accuracy_score(_trainY, trainPredicted))
+    print("F1: ", f1_score(_trainY, trainPredicted, average = "binary"))
+    print("Recall: ", recall_score(_trainY, trainPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_trainY, trainPredicted, average = "binary", pos_label=0))
 
     # test the model
     testPredicted = _rfecv.predict(_testX)
-    accuracy = accuracy_score(_testY, testPredicted)
-    f1 = f1_score(_testY, testPredicted, average = "binary")
-    print(accuracy)
-    print("F1: ", f1)
-
+    
+    print("\ntesting results:")
+    print("Accuracy: ", accuracy_score(_testY, testPredicted))
+    print("F1: ", f1_score(_testY, testPredicted, average = "binary"))
+    print("Recall: ", recall_score(_testY, testPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_testY, testPredicted, average = "binary", pos_label=0))
 
     # feature selection
     print("Optimal number of features : %d" % _rfecv.n_features_)
@@ -86,10 +89,10 @@ if __name__ == "__main__":
                     alpha=0.2)
     plt.show()
 
-    feature_names = _trainX.columns
-    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
-    results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
-    FileSaver.SaveData(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
+    # feature_names = _trainX.columns
+    # selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
+    # results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
+    # FileSaver.SaveData(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
 
     # importance = _rfModel.feature_importances_
     # importance = pd.DataFrame({'CpG': _trainX.columns, 'Importance': importance})
@@ -103,7 +106,7 @@ if __name__ == "__main__":
     # plt.show()
     # FileSaver.SaveDataframe(importance, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
-    # save the model
+    # # save the model
     # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
     # joblib.dump(_rfModel, treePath)
 
