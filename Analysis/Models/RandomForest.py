@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
 
     # oversample the training data
-    _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY) 
+    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY) 
     print(_trainY.value_counts())
 
     # train the model

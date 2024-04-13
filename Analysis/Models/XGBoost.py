@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import joblib
 from sklearn.feature_selection import RFECV
 from xgboost import XGBClassifier
-from sklearn.metrics import f1_score, accuracy_score
+from sklearn.metrics import f1_score, accuracy_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split
 import shap
-from imblearn.over_sampling import KMeansSMOTE
+from imblearn.over_sampling import SVMSMOTE
 from RandomForest import TransformTrainData
 from MakeFile.FileSaver import FileSaver
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     _config.read(_configPath)   
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"], usecols=["CpG", "DNAm"])
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
@@ -51,11 +51,11 @@ if __name__ == "__main__":
     _testY = _testDf["cancer"]
 
     # oversample the training data
-    _trainX, _trainY = KMeansSMOTE().fit_resample(_trainX, _trainY)
+    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
 
     # train the model
     _xgboostModel = XGBClassifier(
-        n_estimators = 125, 
+        n_estimators = 500, 
         max_depth = 4, 
         min_child_weight = 2, 
         subsample = 0.9,
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         objective= 'binary:logistic'
     )
     eval_set = [(_testX, _testY)]
-    _rfecv = RFECV(estimator=_xgboostModel, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfecv = RFECV(estimator=_xgboostModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
     # _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
 
@@ -87,6 +87,8 @@ if __name__ == "__main__":
     f1 = f1_score(_testY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
+    print("Recall: ", recall_score(_testY, trainPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_testY, trainPredicted, average = "binary", pos_label=0))
 
     # feature selection
     print("Optimal number of features : %d" % _rfecv.n_features_)
@@ -103,6 +105,11 @@ if __name__ == "__main__":
                     scores + stds,
                     alpha=0.2)
     plt.show()
+
+    feature_names = _trainX.columns
+    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
+    results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
+    FileSaver.SaveData(results_df, _config["Paths"]["XGBOOST_FEATURES_SELECTION_PATH"])
 
     # # save the model
     # xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
