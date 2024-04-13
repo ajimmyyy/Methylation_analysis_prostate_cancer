@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
+from sklearn.feature_selection import RFECV
 from xgboost import XGBClassifier
 from sklearn.metrics import f1_score, accuracy_score
 from sklearn.model_selection import GridSearchCV
@@ -65,42 +66,60 @@ if __name__ == "__main__":
         objective= 'binary:logistic'
     )
     eval_set = [(_testX, _testY)]
-    _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
+    _rfecv = RFECV(estimator=_xgboostModel, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfecv.fit(_trainX, _trainY)
+    # _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
 
-    # evaluate the model
-    _explainer = shap.Explainer(_xgboostModel)
-    _shapValues = _explainer(_testX)
-    # shap.waterfall_plot(_shapValues[1])
-    shap.plots.beeswarm(_shapValues) 
+    # # evaluate the model
+    # _explainer = shap.Explainer(_xgboostModel)
+    # _shapValues = _explainer(_testX)
+    # # shap.waterfall_plot(_shapValues[1])
+    # shap.plots.beeswarm(_shapValues) 
 
-    trainPredicted = _xgboostModel.predict(_trainX)
+    trainPredicted = _rfecv.predict(_trainX)
     accuracy = accuracy_score(_trainY, trainPredicted)
     f1 = f1_score(_trainY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
     
-    trainPredicted = _xgboostModel.predict(_testX)
+    trainPredicted = _rfecv.predict(_testX)
     accuracy = accuracy_score(_testY, trainPredicted)
     f1 = f1_score(_testY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
 
-    # save the model
-    xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
-    joblib.dump(_xgboostModel, xgboostPath)
+    # feature selection
+    print("Optimal number of features : %d" % _rfecv.n_features_)
+    print("Ranking of features : %s" % _rfecv.ranking_)
+    scores = _rfecv.cv_results_['mean_test_score']
+    stds = _rfecv.cv_results_['std_test_score']
+    plt.figure()
+    plt.title('RFECV')
+    plt.xlabel('Number of features selected')
+    plt.ylabel('Cross validation score (F1)')
+    plt.plot(range(1, len(scores) + 1), scores, marker='o', linestyle='-')
+    plt.fill_between(range(1, len(scores) + 1),
+                    scores - stds,
+                    scores + stds,
+                    alpha=0.2)
+    plt.show()
 
-    _importance = _xgboostModel.feature_importances_
-    _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
-    _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
-    _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
+    # # save the model
+    # xgboostPath = _config.get('Paths', 'XGBOOST_PATH')
+    # joblib.dump(_xgboostModel, xgboostPath)
 
-    df = pd.DataFrame({
-        'CpG': list(_weight.keys()),
-        'weight': list(_weight.values()),
-        'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
-        'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
-    })
-    FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
+    # _importance = _xgboostModel.feature_importances_
+    # _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
+    # _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
+    # _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
+
+    # df = pd.DataFrame({
+    #     'CpG': list(_weight.keys()),
+    #     'weight': list(_weight.values()),
+    #     'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
+    #     'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
+    # })
+    # FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
 
     # Parameter Tuning
     # cv = {'learning_rate': [0.01, 0.05, 0.07, 0.1, 0.2]}
