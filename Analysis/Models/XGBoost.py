@@ -6,6 +6,7 @@ import joblib
 from sklearn.feature_selection import RFECV
 from xgboost import XGBClassifier
 from sklearn.metrics import f1_score, accuracy_score, recall_score
+from sklearn.metrics import f1_score, accuracy_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split
@@ -51,6 +52,7 @@ if __name__ == "__main__":
     _testY = _testDf["cancer"]
 
     # oversample the training data
+    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
     _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
 
     # train the model
@@ -119,7 +121,18 @@ if __name__ == "__main__":
     # _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
     # _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
     # _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
+    # _importance = _xgboostModel.feature_importances_
+    # _weight = _xgboostModel.get_booster().get_score(importance_type='weight')
+    # _gain = _xgboostModel.get_booster().get_score(importance_type='gain')
+    # _cover = _xgboostModel.get_booster().get_score(importance_type='cover')
 
+    # df = pd.DataFrame({
+    #     'CpG': list(_weight.keys()),
+    #     'weight': list(_weight.values()),
+    #     'gain': [_gain.get(feature, 0) for feature in _weight.keys()],
+    #     'cover': [_cover.get(feature, 0) for feature in _weight.keys()],
+    # })
+    # FileSaver.SaveData(df, _config.get('Paths', 'XGBOOST_IMPORTANCES_PATH'))
     # df = pd.DataFrame({
     #     'CpG': list(_weight.keys()),
     #     'weight': list(_weight.values()),
