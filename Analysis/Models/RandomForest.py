@@ -107,8 +107,8 @@ if __name__ == "__main__":
     # FileSaver.SaveDataframe(importance, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
     # save the model
-    treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
-    joblib.dump(_rfModel, treePath)
+    # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
+    # joblib.dump(_rfModel, treePath)
 
 
     # # Parameter Tuning
