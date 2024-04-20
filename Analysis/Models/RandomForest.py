@@ -23,7 +23,7 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
+    _aucDf = pd.read_csv(_config["Paths"]["MEAN_HYPER_WARD_CHOOSE_PATH"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
@@ -89,10 +89,10 @@ if __name__ == "__main__":
                     alpha=0.2)
     plt.show()
 
-    # feature_names = _trainX.columns
-    # selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
-    # results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
-    # FileSaver.SaveData(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
+    feature_names = _trainX.columns
+    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
+    results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
+    FileSaver.SaveData(results_df, _config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
 
     # importance = _rfModel.feature_importances_
     # importance = pd.DataFrame({'CpG': _trainX.columns, 'Importance': importance})
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # plt.show()
     # FileSaver.SaveDataframe(importance, _config["Paths"]["RANDOM_FOREST_IMPORTANCES_PATH"])
 
-    # # save the model
+    # save the model
     # treePath = _config.get('Paths', 'RANDOM_FOREST_TREE_PATH')
     # joblib.dump(_rfModel, treePath)
 

@@ -7,7 +7,7 @@ class FileSaver:
     def SaveData(data, filename):
         if isinstance(data, pd.DataFrame):
             data.to_csv(filename, index=False)
-        if isinstance(data, plt.Axes):
+        if isinstance(data, plt.Figure or plt.Axes):
             data.figure.savefig(filename)
         if isinstance(data, list):
             with open(filename, 'wb') as file:
