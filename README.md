@@ -19,7 +19,7 @@ R
 pip install -e .
 ```
 
-4. 執行main.ipunb
+4. 執行main.ipynb
 
 ## DataSet來源
 
