@@ -24,7 +24,6 @@ if __name__ == "__main__":
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
-    keepFeature=[x for x in keepFeature if x not in ["cg00536939", "cg18759209"]]
 
     # read the testing data
     _df = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
@@ -53,22 +52,22 @@ if __name__ == "__main__":
     print("Recall: ", recall_score(_testY, trainPredicted, average = "binary"))
     print("Specificity: ", recall_score(_testY, trainPredicted, average = "binary", pos_label=0))
 
-#     _result = permutation_importance(_model, _testX, _testY, n_repeats=10, random_state=0)
+    _result = permutation_importance(_model, _testX, _testY, n_repeats=10, random_state=0)
 
-#     _importancesMean = _result.importances_mean
-#     _importancesStd = _result.importances_std
-#     _importance = _model.feature_importances_
+    _importancesMean = _result.importances_mean
+    _importancesStd = _result.importances_std
+    _importance = _model.feature_importances_
 
-#     _sortedIndices = np.argsort(_importancesMean)
-#     _sortedScores = _importancesMean[_sortedIndices]
+    _sortedIndices = np.argsort(_importancesMean)
+    _sortedScores = _importancesMean[_sortedIndices]
 
-#     data = {'CpG': _testX.columns, 'FeatureImportance': _importance, 'ImportanceMean': _importancesMean, 'ImportanceStd': _sortedScores}
-#     df = pd.DataFrame(data)
-#     FileSaver.SaveData(df, SAVE_PATH)
+    data = {'CpG': _testX.columns, 'FeatureImportance': _importance, 'ImportanceMean': _importancesMean, 'ImportanceStd': _sortedScores}
+    df = pd.DataFrame(data)
+    FileSaver.SaveData(df, SAVE_PATH)
 
-#     plt.figure(figsize=(10, 6))
-#     plt.boxplot(_result.importances[_sortedIndices].T, vert=False,
-#             labels=np.array(_testX.columns)[_sortedIndices])
-#     plt.xlabel('Importance Score')
-#     plt.title('Permutation Importance')
-#     plt.show()
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(_result.importances[_sortedIndices].T, vert=False,
+            labels=np.array(_testX.columns)[_sortedIndices])
+    plt.xlabel('Importance Score')
+    plt.title('Permutation Importance')
+    plt.show()
