@@ -1,25 +1,11 @@
 from setuptools import setup, find_packages
 
+
+REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
+
 setup(
     name = "methylation_analysis",
     version = "0.2",
     packages = find_packages(),
-    install_requires=[
-        'pandas',
-        'numpy',
-        'matplotlib',
-        'seaborn',
-        'tqdm',
-        'scikit-learn',
-        "scikit-learn-extra",
-        "xgboost",
-        "imblearn",
-        'scipy',
-        'multipledispatch',
-        "biopython",
-        "biomart",
-        "goatools",
-        "joblib",
-        "shap"
-    ],
+    install_requires = REQUIREMENTS,
 )
