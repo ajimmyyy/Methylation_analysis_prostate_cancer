@@ -16,7 +16,7 @@ class DeltaBetaFilter:
     # *請確保資料擁有各病人之beta值
     def CalculateDeltaBeta(self, betaDf, normalCount):
         tqdm.pandas(desc="find dbeta")
-        betaDf[["dbeta", "avg"]] = betaDf.progress_apply(self.__CalculateRowDeltaBeta, axis = 1, args = (normalCount,))
+        betaDf.loc[:, ["dbeta", "avg"]] = betaDf.progress_apply(self.__CalculateRowDeltaBeta, axis = 1, args = (normalCount,))
 
         return betaDf.loc[:, ["CpG", "dbeta", "avg"]]
     
