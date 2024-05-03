@@ -23,7 +23,7 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["MEAN_HYPER_WARD_CHOOSE_PATH"])
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
     keepFeature.append("cancer")
@@ -39,6 +39,7 @@ if __name__ == "__main__":
     _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
+    _testDf = _testDf[_trainDf.columns]
 
     # split the training, testing data into X and Y
     _trainX = _trainDf.drop(columns=["cancer"])
@@ -52,7 +53,7 @@ if __name__ == "__main__":
     print(_trainY.value_counts())
 
     # train the model
-    _rfModel = RandomForestClassifier(n_estimators = 3000, n_jobs=-1)
+    _rfModel = RandomForestClassifier(n_estimators = 5000, n_jobs=-1)
     _rfecv = RFECV(estimator=_rfModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
 

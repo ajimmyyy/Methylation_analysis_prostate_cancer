@@ -44,6 +44,7 @@ if __name__ == "__main__":
     _testDf = TransformTrainData(_testDf, 25)
     _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
     _testDf = _testDf.iloc[1:]
+    _testDf = _testDf[_trainDf.columns]
 
     # split the training, testing data into X and Y
     _trainX = _trainDf.drop(columns=["cancer"])
