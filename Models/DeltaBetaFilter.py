@@ -28,12 +28,12 @@ class DeltaBetaFilter:
     # onlyPromoter: bool，是否只篩選promoter，預設true
     # Return:
     # DataFrame，合併資料
-    def FilterDeltaBeta(self, dbetaDf, dmpDf, onlyPromoter = True):
+    def FilterDeltaBeta(self, dbetaDf, dmpDf, onlyPromoter = True, promoter = 'feature'):
         dbetaDf = dbetaDf[["CpG", "dbeta"]]
         merged_df = pd.merge(dmpDf, dbetaDf, on='CpG')
 
         if onlyPromoter:
-            merged_df = merged_df[merged_df['feature'].isin(['TSS200', 'TSS1500'])]
+            merged_df = merged_df[merged_df[promoter].isin(['TSS200', 'TSS1500'])]
 
         merged_df['abs_dbeta'] = merged_df['dbeta'].abs()
         max_dbeta_index = merged_df.groupby('gene')['abs_dbeta'].idxmax()
@@ -52,8 +52,8 @@ class DeltaBetaFilter:
     # dbetaRow: string，dbeta行名，預設"deltaBeta"
     # Return:
     # hyper, hypo: DataFrame，hyper,hypo資料
-    def DetermineDNAm(self, dmpDf, thresholdDbetaHyper, thresholdDbetaHypo, thresholdPvalue, dbetaRow = "dbeta"):
-        dmpDf = dmpDf[dmpDf["adj.P.Val"] < thresholdPvalue]
+    def DetermineDNAm(self, dmpDf, thresholdDbetaHyper, thresholdDbetaHypo, thresholdPvalue, dbetaRow = "dbeta", pvalueRow = "adj.P.Val"):
+        dmpDf = dmpDf[dmpDf[pvalueRow] < thresholdPvalue]
 
         hyper = dmpDf[dmpDf[dbetaRow] > thresholdDbetaHyper]
         hypo = dmpDf[dmpDf[dbetaRow] < thresholdDbetaHypo]
