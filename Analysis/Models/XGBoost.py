@@ -6,7 +6,6 @@ import joblib
 from sklearn.feature_selection import RFECV
 from xgboost import XGBClassifier
 from sklearn.metrics import f1_score, accuracy_score, recall_score
-from sklearn.metrics import f1_score, accuracy_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split
