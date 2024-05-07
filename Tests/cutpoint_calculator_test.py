@@ -3,7 +3,7 @@ import pandas as pd
 import Models.CutpointCalculator
 import Models.DeltaBetaFilter
 
-class TestCutpointCalculator(unittest.TestCase):
+class CutpointCalculatorTest(unittest.TestCase):
     def setUp(self):
         data = pd.DataFrame(
             {
@@ -28,7 +28,7 @@ class TestCutpointCalculator(unittest.TestCase):
         self.select_hyper = select_hyper
         self.select_hypo = select_hypo
     
-    def test_CalculateCutpoint(self):
+    def test_calculate_cutpoint(self):
         result_min = self.cutpointCul.CalculateCutpoint(self.data, self.select_hyper, 1, "hyper", "CpG", "min")
         result_mid = self.cutpointCul.CalculateCutpoint(self.data, self.select_hyper, 1, "hyper", "CpG", "mid")
         result_max = self.cutpointCul.CalculateCutpoint(self.data, self.select_hyper, 1, "hyper", "CpG", "max")
@@ -36,9 +36,6 @@ class TestCutpointCalculator(unittest.TestCase):
         self.assertEqual(result_mid["cutpoint"].tolist(), [0.75])
         self.assertEqual(result_max["cutpoint"].tolist(), [0.99])
     
-    def test_CalculateCutpoint_multi(self):
+    def test_calculate_cutpoint_multi(self):
         result = self.cutpointCul.CalculateCutpoint(self.data, [self.select_hyper, self.select_hypo], 1, ["hyper", "hypo"], "CpG", "min")
         self.assertEqual(result["cutpoint"].tolist(), [0.51, 0.51])
-
-if __name__ == '__main__':
-    unittest.main()
