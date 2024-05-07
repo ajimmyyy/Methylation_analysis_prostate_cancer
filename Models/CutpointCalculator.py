@@ -89,7 +89,9 @@ class CutpointCalculator:
 
         if cutpointType == "min":
             maxCutpoint = minCutpoint
-        elif cutpoint == "mid":
+        elif cutpointType == "mid":
             maxCutpoint = (minCutpoint + maxCutpoint) / 2
+        elif cutpointType == "max":
+            pass
         
         return pd.Series({"DNAm": type,"cutpoint": round(maxCutpoint, 2), "F1": maxF1})
