@@ -7,6 +7,28 @@ from itertools import combinations
 class ValidateData:
     NOT_FIND = -1
 
+    # DataFormatValidation(self, betaDf: pd.DataFrame)
+    # 驗證資料格式
+    # Parameters:
+    # betaDf: DataFrame，資料集
+    # Return:
+    # True: Boolean，資料格式正確
+    def DataFormatValidation(self, betaDf: pd.DataFrame):
+        # Check if betaDf is empty
+        assert not betaDf.empty, "DataFrame is empty"
+        
+        # Check if the first column starts with "cg"
+        assert all(row.startswith("cg") for row in betaDf.iloc[:,0]), "First row does not start with 'cg'"
+        
+        # Check if all column names are unique
+        assert not betaDf.columns.duplicated().any(), "Duplicate column names exist"
+        
+        # Check if there are any missing values in the DataFrame
+        assert not betaDf.isnull().values.any(), "DataFrame contains missing values"
+        
+        return True
+        
+
     # randomChooseValidation(betaDf, normalCount, normalChoose, tumorCount, tumorChoose)
     # 隨機選取驗證集
     # Parameters:

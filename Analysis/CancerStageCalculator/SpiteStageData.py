@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 import pandas as pd
 from Models.CancerStageCalculator import CancerStageCalculator
+from ValidateModel.ValidateData import ValidateData
 
 if __name__ == "__main__":
     _configPath = "Analysis/CancerStageCalculator/config.ini"
@@ -32,5 +33,6 @@ if __name__ == "__main__":
     _nromalDf2 = _betaDf2.iloc[:, :25]
 
     _mergedDf = pd.concat([_nromalDf, _nromalDf2, _earlyDf, _earlyDf2], axis=1)
+    _mergedDf.dropna(inplace=True)
 
-    _mergedDf.to_csv(_config["Paths"]["EARLY_STAGE_DATA_PATH"], index=False)
+    _mergedDf.to_csv(_config["Paths"]["EARLY_STAGE_DATA_PATH"], index=True)
