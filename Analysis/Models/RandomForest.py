@@ -1,21 +1,13 @@
 from configparser import ConfigParser
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import joblib
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score, recall_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_selection import RFECV
 from imblearn.over_sampling import RandomOverSampler, SMOTE, KMeansSMOTE, SVMSMOTE, ADASYN
 from imblearn.pipeline import Pipeline
+import utils
 from MakeFile.FileSaver import FileSaver
-
-def TransformTrainData(df, normalNum):
-    target = [0] * normalNum + [1] * (len(df.columns) - normalNum)
-    df.loc['cancer'] = target
-    df = df.T
-    return df
 
 if __name__ == "__main__":
     _configPath = "Analysis/Models/config.ini"
@@ -23,55 +15,30 @@ if __name__ == "__main__":
     _config.read(_configPath)
 
     # filter out the CpG sites
-    _aucDf = pd.read_csv(_config["Paths"]["MEAN_HYPER_WARD_CHOOSE_PATH"])
+    _aucDf = pd.read_csv(_config["Paths"]["AUC_GROUP_DATA_PATH"])
     _aucDf = _aucDf[_aucDf['DNAm'] == "hyper"]
     keepFeature = _aucDf["CpG"].tolist()
-    keepFeature.append("cancer")
     
-    # read the training data
+    # read the training and testing data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
-    _trainDf = TransformTrainData(_trainDf, 25)
-    _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
-    _trainDf = _trainDf.iloc[1:]
-
-    # read the testing data
     _testDf = pd.read_csv(_config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
-    _testDf = TransformTrainData(_testDf, 25)
-    _testDf = _testDf[_testDf.columns.intersection(keepFeature)]
-    _testDf = _testDf.iloc[1:]
-
+    
     # split the training, testing data into X and Y
-    _trainX = _trainDf.drop(columns=["cancer"])
-    _trainY = _trainDf["cancer"]
-    _testX = _testDf.drop(columns=["cancer"])
-    _testY = _testDf["cancer"]
-
+    _trainX, _trainY, _testX, _testY = utils.SpliteTrainTest(_trainDf, _testDf, 25, keepFeature)
 
     # oversample the training data
     _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY) 
     print(_trainY.value_counts())
 
     # train the model
-    _rfModel = RandomForestClassifier(n_estimators = 3000, n_jobs=-1)
+    _rfModel = RandomForestClassifier(n_estimators = 300, n_jobs=-1)
     _rfecv = RFECV(estimator=_rfModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
 
-    trainPredicted = _rfecv.predict(_trainX)
-
-    print("training results:")
-    print("Accuracy: ", accuracy_score(_trainY, trainPredicted))
-    print("F1: ", f1_score(_trainY, trainPredicted, average = "binary"))
-    print("Recall: ", recall_score(_trainY, trainPredicted, average = "binary"))
-    print("Specificity: ", recall_score(_trainY, trainPredicted, average = "binary", pos_label=0))
-
     # test the model
-    testPredicted = _rfecv.predict(_testX)
-    
-    print("\ntesting results:")
-    print("Accuracy: ", accuracy_score(_testY, testPredicted))
-    print("F1: ", f1_score(_testY, testPredicted, average = "binary"))
-    print("Recall: ", recall_score(_testY, testPredicted, average = "binary"))
-    print("Specificity: ", recall_score(_testY, testPredicted, average = "binary", pos_label=0))
+    utils.TestModelPerformance(_rfecv, _trainX, _trainY)
+    print()
+    utils.TestModelPerformance(_rfecv, _testX, _testY)
 
     # feature selection
     print("Optimal number of features : %d" % _rfecv.n_features_)
