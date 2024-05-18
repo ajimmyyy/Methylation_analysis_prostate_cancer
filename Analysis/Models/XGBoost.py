@@ -34,7 +34,7 @@ if __name__ == "__main__":
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
     print(_trainDf.shape)
-    _trainDf = TransformTrainData(_trainDf, 25)
+    _trainDf = TransformTrainData(_trainDf, 75)
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
     _trainDf = _trainDf.iloc[1:]
 
@@ -54,11 +54,10 @@ if __name__ == "__main__":
 
     # oversample the training data
     _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
-    _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY)
 
     # train the model
     _xgboostModel = XGBClassifier(
-        n_estimators = 500, 
+        n_estimators = 1000,
         max_depth = 4, 
         min_child_weight = 2, 
         subsample = 0.9,
@@ -68,9 +67,9 @@ if __name__ == "__main__":
         learning_rate= 0.05,
         objective= 'binary:logistic'
     )
-    eval_set = [(_testX, _testY)]
-    _rfecv = RFECV(estimator=_xgboostModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfecv = RFECV(estimator=_xgboostModel, min_features_to_select=2, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
+    # eval_set = [(_testX, _testY)]
     # _xgboostModel.fit(_trainX, _trainY, eval_metric=F1_eval, eval_set=eval_set, verbose=True)
 
     # # evaluate the model
@@ -84,6 +83,8 @@ if __name__ == "__main__":
     f1 = f1_score(_trainY, trainPredicted, average = "binary")
     print(accuracy)
     print("F1: ", f1)
+    print("Recall: ", recall_score(_trainY, trainPredicted, average = "binary"))
+    print("Specificity: ", recall_score(_trainY, trainPredicted, average = "binary", pos_label=0))
     
     trainPredicted = _rfecv.predict(_testX)
     accuracy = accuracy_score(_testY, trainPredicted)
@@ -109,10 +110,10 @@ if __name__ == "__main__":
                     alpha=0.2)
     plt.show()
 
-    feature_names = _trainX.columns
-    selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
-    results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
-    FileSaver.SaveData(results_df, _config["Paths"]["XGBOOST_FEATURES_SELECTION_PATH"])
+    # feature_names = _trainX.columns
+    # selected_feature_names = [feature_names[i] for i in range(len(feature_names)) if _rfecv.support_[i]]
+    # results_df = _aucDf[_aucDf['CpG'].isin(selected_feature_names)]
+    # FileSaver.SaveData(results_df, _config["Paths"]["XGBOOST_FEATURES_SELECTION_PATH"])
 
     # # save the model
     # xgboostPath = _config.get('Paths', 'XGBOOST_PATH')

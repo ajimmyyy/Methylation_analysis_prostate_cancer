@@ -30,7 +30,7 @@ if __name__ == "__main__":
     
     # read the training data
     _trainDf = pd.read_csv(_config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
-    _trainDf = TransformTrainData(_trainDf, 25)
+    _trainDf = TransformTrainData(_trainDf, 75)
     _trainDf = _trainDf[_trainDf.columns.intersection(keepFeature)]
     _trainDf = _trainDf.iloc[1:]
 
@@ -53,8 +53,8 @@ if __name__ == "__main__":
     print(_trainY.value_counts())
 
     # train the model
-    _rfModel = RandomForestClassifier(n_estimators = 5000, n_jobs=-1)
-    _rfecv = RFECV(estimator=_rfModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfModel = RandomForestClassifier(n_estimators = 3000, n_jobs=-1)
+    _rfecv = RFECV(estimator=_rfModel, min_features_to_select=2, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
 
     trainPredicted = _rfecv.predict(_trainX)
