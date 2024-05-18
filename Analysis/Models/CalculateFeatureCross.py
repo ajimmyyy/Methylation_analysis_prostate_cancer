@@ -6,9 +6,10 @@ if __name__ == "__main__":
     _config = ConfigParser()
     _config.read(_configPath)
 
-    _rfDf = pd.read_csv(_config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"])
-    _xgbDf = pd.read_csv(_config["Paths"]["XGBOOST_FEATURES_SELECTION_PATH"])
+    _rfDf = pd.read_csv(_config["Paths"]["RANDOM_FOREST_FEATURES_SELECTION_PATH"], index_col=0)
+    _xgbDf = pd.read_csv(_config["Paths"]["XGBOOST_FEATURES_SELECTION_PATH"], index_col=0)
 
-    _crossDf = pd.merge(_rfDf, _xgbDf, on="CpG", how="inner")
+    index = _rfDf.index.intersection(_xgbDf.index)
+    crossDf = _rfDf.loc[index]
 
-    _crossDf.to_csv(_config["Paths"]["CROSS_FEATURE_PATH"], index=False)
+    crossDf.to_csv(_config["Paths"]["CROSS_FEATURE_PATH"], index=True)
