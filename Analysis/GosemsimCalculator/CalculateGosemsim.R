@@ -1,12 +1,13 @@
 library(GOSemSim)
 
-fn_o <- "C:/Users/user/Desktop/project/mgeneSim_results.csv"
-fn_hyper <- "C:/Users/user/Desktop/project/mgeneSim_hyper.csv"
-fn_hypo <- "C:/Users/user/Desktop/project/mgeneSim_hypo.csv"
+type <- "BP"
+fn_o <- sprintf("Data/Processed/GoSemsimData/%s/mgeneSim_results.csv", type)
+fn_hyper <- sprintf("Data/Processed/GoSemsimData/%s/mgeneSim_hyper.csv", type)
+fn_hypo <- sprintf("Data/Processed/GoSemsimData/%s/mgeneSim_hypo.csv", type)
 
-hsGO <- godata('org.Hs.eg.db', keytype = "SYMBOL", ont="BP", computeIC = FALSE)
+hsGO <- godata('org.Hs.eg.db', keytype = "SYMBOL", ont=type, computeIC = FALSE)
 
-data <- read.csv("C:/Users/user/Desktop/project/comorbidity_group_auc.csv")
+data <- read.csv("Data/Processed/Models/CrossFeature/cross_feature_selection.csv")
 genes <- data$gene
 genes_hyper <- data$gene[data$DNAm == "hyper"]
 genes_hypo <- data$gene[data$DNAm == "hypo"]
