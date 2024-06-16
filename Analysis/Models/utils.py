@@ -40,6 +40,7 @@ def TestModelPerformance(model, testX, testY):
     print("F1: ", f1)
     print("Recall: ", recall)
     print("Specificity: ", specificity)
+    print()
 
     return accuracy, f1, recall, specificity
 

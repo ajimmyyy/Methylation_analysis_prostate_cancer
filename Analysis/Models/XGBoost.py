@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     # train the model
     _xgboostModel = XGBClassifier(
-        n_estimators = 500, 
+        n_estimators = 300, 
         max_depth = 4, 
         min_child_weight = 2, 
         subsample = 0.9,
@@ -63,12 +63,11 @@ if __name__ == "__main__":
         objective= 'binary:logistic'
     )
     eval_set = [(_testX, _testY)]
-    _rfecv = RFECV(estimator=_xgboostModel, min_features_to_select=40, step=1, cv=5, scoring='f1', n_jobs=-1)
+    _rfecv = RFECV(estimator=_xgboostModel, min_features_to_select=2, step=1, cv=5, scoring='f1', n_jobs=-1)
     _rfecv.fit(_trainX, _trainY)
 
     # test the model
     utils.TestModelPerformance(_rfecv, _trainX, _trainY)
-    print()
     utils.TestModelPerformance(_rfecv, _testX, _testY)
 
     # feature selection

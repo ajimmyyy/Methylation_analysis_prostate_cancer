@@ -38,11 +38,38 @@ class AucCalculator:
     # Figure，ROC曲線圖
     def DrawRoc(self, betaDf, originDf, normalCount, selectLine = "CpG"):
         betaDf = betaDf[betaDf[selectLine].isin(originDf[selectLine])]
-        fig = plt.figure(figsize=(32,18))
+        fig = plt.figure(figsize=(7, 6))
 
-        tqdm.pandas(desc="draw roc")
-        betaDf.progress_apply(self.__DrawRowRoc, axis = 1, args = (normalCount,))
+        tqdm.pandas(desc="Calculating AUC")
+        auc_values = betaDf.progress_apply(self.__CalculateRowAuc, axis=1, args=(normalCount,))
 
+        max_auc_index = auc_values['auc'].idxmax()
+        min_auc_index = auc_values['auc'].idxmin()
+        worst_auc_index = (auc_values['auc'] - 0.5).abs().idxmin()
+
+        tqdm.pandas(desc="Drawing ROC")
+        for idx, row in tqdm(betaDf.iterrows(), total=betaDf.shape[0], desc="Drawing ROC"):
+            color = 'grey'
+            alpha = 0.03
+            label = None
+            if idx == max_auc_index:
+                color = 'red'
+                alpha = 1.0
+                label = f'Max AUC: {auc_values.loc[idx, "auc"]:.2f}'
+            elif idx == min_auc_index:
+                color = 'orange'
+                alpha = 1.0
+                label = f'Min AUC: {auc_values.loc[idx, "auc"]:.2f}'
+            elif idx == worst_auc_index:
+                color = 'blue'
+                alpha = 1.0
+                label = f'Closest to 0.5 AUC: {auc_values.loc[idx, "auc"]:.2f}'
+            self.__DrawRowRoc(row, normalCount, color, alpha, label)
+
+        plt.plot([0, 1], [0, 1], linestyle='--', color='red', label='AUC = 0.5')
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.legend(loc='lower right')
         return fig
 
     def __CalculateRowAuc(self, row, normalCount):
@@ -58,9 +85,9 @@ class AucCalculator:
         actual_beta = np.ones(int(len(predictBeta)))
         actual_beta[:normalCount] = 0
 
-        fpr, tpr, threshold = roc_curve(actual_beta, predictBeta)
+        fpr, tpr, _ = roc_curve(actual_beta, predictBeta)
         return fpr, tpr
     
-    def __DrawRowRoc(self, row, normalCount):
+    def __DrawRowRoc(self, row, normalCount, color, alpha, label):
         fpr, tpr = self.__CalculateRowRoc(row, normalCount)
-        plt.plot(fpr,tpr,marker = 'o')
+        plt.plot(fpr, tpr, marker='o', color=color, alpha=alpha, label=label)
