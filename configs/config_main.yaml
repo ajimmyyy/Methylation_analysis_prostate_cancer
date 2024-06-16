@@ -1,0 +1,16 @@
+row_data:
+  train:
+    beta_data_path: Data/Row/train/all_beta_normalized.csv
+    DMP_data_path: Data/Row/train/DMP_result_TN.csv
+  test:
+    beta_data_path: Data/Row/test/all_beta_normalized_test.csv
+    DMP_data_path: Data/Row/test/DMP_result_TN_test.csv
+  extro:
+    450k_data:
+      GSE:
+        beta_data_path: Data/Row/extro/450k/GSE157272/all_beta_normalized.csv
+        DMP_data_path: Data/Row/450k/GSE/DMP_result_TN_450k.csv
+      beta_data_path: Data/Row/450k/all_beta_normalized_450k.csv
+      DMP_data_path: Data/Row/450k/DMP_result_TN_450k.csv
+
+  
