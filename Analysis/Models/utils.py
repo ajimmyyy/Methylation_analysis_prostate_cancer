@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.feature_selection import RFECV
 from sklearn.metrics import accuracy_score, f1_score, recall_score
 
 def TransformTrainData(df: pd.DataFrame, normalNum: int):
@@ -51,4 +52,20 @@ def CorrelationHeatmap(train):
     sns.heatmap(correlations, vmax=1.0, center=0, fmt='.2f', cmap="rainbow",
                 square=True, linewidths=.5, annot=True, cbar_kws={"shrink": .70}
                 )
+    plt.show()
+
+def DrawRFECVPlot(rfecv: RFECV):
+    print("Optimal number of features : %d" % rfecv.n_features_)
+    print("Ranking of features : %s" % rfecv.ranking_)
+    scores = rfecv.cv_results_['mean_test_score']
+    stds = rfecv.cv_results_['std_test_score']
+    plt.figure()
+    plt.title('RFECV')
+    plt.xlabel('Number of features selected')
+    plt.ylabel('Cross validation score (F1)')
+    plt.plot(range(1, len(scores) + 1), scores, marker='o', linestyle='-')
+    plt.fill_between(range(1, len(scores) + 1),
+                    scores - stds,
+                    scores + stds,
+                    alpha=0.2)
     plt.show()
