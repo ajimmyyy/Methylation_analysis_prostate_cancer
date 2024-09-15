@@ -26,7 +26,7 @@ if __name__ == "__main__":
     
     # split the training, testing data into X and Y
     _trainX, _trainY, _testX, _testY = utils.SpliteTrainTest(_trainDf, _testDf, 25, keepFeature)
-
+    
     # oversample the training data
     _trainX, _trainY = SVMSMOTE().fit_resample(_trainX, _trainY) 
     print(_trainY.value_counts())
