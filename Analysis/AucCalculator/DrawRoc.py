@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 from Models.AucCalculator import AucCalculator
 import pandas as pd
+import matplotlib.pyplot as plt
 from MakeFile.FileSaver import FileSaver
 
 if __name__ == "__main__":
@@ -14,5 +15,6 @@ if __name__ == "__main__":
 
     _aucCalculator = AucCalculator()
     _fig = _aucCalculator.DrawRoc(_betaDataDf, _comorbidityGroupDf, 25)
-
+    
+    plt.show()
     FileSaver.SaveData(_fig, _config["Paths"]["ROC_GROUP_CURVE_PATH"])

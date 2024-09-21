@@ -69,22 +69,7 @@ class ValidateData:
         cutpointDf = cutpointDf[cutpointDf["F1_validate"] > thresholdF1]
         
         return cutpointDf, notfindDf
-    
-    def ValidateGeneAccuracy(self, cutpointDf, betaDfs, normalCount, testCount = 3, method = "count", chooseOn = "F1"):
-        allCutpointDf = cutpointDf[["CpG", "cutpoint"]]
-        combinationsList = list(combinations(allCutpointDf.index, testCount))
 
-        cutpointDfList = []
-        for combination in combinationsList:
-            selectedColumns = allCutpointDf.loc[list(combination)]
-            cutpointDfList.append(selectedColumns)
-        
-        if method == "count":
-            result = self.__PredictResultCount(cutpointDfList, betaDfs, normalCount, "CpG", chooseOn)
-
-        return result
-
-    
     def __CalculateF1(self, row, betaDf, normalCount):
         cutpoint = row["cutpoint"]
         betaDf = betaDf[betaDf["CpG"] == row["CpG"]]
