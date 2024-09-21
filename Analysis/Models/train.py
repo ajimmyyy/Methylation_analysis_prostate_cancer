@@ -1,7 +1,10 @@
 from configparser import ConfigParser
+import random
 import time
+from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+from functools import reduce
 from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -10,8 +13,10 @@ from boruta import BorutaPy
 from sklearn.model_selection import cross_val_score, StratifiedKFold
 from imblearn.over_sampling import SVMSMOTE
 import utils
+from MakeFile.FileSaver import FileSaver
 
 RANDOM_SEED = 42
+TEST_MODE = "stability"
 
 class ModelTrainer:
     def __init__(self, trainDf, testDf, normalCount, keepFeature):
@@ -133,7 +138,20 @@ def OverlapRatio(list1, list2):
     
     return ratio_relative_to_first_list, ratio_relative_to_union
 
-if __name__ == "__main__":
+def calculate_stability(row, df):
+    lists = [row[col] for col in df.columns]
+
+    union_set = set().union(*lists)
+    intersection_set = set(lists[0]).intersection(*lists)
+
+    if len(union_set) > 0:
+        stability = len(intersection_set) / len(union_set)
+    else:
+        stability = 0
+    
+    return stability
+
+if TEST_MODE == "compare":
     configPath = "Analysis/Models/config.ini"
     config = ConfigParser()
     config.read(configPath)
@@ -204,3 +222,163 @@ if __name__ == "__main__":
 
     # crossFeatures = modelTrainer.CrossFeatures()
     # print(crossFeatures)
+
+if TEST_MODE == "stability":
+    configPath = "Analysis/Models/config.ini"
+    config = ConfigParser()
+    config.read(configPath)
+
+    aucDf = pd.read_csv(config["Paths"]["AUC_GROUP_DATA_PATH"])
+    aucDf = aucDf[aucDf['DNAm'] == "hyper"]
+    keepFeature = aucDf["CpG"].tolist()
+
+    # read the training and testing data
+    trainDf = pd.read_csv(config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
+    testDf = pd.read_csv(config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
+
+    # train the model
+    modelTrainer = ModelTrainer(trainDf, testDf, 25, keepFeature)
+    selected_features = pd.DataFrame()
+
+    for seed in [0, 42, 100, 1234, 5678]:
+        models = {
+            'RF': RandomForestClassifier(
+                n_estimators=300, 
+                max_depth=10, 
+                max_leaf_nodes=5, 
+                max_features='sqrt', 
+                n_jobs=-1,
+                random_state=seed
+            ),
+            'XGB': XGBClassifier(
+                n_estimators=300,
+                subsample=0.7,
+                max_depth=5,
+                learning_rate=0.1,
+                colsample_bytree=0.7,
+                reg_alpha=1,
+                n_jobs=-1,
+                random_state=seed
+            )
+        }
+
+        testModels = {
+            'RF': RandomForestClassifier( 
+                n_jobs=-1,
+                random_state=seed
+            ),
+            'XGB': XGBClassifier(
+                n_jobs=-1,
+                random_state=seed
+            )
+        }
+
+        modelTrainer.TrainModel(models, method='Boruta', randomSeed=seed)
+        selected_features[f'seed_{seed}'] = modelTrainer.GetSelectedFeatures()
+    
+    selected_features.loc[:, "stability"] = selected_features.apply(calculate_stability, axis = 1, args = (selected_features,))
+
+    print(selected_features)
+    
+if TEST_MODE == "train":
+    configPath = "Analysis/Models/config.ini"
+    config = ConfigParser()
+    config.read(configPath)
+
+    aucDf = pd.read_csv(config["Paths"]["AUC_GROUP_DATA_PATH"])
+    aucDf = aucDf[aucDf['DNAm'] == "hyper"]
+    keepFeature = aucDf["CpG"].tolist()
+
+    # read the training and testing data
+    trainDf = pd.read_csv(config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
+    testDf = pd.read_csv(config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
+
+    # train the model
+    modelTrainer = ModelTrainer(trainDf, testDf, 25, keepFeature)
+    selected_features = pd.DataFrame()
+
+    modelTrainer = ModelTrainer(trainDf, testDf, 25, keepFeature)
+
+    models = {
+        'RF': RandomForestClassifier(
+            n_estimators=150, 
+            max_depth=10, 
+            max_leaf_nodes=5, 
+            max_features='sqrt', 
+            n_jobs=-1,
+            random_state=RANDOM_SEED
+        ),
+        'XGB': XGBClassifier(
+            n_estimators=150,
+            subsample=0.7,
+            max_depth=5,
+            learning_rate=0.1,
+            colsample_bytree=0.7,
+            reg_alpha=1,
+            n_jobs=-1,
+            random_state=RANDOM_SEED
+        )
+    }
+
+    testModels = {
+        'RF': RandomForestClassifier( 
+            n_jobs=-1,
+            random_state=RANDOM_SEED
+        ),
+        'XGB': XGBClassifier(
+            n_jobs=-1,
+            random_state=RANDOM_SEED
+        )
+    }
+
+    selected_features = pd.DataFrame()
+
+    for seed in [6641, 4129, 5260, 8771, 1851, 4174, 6461, 7389, 4571, 6217]:
+        models = {
+            'RF': RandomForestClassifier(
+                n_estimators=1000, 
+                max_depth=10, 
+                max_leaf_nodes=5, 
+                max_features='sqrt', 
+                n_jobs=-1,
+                random_state=seed
+            ),
+            'XGB': XGBClassifier(
+                n_estimators=300,
+                subsample=0.7,
+                max_depth=5,
+                learning_rate=0.1,
+                colsample_bytree=0.7,
+                reg_alpha=1,
+                n_jobs=-1,
+                random_state=seed
+            )
+        }
+
+        testModels = {
+            'RF': RandomForestClassifier( 
+                n_jobs=-1,
+                random_state=seed
+            ),
+            'XGB': XGBClassifier(
+                n_jobs=-1,
+                random_state=seed
+            )
+        }
+
+        modelTrainer.TrainModel(models, method='RFECV', randomSeed=seed)
+        features = modelTrainer.GetSelectedFeatures()
+        boruta_score = modelTrainer.TestModelPerformance(testModels, cv=10)
+        for modelName in modelTrainer.GetSelectedFeatures().keys():
+            features[f'{modelName}_Score_AVG'] = np.mean(boruta_score[modelName])
+            print("RFECV-", modelName)
+            print(f"Features: {features[modelName]}")
+            print(f"Score: {boruta_score[modelName]}")
+            print(f'Average: {np.mean(boruta_score[modelName])}')
+            print("\n")
+
+        selected_features[f'seed_{seed}'] = features
+
+    FileSaver.SaveData(selected_features, "C:/Users/user/Desktop/tmp/RFECV_selected_features.csv", index=True)
+
+    
