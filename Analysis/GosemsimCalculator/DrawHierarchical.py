@@ -12,8 +12,8 @@ if __name__ == "__main__":
     _gosemsimDf = pd.read_csv(_config["Paths"]["GOSEMSIM_MEAN_HYPER_PATH"], index_col = 0)
 
     _gosemsimCalculator = GosemsimCalculator()
-    _fig = _gosemsimCalculator.DrawHierarchy(_gosemsimDf, "ward")
+    _fig = _gosemsimCalculator.DrawHierarchy(_gosemsimDf, "ward", 5)
 
     plt.show()
 
-    FileSaver.SaveData(_fig, _config["Paths"]["GENE_MEAN_HYPER_WARD_HIERARCHICAL_PATH"])
+    # FileSaver.SaveData(_fig, _config["Paths"]["GENE_MEAN_HYPER_WARD_HIERARCHICAL_PATH"])

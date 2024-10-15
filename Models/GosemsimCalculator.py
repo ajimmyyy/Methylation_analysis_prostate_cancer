@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.cluster import hierarchy
+from scipy.cluster.hierarchy import fcluster
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
@@ -134,10 +135,18 @@ class GosemsimCalculator:
     # distanceMethod: String，距離算法，詳見https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html
     # Return:
     # Figure，熱圖
-    def DrawHierarchy(self, gosemsimDf, distanceMethod = 'average'):
+    def DrawHierarchy(self, gosemsimDf, distanceMethod = 'average', num_clusters=None):
         fig = plt.figure(figsize=(20, 20))
         row_linkage = hierarchy.linkage(gosemsimDf, method = distanceMethod)
-        dn = hierarchy.dendrogram(row_linkage, labels = gosemsimDf.columns.tolist())
+
+        if num_clusters is not None:
+            clusters = fcluster(row_linkage, num_clusters, criterion='maxclust')
+            max_d = max(row_linkage[:, 2])
+            color_threshold = row_linkage[-(num_clusters-1), 2]
+        else:
+            color_threshold = None
+            
+        dn = hierarchy.dendrogram(row_linkage, labels = gosemsimDf.columns.tolist(), color_threshold=color_threshold)
         return fig
     
     def __TreeFCluster(self, tree, minCount):

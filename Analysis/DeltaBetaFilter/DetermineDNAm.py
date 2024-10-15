@@ -1,4 +1,6 @@
 from configparser import ConfigParser
+
+from matplotlib import pyplot as plt
 from Models.DeltaBetaFilter import DeltaBetaFilter
 import pandas as pd
 import numpy as np
@@ -18,7 +20,8 @@ if __name__ == "__main__":
     _dbateFilter = DeltaBetaFilter()
     _hyperDf, _hypoDf = _dbateFilter.DetermineDNAm(_dmpDataDf, _hyperThreshold, _hypoThreshold, _pValueThreshold)
     _fig = _dbateFilter.DrawVolcanoPlot(_dmpDataDf, _hyperDf, _hypoDf)
+    plt.show()
 
-    FileSaver.SaveData(_hyperDf, _config["Paths"]["DMP_HYPER_DATA_PATH"])
-    FileSaver.SaveData(_hypoDf, _config["Paths"]["DMP_HYPO_DATA_PATH"])
-    FileSaver.SaveData(_fig, _config["Paths"]["VOLCANO_PLOT_PATH"])
+    # FileSaver.SaveData(_hyperDf, _config["Paths"]["DMP_HYPER_DATA_PATH"])
+    # FileSaver.SaveData(_hypoDf, _config["Paths"]["DMP_HYPO_DATA_PATH"])
+    # FileSaver.SaveData(_fig, _config["Paths"]["VOLCANO_PLOT_PATH"])

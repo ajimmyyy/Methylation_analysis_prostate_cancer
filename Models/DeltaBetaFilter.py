@@ -70,7 +70,8 @@ class DeltaBetaFilter:
     # Return:
     # Figure，火山圖
     def DrawVolcanoPlot(self, dmpDf, hyperDf, hypoDf, dbetaRow = "dbeta"):
-        fig = plt.figure(figsize=(32,18))
+        # fig = plt.figure(figsize=(32,18))
+        fig = plt.figure(figsize=(16,9))
         plt.style.use("ggplot")
         plt.xlabel("dbeta", fontweight = "bold")
         plt.ylabel("-log(P.adj)", fontweight = "bold")

@@ -12,7 +12,7 @@ from imblearn.pipeline import Pipeline as ImbPipeline
 from sklearn.metrics import recall_score, make_scorer
 import utils
 
-RANDOM_SEED = 42
+ROUND = 5
 
 class ModelTrainer:
 
@@ -54,21 +54,20 @@ class ModelTrainer:
 
         return results
 
-    def DrawPlot(self):
-        df = self.results
-        df['model_oversampler'] = df['model'] + ' ' + df['oversampler']
-        df_melted = df.melt(id_vars=['model_oversampler'], value_vars=['accuracy', 'f1', 'recall', 'specificity'], var_name='metric', value_name='value')
-        
-        plt.figure(figsize=(14, 8))
-        sns.scatterplot(data=df_melted, x='model_oversampler', y='value', hue='metric', style='metric', s=100)
-        plt.xticks(rotation=90)
-        plt.xlabel('Model and Oversampler Combination')
-        plt.ylabel('Value')
-        plt.title('Model and Oversampler Performance Metrics')
-        plt.legend(title='Metric')
+def DrawPlot(df):
+    df['model_oversampler'] = df['model'] + ' ' + df['oversampler']
+    df_melted = df.melt(id_vars=['model_oversampler'], value_vars=['accuracy', 'f1', 'recall', 'specificity'], var_name='metric', value_name='value')
+    
+    plt.figure(figsize=(14, 8))
+    sns.scatterplot(data=df_melted, x='model_oversampler', y='value', hue='metric', style='metric', s=100)
+    plt.xticks(rotation=90)
+    plt.xlabel('Model and Oversampler Combination')
+    plt.ylabel('Value')
+    plt.title('Model and Oversampler Performance Metrics')
+    plt.legend(title='Metric')
 
-        plt.tight_layout()
-        plt.show()
+    plt.tight_layout()
+    plt.show()
 
 if __name__ == "__main__":
     configPath = "Analysis/Models/config.ini"
@@ -83,43 +82,7 @@ if __name__ == "__main__":
     trainDf = pd.read_csv(config["Paths"]["TRAIN_BETA_DATA_PATH"], index_col=0)
     testDf = pd.read_csv(config["Paths"]["TEST_BETA_DATA_PATH"], index_col=0)
 
-    oversamplings = {
-        'Random': RandomOverSampler(random_state=RANDOM_SEED),
-        'SMOTE': SMOTE(random_state=RANDOM_SEED),
-        'SVMSMOTE': SVMSMOTE(random_state=RANDOM_SEED),
-        'ADASYN': ADASYN(random_state=RANDOM_SEED),
-        'BLSMOTE': BorderlineSMOTE(random_state=RANDOM_SEED),
-    }
-
-    models = {
-        'LR': LogisticRegression(
-            C=10, 
-            penalty='l1', 
-            solver='saga',
-            n_jobs=-1, 
-            random_state=RANDOM_SEED
-        ),
-        'RF': RandomForestClassifier(
-            n_estimators=150, 
-            max_depth=10, 
-            max_leaf_nodes=5, 
-            max_features='sqrt', 
-            n_jobs=-1,
-            random_state=RANDOM_SEED
-        ),
-        'XGB': XGBClassifier(
-            n_estimators=150,
-            subsample=0.7,
-            max_depth=5,
-            learning_rate=0.1,
-            colsample_bytree=0.7,
-            reg_alpha=1,
-            n_jobs=-1,
-            random_state=RANDOM_SEED
-        )
-    }
-
-    # 3. 定義評估指標
+    # 定義評估指標
     scoring = {
         'accuracy': 'accuracy',
         'f1': 'f1',
@@ -127,8 +90,49 @@ if __name__ == "__main__":
         'specificity': make_scorer(lambda y_true, y_pred: recall_score(y_true, y_pred, pos_label=0))
     }
 
-    modelTrainer = ModelTrainer(trainDf, testDf, 25, keepFeature)
-    results = modelTrainer.TrainModel(oversamplings, models, scoring)
-    print(results)
+    results = []
 
-    modelTrainer.DrawPlot()
+    for random_seed in np.random.randint(0, 1000, ROUND):
+        oversamplings = {
+            'Random': RandomOverSampler(random_state=random_seed),
+            'SMOTE': SMOTE(random_state=random_seed),
+            'SVMSMOTE': SVMSMOTE(random_state=random_seed),
+            'ADASYN': ADASYN(random_state=random_seed),
+            'BLSMOTE': BorderlineSMOTE(random_state=random_seed),
+        }
+
+        models = {
+            'LR': LogisticRegression(
+                C=10, 
+                penalty='l1', 
+                solver='saga',
+                n_jobs=-1, 
+                random_state=random_seed
+            ),
+            'RF': RandomForestClassifier(
+                n_estimators=150, 
+                max_depth=10, 
+                max_leaf_nodes=5, 
+                max_features='sqrt', 
+                n_jobs=-1,
+                random_state=random_seed
+            ),
+            'XGB': XGBClassifier(
+                n_estimators=150,
+                subsample=0.7,
+                max_depth=5,
+                learning_rate=0.1,
+                colsample_bytree=0.7,
+                reg_alpha=1,
+                n_jobs=-1,
+                random_state=random_seed
+            )
+        }
+
+        modelTrainer = ModelTrainer(trainDf, testDf, 25, keepFeature)
+        result = modelTrainer.TrainModel(oversamplings, models, scoring)
+        results.append(result)
+
+    results = pd.concat(results)
+    average_results = results.groupby(['oversampler', 'model']).mean(numeric_only=True).reset_index()
+    DrawPlot(average_results)
